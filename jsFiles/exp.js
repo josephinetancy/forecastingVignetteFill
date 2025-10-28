@@ -26,13 +26,13 @@ var textNew = {
 }
 
     const html = {
-        introPlay: [
+        intro: [
             `<div class='parent'>
                 <p><strong>Welcome to the Manager Challenge!</strong></p>
                <p>This game involves you imagining yourself as a manager of various organizations. </p>
-             </div>`,
+             </div>`],
 
-
+        introFood: [
             `<div class='tight'>
                 <img src="./img/foodfast.png" style="width:40%; height:40%">
                 <p>In Scenario One, you're the manager of FoodFast.</p>
@@ -51,6 +51,11 @@ var textNew = {
     <strong>"FoodFast Stars".</strong>
   </p>
 </div>`,
+            `<div class='tight'>
+            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
+            <p>Each day, whether a driver is named a FoodFast Star determines their chances of earning a daily bonus. </p>
+            <p>A certain percentage of top-performing drivers will earn the FoodFast Star title based on their average driving time that day.</p>
+            </div>`,
 
             `<div class='tight'>
             <img src="./img/foodfaststars.png" style="width:40%; height:40%">
@@ -60,24 +65,56 @@ var textNew = {
 
             `<div class='tight'>
             <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p>Each day, whether a driver is named a FoodFast Star determines their chances of earning a daily bonus. </p>
-            <p>A certain percentage of top-performing drivers will earn the FoodFast Star title based on their average driving time that day.</p>
-            <p>Now, please indicate how you would design the FoodFast Star program to maximize drivers' immersion and engagement. </p>
+            <p>Now, please indicate how you would design the FoodFast Star program <b> to maximize drivers' immersion and engagement. </b></p>
             </div>`
             ],
+introPerformanceFood: [
+  `<div class='tight'>
+    <img src="./img/foodfaststars.png" style="width:40%; height:40%">
+    <p>Your manager has decided to update the objective of the "FoodFast Stars" Program. It is now designed to help FoodFast drivers achieve better <strong>job performance.</strong></p>
+    <p>In other words, the aim of the program is to help drivers complete their deliveries more efficiently and effectively.</p>
+  </div>`,
 
-            postPredict: [
-            `<div class='parent'>
-                <p>The wheel is spun by grabbing the cursor and giving it a spin.</p>
-                <p>Watch the animation below to see how it's done.</p>
-                <img src="./img/spin-gif.gif" style="width:70%; height:70%">
+    `<div class='tight'>
+    <img src="./img/foodfaststars.png" style="width:40%; height:40%">
+    <p>Now, please indicate how you would design the FoodFast Star program <b> to maximize drivers' job performance. </p>
+  </div>`
+        ],
+        introCall: [
+            `<div class='tight'>
+                <img src="./img/nextconnect.png" style="width:40%; height:40%">
+                <p>In Scenario Two, you're the manager of NextConnect.</p>
             </div>`,
 
-            `<div class='parent'>
-                <p>To get a feel for the game, you'll practice spinning two example wheels.</p>
-                <p>Continue to the next screen to begin.</p>
-            </div>`,      
-        ],
+
+            `<div class='tight'>
+                <img src="./img/nextconnect.png" style="width:40%; height:40%">
+                <p>NextConnect is a call center company. </p>
+            </div>`,
+
+`<div class='tight'>
+  <img src="./img/nextconnectachieve.png" style="width:40%; height:40%">
+  <p> NextConnect is launching a new call center agent incentive program, called 
+    <strong>"NextConnect Achieve".</strong>
+  </p>
+</div>`,
+            `<div class='tight'>
+            <img src="./img/nextconnectachieve.png" style="width:40%; height:40%">
+            <p>Each day, whether an agent is named a NextConnect Achiever determines their chances of earning a daily bonus. </p>
+            <p>A certain percentage of top-performing agents will earn the NextConnect Achiever title based on their daily average call time.</p>
+            </div>`,
+
+            `<div class='tight'>
+            <img src="./img/nextconnectachieve.png" style="width:40%; height:40%">
+            <p>The objective of the "NextConnect Achiever" Program is to help agents feel more <strong>immersed and engaged in their work. </strong></p>
+            <p>In other words, the aim of the program is to help agents "get in the zone" while working, so much so that they feel <br>totally absorbed in their work.</p> 
+            </div>`,
+
+            `<div class='tight'>
+            <img src="./img/nextconnectachieve.png" style="width:40%; height:40%">
+            <p>Now, please indicate how you would design the NextConnect Achiever program <b> to maximize agents' immersion and engagement. </b></p>
+            </div>`
+            ],
 
         goalPredict: [
             `<div class='parentGoal'>
@@ -165,10 +202,34 @@ var textNew = {
     <p>If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
 
 
-
-    const introPlay = {
+    const intro = {
         type: jsPsychInstructions,
-        pages: html.introPlay,
+        pages: html.intro,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+        allow_keys: false,
+    };
+
+
+    const introFood = {
+        type: jsPsychInstructions,
+        pages: html.introFood,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+        allow_keys: false,
+    };
+
+    const introPerformanceFood = {
+        type: jsPsychInstructions,
+        pages: html.introPerformanceFood,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+        allow_keys: false,
+    };
+
+    const introCall = {
+        type: jsPsychInstructions,
+        pages: html.introCall,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
@@ -232,8 +293,7 @@ if (randomAssignment === 2) {
         show_clickable_nav: true,
         allow_keys: false,
     };
-
-function createTripleFillInQuestion(questions, questionIds) {
+function fillIn(questions, questionIds) {
     return {
         type: jsPsychSurveyHtmlForm,
         html: `
@@ -242,11 +302,11 @@ function createTripleFillInQuestion(questions, questionIds) {
                     max-width: 800px;
                     margin: 40px auto;
                     padding: 20px;
-                    font-family: Arial, sans-serif;
+                    font-family: Open Sans;
                 }
                 
                 .instructions {
-                    font-size: 14px;
+                    font-size: 16px;
                     font-weight: 500;
                     color: #333;
                     text-align: center;
@@ -269,40 +329,52 @@ function createTripleFillInQuestion(questions, questionIds) {
                     display: none;
                 }
                 
-                .question-section {
-                    margin: 40px 0;
-                    padding: 30px 0;
-                    border-bottom: 1px solid #eee;
-                }
-                
-                .question-section:last-of-type {
-                    border-bottom: none;
-                }
-                
-                .question-text {
+                .prompt-text {
                     font-size: 18px;
                     margin: 20px 0;
                     font-weight: 500;
-                }
-                
-                .fill-text {
-                    font-size: 16px;
-                    margin: 20px 0;
-                    line-height: 1.6;
-                }
-                
-                .number-input {
-                    display: inline-block;
-                    width: 60px;
-                    padding: 4px 8px;
-                    border: 2px solid #1a73e8;
-                    border-radius: 4px;
                     text-align: center;
-                    font-size: 16px;
-                    font-weight: bold;
-                    color: #1a73e8;
-                    background-color: #f8f9fa;
                 }
+                
+.paragraph-container {
+    margin: 30px -20px;  /* Negative margins extend beyond parent */
+    padding: 50px;       /* Increase padding for more internal space */
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    width: calc(100% + 40px);  /* Extends beyond parent width */
+    box-sizing: border-box;
+}
+                
+                .fill-paragraph {
+                    font-size: 17px;  
+                    line-height: 1.5;  
+                    text-align: justify;
+                }
+                
+.fill-paragraph .sentence {
+    display: inline;         /* Change to inline so they flow together */
+}
+                
+.number-input {
+    display: inline-block;
+    width: 60px;
+    padding: 4px 8px;
+    border: 2px solid #1a73e8;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #1a73e8;
+    background-color: #f8f9fa;
+    margin: 0 2px;
+    white-space: nowrap; /* Add this */
+}
+
+/* Add this new rule to keep the ending phrase together */
+.no-break {
+    white-space: nowrap;
+}
                 
                 .number-input.required-empty {
                     border-color: #d32f2f;
@@ -342,24 +414,22 @@ function createTripleFillInQuestion(questions, questionIds) {
             </style>
             
             <div class="fill-container">
-                <div class="instructions">
-                    Please fill in the blanks.
-                </div>
-                
-                <div id="error-message" class="error-message">
-                    Please fill in all required fields before continuing.
-                </div>
-                
-                ${questions.map((q, index) => `
-                    <div class="question-section">
-                        ${q.promptText ? `<div class="question-text">${q.promptText}</div>` : ''}
-                        
-                        <div class="fill-text">
-                            ${q.fillText}
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
+    <div class="instructions">
+        Please fill in the blanks.
+    </div>
+    
+    <div id="error-message" class="error-message">
+        Please fill in all required fields before continuing.
+    </div>
+    
+    ${questions[0].promptText ? `<div class="prompt-text">${questions[0].promptText}</div>` : ''}
+    
+    <div class="paragraph-container">
+        <div class="fill-paragraph">
+            ${questions.map(q => `<span class="sentence">${q.fillText}</span>`).join(' ')}
+        </div>
+    </div>
+</div>
         `,
         button_label: 'Continue',
         data: {
@@ -416,26 +486,74 @@ function createTripleFillInQuestion(questions, questionIds) {
                 const inputValue = parseInt(data.response[`percentage_${qId}`]) || 0;
                 data[`${qId}_percentage`] = inputValue;
                 data[`${qId}_input_value`] = inputValue;
+                console.log(data)
             });
         }
     };
 }
-
 // Usage example:
-var tripleFillInQuestion = createTripleFillInQuestion([
+var fillInFood_Flow = fillIn([
     {
         promptText: "<strong>To maximize immersion and engagement,</strong>",
-        fillText: `I would make the top <input type="number" class="number-input" name="percentage_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
+        fillText: `I would make the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
     },
     {
-        promptText: "",
-        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="percentage_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+        promptText: "", 
+        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="flow_posterior" min="0" max="100" required>% chance of receiving a bonus.`
     },
     {
-        promptText: "",
-        fillText: `Each day, drivers who are <strong>not</strong> Non-FoodFast Stars will have a <input type="number" class="number-input" name="percentage_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+        promptText: "", 
+        fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
     }
-], ['prior', 'posterior', 'posterior2']);
+], ['flow_prior', 'flow_posterior', 'flow_posterior2']);
+
+var fillInFood_Performance = fillIn([
+    {
+        promptText: "<strong>To maximize job performance,</strong>", // Fixed prompt text
+        fillText: `I would make the top <input type="number" class="number-input" name="performance_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+    }
+], ['performance_prior', 'performance_posterior', 'performance_posterior2']);
+
+
+var fillInCall_Flow = fillIn([
+    {
+        promptText: "<strong>To maximize immersion and engagement,</strong>",
+        fillText: `I would make the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of daily best-performing agents as NextConnect achievers.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, NextConnect Achievers will have a <input type="number" class="number-input" name="flow_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, agents who are <strong>not</strong> NextConnect Achievers will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+    }
+], ['flow_prior', 'flow_posterior', 'flow_posterior2']);
+
+var fillInCall_Performance = fillIn([
+    {
+        promptText: "<strong>To maximize job performance,</strong>", // Fixed prompt text
+        fillText: `I would make the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of daily best-performing agents as NextConnect achievers.`
+    },
+    {
+        promptText: "", 
+         fillText: `Each day, NextConnect Achievers will have a <input type="number" class="number-input" name="flow_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+   },
+    {
+        promptText: "", 
+        fillText: `Each day, agents who are <strong>not</strong> NextConnect Achievers will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+    }
+], ['performance_prior', 'performance_posterior', 'performance_posterior2']);
+
+
 
 
 const attnChk1 = {
@@ -465,7 +583,7 @@ const attnChk1 = {
     };
 
     p.instLoopPredict = {
-      timeline: [introPlay, tripleFillInQuestion, attnChk, conditionalNode],
+      timeline: [intro, introFood, fillInFood_Flow,introPerformanceFood, fillInFood_Performance, introCall, fillInCall_Flow, fillInCall_Performance, attnChk, conditionalNode],
       loop_function: () => {
         const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
         return fail;
@@ -474,7 +592,7 @@ const attnChk1 = {
 
     p.instLoopPlay = {
     //timeline: [introPlay, sliderQuestion, attnChk, conditionalNode],
-      timeline: [introPlay, tripleFillInQuestion, attnChk, conditionalNode],
+      timeline: [intro, introFood, fillInFood_Flow, introPerformanceFood, fillInFood_Performance, introCall, fillInCall_Flow, fillInCall_Performance, attnChk, conditionalNode],
       loop_function: () => {
         const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
         return fail;
@@ -1210,7 +1328,7 @@ if (randomAssignment === 1) {
 
 p.preload = {
     type: jsPsychPreload,
-    images: ['./img/foodfast.png', './img/foodfaststars.png']
+    images: ['./img/foodfast.png', './img/foodfaststars.png', './img/nextconnectachieve.png', './img/nextconnect.png']
 };
 
     p.save_data = {
