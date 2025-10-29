@@ -19,7 +19,8 @@ const exp = (function() {
     */
 
 var textNew = {
-    game: [2].includes(randomAssignment) ? 'Guess the Feeling' : 'Spin the Wheel',
+    scenario: [2].includes(randomAssignment) ? 'One' : 'Two',
+    scenari2: [2].includes(randomAssignment) ? 'two' : 'one',
     attnchk1: [2].includes(randomAssignment) ? 'a wheel' : 'you',
     their: [2].includes(randomAssignment) ? 'the' : 'your',
     s: [2].includes(randomAssignment) ? 's' : '',
@@ -29,7 +30,7 @@ var textNew = {
         intro: [
             `<div class='parent'>
                 <p><strong>Welcome to the Manager Challenge!</strong></p>
-               <p>This game involves you imagining yourself as a manager of various organizations. </p>
+               <p>This game involves you imagining yourself as a manager of four organizations. </p>
              </div>`],
 
         introFood: [
@@ -116,64 +117,64 @@ introPerformanceFood: [
             </div>`
             ],
 
-        goalPredict: [
-            `<div class='parentGoal'>
-                <p>Your goal in Feel the Spin is to guess how an average person would feel while spinning different wheels. </p>
-                <p>You will see a variety of wheels, each with its own set of values and probability of a standard outcome. </p>
-                <p>For each wheel, your job is to guess how <b>immersed and absorbed</b> an average person would feel while spinning it&mdash;simply provide your best guess about the typical experience.</p>
-                <p>Continue to the next screen to begin.</p>
-            </div>`,      
+        introPerformanceCall: [
+  `<div class='tight'>
+    <img src="./img/nextconnectachieve.png" style="width:40%; height:40%">
+    <p>Your manager has decided to update the objective of the "NextConnect Achieve" Program. It is now designed to help NextConnect agents achieve better <strong>job performance.</strong></p>
+    <p>In other words, the aim of the program is to help agents handle customer calls more efficiently and effectively.</p>
+  </div>`,
+
+    `<div class='tight'>
+    <img src="./img/nextconnectachieve.png" style="width:40%; height:40%">
+    <p>Now, please indicate how you would design the NextConnect Achieve Program <b> to maximize agents' job performance. </p>
+  </div>`
         ],
 
-        goalPlay: [
-            `<div class='parentGoal'>
-            <p>Your goal in Feel the Spin is to spin the wheels and earn as many points as possible.</p>
-            <p>You will see a variety of wheels, each with its own set of values and probability of a standard outcome. For each wheel, your job is to spin the wheel and earn as many points as possible.</p>
-            <p>Also, throughout Feel the Spin, you will describe your feelings. Specifically, you will report how <b>immersed and absorbed</b> you felt while spinning each wheel.</p>
-            <p>Continue to the next screen to begin.</p>
-            </div>`,      
-        ],
-
-        postPlay: [
-            `<div class='parent'>
-                <p>To spin a prize wheel, just grab it with your cursor and give it a spin.</p>
-                <p>Watch the animation below to see how it's done.</p>
-                <img src="./img/spin-gif.gif" style="width:70%; height:70%">
+        introEdit: [
+            `<div class='tight'>
+                <img src="./img/redpen.png" style="width:40%; height:40%">
+                <p>In Scenario Three, you're the manager of Red Pen services.</p>
             </div>`,
 
-            `<div class='parent'>
-                <p>To get a feel for the game, you'll practice spinning two example wheels.</p>
-                <p>Continue to the next screen to begin.</p>
-            </div>`,     
-        ],
 
-        readyPlay: [
-            `<div class='parent'>
-             <p>You're now ready to play Feel the Spin!</p> 
-             <p> Click "Next" to continue. </p>
-        </div>`
-        ],
+            `<div class='tight'>
+                <img src="./img/redpen.png" style="width:40%; height:40%">
+                <p>Red Pen services is proofreading company. </p>
+            </div>`,
 
-        readyPredict: [
-            `<div class='parent'>
-             <p>You're now ready to play Feel the Spin!</p> 
-             <p> Click "Next" to continue. </p>
-        </div>`
-        ],
+`<div class='tight'>
+  <img src="./img/redpendetective.png" style="width:40%; height:40%">
+  <p> Red Pen services is launching a proofreader incentive program called <strong>"Red Pen Detective".</strong>
+  </p>
+</div>`,
+            `<div class='tight'>
+            <img src="./img/redpendetective.png" style="width:40%; height:40%">
+              <p>Proofreaders work on documents with intentionally planted errors to test their skills.</p>
+              <p>Proofreaders will earn the Red Pen Detective status based on how many of the 10 planted errors they can catch in each challenge document.</p>
+            </div>`,
 
-        postTaskPlay: [
-            `<div class='parent'>
-                <p>The game is now complete!</p>
-                <p>To finish this study, please continue to answer a few final questions.</p>
+            `<div class='tight'>
+            <img src="./img/redpendetective.png" style="width:40%; height:40%">
+            <p>The objective of the "Red Pen Detective" Program is to help proofreaders feel more <strong>immersed and engaged in their work. </strong></p>
+            <p>In other words, the aim of the program is to help proofreaders "get in the zone" while working, so much so that they feel <br>totally absorbed in their work.</p> 
+            </div>`,
+
+            `<div class='tight'>
+            <img src="./img/redpendetective.png" style="width:40%; height:40%">
+            <p>Now, please indicate how you would design the Red Pen Detective program <b> to maximize proofreaders' immersion and engagement. </b></p>
             </div>`
-        ],
+            ],
+                introPerformanceEdit: [
+  `<div class='tight'>
+    <img src="./img/redpendetective.png" style="width:40%; height:40%">
+    <p>Your manager has decided to update the objective of the "Red Pen Detective" Program. It is now designed to help Red Pen proofreaders achieve better <strong>job performance.</strong></p>
+    <p>In other words, the aim of the program is to help proofreaders catch errors more efficiently and accurately in their documents.</p>
+  </div>`,
 
-        postTaskPredict: [
-            `<div class='parent'>
-                <p>The game is now complete!</p>
-                <p>To finish this study, please continue to answer a few final questions.</p>
-            </div>`
-        ],
+    `<div class='tight'>
+    <img src="./img/redpendetective.png" style="width:40%; height:40%">
+    <p>Now, please indicate how you would design the Red Pen Detective Program <b> to maximize proofreaders' job performance. </p>
+  </div>`]
     };
 
     const consent = `
@@ -230,6 +231,30 @@ introPerformanceFood: [
     const introCall = {
         type: jsPsychInstructions,
         pages: html.introCall,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+        allow_keys: false,
+    };
+
+    const introEdit = {
+        type: jsPsychInstructions,
+        pages: html.introEdit,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+        allow_keys: false,
+    };
+
+    const introPerformanceEdit = {
+        type: jsPsychInstructions,
+        pages: html.introPerformanceEdit,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+        allow_keys: false,
+    };
+
+    const introPerformanceCall = {
+        type: jsPsychInstructions,
+        pages: html.introPerformanceCall,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
@@ -553,7 +578,35 @@ var fillInCall_Performance = fillIn([
     }
 ], ['performance_prior', 'performance_posterior', 'performance_posterior2']);
 
+var fillInEdit_Flow = fillIn([
+    {
+        promptText: "<strong>To maximize immersion and engagement,</strong>",
+        fillText: `I would give Red Pen Detective status to proofreaders who catch <input type="number" class="number-input" name="flow_prior" min="0" max="10" required> out of 10 planted errors in challenge documents.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, Red Pen Detectives will have a <input type="number" class="number-input" name="flow_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, proofreaders who are <strong>not</strong> Red Pen Detectives will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+    }
+], ['flow_prior', 'flow_posterior', 'flow_posterior2']);
 
+var fillInEdit_Performance = fillIn([
+    {
+        promptText: "<strong>To maximize job performance,</strong>",
+        fillText: `I would give Red Pen Detective status to proofreaders who catch <input type="number" class="number-input" name="flow_prior" min="0" max="10" required> out of 10 planted errors in challenge documents.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, Red Pen Detectives will have a <input type="number" class="number-input" name="flow_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, proofreaders who are <strong>not</strong> Red Pen Detectives will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+    }
+], ['flow_prior', 'flow_posterior', 'flow_posterior2']);
 
 
 const attnChk1 = {
@@ -583,7 +636,7 @@ const attnChk1 = {
     };
 
     p.instLoopPredict = {
-      timeline: [intro, introFood, fillInFood_Flow,introPerformanceFood, fillInFood_Performance, introCall, fillInCall_Flow, fillInCall_Performance, attnChk, conditionalNode],
+      timeline: [intro,introFood, fillInFood_Flow,introPerformanceFood, fillInFood_Performance, introCall, fillInCall_Flow, introPerformanceCall, fillInCall_Performance, introEdit,fillInEdit_Flow, introPerformanceEdit, fillInEdit_Performance, attnChk, conditionalNode],
       loop_function: () => {
         const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
         return fail;
@@ -592,7 +645,7 @@ const attnChk1 = {
 
     p.instLoopPlay = {
     //timeline: [introPlay, sliderQuestion, attnChk, conditionalNode],
-      timeline: [intro, introFood, fillInFood_Flow, introPerformanceFood, fillInFood_Performance, introCall, fillInCall_Flow, fillInCall_Performance, attnChk, conditionalNode],
+      timeline: [intro, introFood, fillInFood_Flow, introPerformanceFood, fillInFood_Performance, introCall, fillInCall_Flow, introPerformanceCall, fillInCall_Performance, introEdit,fillInEdit_Flow, introPerformanceEdit, fillInEdit_Performance,attnChk, conditionalNode],
       loop_function: () => {
         const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
         return fail;
@@ -613,54 +666,6 @@ const attnChk1 = {
         const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
         return fail;
       },
-    };
-
-    p.postPlay = {
-        type: jsPsychInstructions,
-        pages: html.postPlay,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
-    };
-
-    p.postPredict = {
-        type: jsPsychInstructions,
-        pages: html.postPredict,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
-    };
-
-    p.goalPlay = {
-        type: jsPsychInstructions,
-        pages: html.goalPlay,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
-    };
-
-    p.goalPredict = {
-        type: jsPsychInstructions,
-        pages: html.goalPredict,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
-    };
-
-    p.readyPlay = {
-        type: jsPsychInstructions,
-        pages: html.readyPlay,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
-    };
-
-    p.readyPredict = {
-        type: jsPsychInstructions,
-        pages: html.readyPredict,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
     };
 
     p.consent = {
@@ -1102,37 +1107,6 @@ preamble: function() {
   }
 };
 
-    // trial: happiness DV
-/*
-    const enjoymentMeasure = {
-        type: jsPsychSurveyLikert,
-        questions: [
-            {prompt: `How much did you like Spinning the Wheel?`,
-            name: `happiness`,
-            labels: ['0<br>A little', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10<br>Extremely']},
-        ],
-        randomize_question_order: false,
-        scale_width: 600,
- data: function() {
-  const sectors = jsPsych.timelineVariable('sectors');
-  return {
-    ev: jsPsych.timelineVariable('ev'),
-    sd: jsPsych.timelineVariable('sd'),
-    reliability: jsPsych.timelineVariable('reliability'),
-    uniformity: jsPsych.timelineVariable('uniformity'),
-    cardinality: jsPsych.timelineVariable('cardinality'),
-    points: sectors.map(s => s.points)
-  };
-},          on_finish: function(data) {
-            data.round = round;
-            let scoreArray = jsPsych.data.get().select('score').values;
-            data.score = scoreArray[scoreArray.length - 2];
-            saveSurveyData(data);
- //           data.round++;
-        }
-    }; */
-
-
 //for preview
 const previewBlock1 = {
   timeline: [preSpinPractice, spin],
@@ -1328,7 +1302,7 @@ if (randomAssignment === 1) {
 
 p.preload = {
     type: jsPsychPreload,
-    images: ['./img/foodfast.png', './img/foodfaststars.png', './img/nextconnectachieve.png', './img/nextconnect.png']
+    images: ['./img/foodfast.png', './img/foodfaststars.png', './img/nextconnectachieve.png', './img/nextconnect.png', './img/redpen.png', './img/redpendetective.png']
 };
 
     p.save_data = {
@@ -1351,8 +1325,6 @@ p.preload = {
     return p;
 
 }());
-
-
 
 // const timeline = [exp.instLoop, exp.postPlay, exp.preview, exp.readyPlay, exp.task];
 let timeline;
