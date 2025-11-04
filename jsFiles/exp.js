@@ -74,13 +74,13 @@ const beforePage = [
 const introPerformancePage = [
         `<div class='tight'>
             <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p>Your manager has decided to update the objective of the "FoodFast Stars" Program. It is now designed to help FoodFast drivers <strong>work harder</strong></p>
-            <p>In other words, the aim of the program is to help drivers try as hard as possible.</p>
+            <p>Your manager has decided to update the objective of the "FoodFast Stars" Program. It is now designed to motivate FoodFast drivers to <strong>work harder.</strong></p>
+            <p>In other words, the aim of the program is to help drivers put forth more effort in their work. </p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p>Now, please indicate how you would design the FoodFast Star program <b> to maximize drivers' job performance. </p>
+            <p>Now, please indicate how you would design the FoodFast Star program <b> to encourage drivers to work harder. </p>
         </div>`
 ];
 
@@ -161,72 +161,71 @@ const consent = `
     Independent Contact: If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906, or email at irbnonmed@stanford.edu. You can also write to the Stanford IRB, Stanford University, 1705 El Camino Real, Palo Alto, CA 94306. </p>
     <p>If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
 
+const errorMessage = {
+    type: jsPsychInstructions,
+    pages: [`<div class='parent'><p>You provided the wrong answer.<br>To make sure you understand the game, please continue to re-read the instructions.</p></div>`],
+    show_clickable_nav: true,
+    allow_keys: false,
+};
 
-    const intro = {
+const intro = {
         type: jsPsychInstructions,
         pages: introPage,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
-    };
+};
 
-    const before = {
+const before = {
         type: jsPsychInstructions,
         pages: beforePage,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
-    };
+};
 
-    const uniformity = {
+const uniformity = {
         type: jsPsychInstructions,
         pages: uniformityPage,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
-    };
+};
 
-    const cardinality = {
+const cardinality = {
         type: jsPsychInstructions,
         pages: cardinalityPage,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
-    };
+};
 
-    const diagnosticity = {
+const diagnosticity = {
         type: jsPsychInstructions,
         pages: diagnosticityPage,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
-    };
+};
 
-    const introPerformance = {
+const introPerformance = {
         type: jsPsychInstructions,
         pages: introPerformancePage,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
-    };
-
-const errorMessage = {
-        type: jsPsychInstructions,
-        pages: [`<div class='parent'><p>You provided the wrong answer.<br>To make sure you understand the game, please continue to re-read the instructions.</p></div>`],
-        show_clickable_nav: true,
-        allow_keys: false,
 };
+
+
 
 let correctAnswers = [`To boost drivers' immersion and engagement`, `True`, `True`, `True`];
 
-// Condition mapping
 const conditionMap = {
     1: 'cardinality',
     2: 'uniformity', 
     3: 'diagnosticity'
 };
 
-// Helper function to get scenario page
 function getScenarioPage(pageName) {
     const pageMap = {
         'cardinalityPage1': cardinalityPage1,
@@ -306,6 +305,26 @@ function getCorrectAnswers(assignment) {
     return baseAnswer.concat(conditionAnswers[assignment] || []);
 }
 
+function getTotalErrors(data, correctAnswers) {
+    let errors = 0;
+    correctAnswers.forEach((correct, index) => {
+        const questionName = `attnChk${index + 1}`;
+        if (data.response[questionName] !== correct) {
+            errors++;
+        }
+    });
+    return errors;
+}
+
+
+const conditionalNode = {
+    timeline: [errorMessage],
+    conditional_function: () => {
+    const fail = jsPsych.data.get().last(1).select('totalErrors').sum() > 0 ? true : false;
+    return fail;
+    },
+};
+
 // Main attention check object
 const attnChk = {
     type: jsPsychSurveyMultiChoice,
@@ -334,11 +353,19 @@ const attnChk = {
     }
 };
 
-if (randomAssignment === 2) {
-  correctAnswers = `Guess how an average person would feel while spinning the wheel.`;
-} else {
-  correctAnswers1 = `Spin the wheel and earn points.`;
-}
+const attnCheckLoop = {
+    timeline: [attnChk, conditionalNode],
+    loop_function: () => {
+        const attnChkTrials = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'});
+        if (attnChkTrials.count() > 0) {
+            const lastAttnChk = attnChkTrials.last(1).values()[0];
+            const fail = lastAttnChk.totalErrors > 0;
+            return fail;
+        } else {
+            return false;
+        }
+    }
+};
 
 function fillIn(questions, questionIds) {
     return {
@@ -383,46 +410,46 @@ function fillIn(questions, questionIds) {
                     text-align: center;
                 }
                 
-.paragraph-container {
-    margin: 30px -20px;  /* Negative margins extend beyond parent */
-    padding: 50px;       /* Increase padding for more internal space */
-    background-color: #fafafa;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    width: calc(100% + 40px);  /* Extends beyond parent width */
-    box-sizing: border-box;
-}
-                
+                .paragraph-container {
+                    margin: 30px -20px;  /* Negative margins extend beyond parent */
+                    padding: 50px;       /* Increase padding for more internal space */
+                    background-color: #fafafa;
+                    border-radius: 8px;
+                    border: 1px solid #e0e0e0;
+                    width: calc(100% + 40px);  /* Extends beyond parent width */
+                    box-sizing: border-box;
+                }
+                                
                 .fill-paragraph {
                     font-size: 17px;  
                     line-height: 1.5;  
                     text-align: justify;
                 }
                 
-.fill-paragraph .sentence {
-    display: inline;         /* Change to inline so they flow together */
-}
-                
-.number-input {
-    display: inline-block;
-    width: 60px;
-    padding: 4px 8px;
-    border: 2px solid #1a73e8;
-    border-radius: 4px;
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #1a73e8;
-    background-color: #f8f9fa;
-    margin: 0 2px;
-    white-space: nowrap; /* Add this */
-}
+                .fill-paragraph .sentence {
+                    display: inline;         /* Change to inline so they flow together */
+                }
+                                
+                .number-input {
+                    display: inline-block;
+                    width: 60px;
+                    padding: 4px 8px;
+                    border: 2px solid #1a73e8;
+                    border-radius: 4px;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: #1a73e8;
+                    background-color: #f8f9fa;
+                    margin: 0 2px;
+                    white-space: nowrap; /* Add this */
+                }
 
-/* Add this new rule to keep the ending phrase together */
-.no-break {
-    white-space: nowrap;
-}
-                
+                /* Add this new rule to keep the ending phrase together */
+                .no-break {
+                    white-space: nowrap;
+                }
+                                
                 .number-input.required-empty {
                     border-color: #d32f2f;
                     background-color: #ffebee;
@@ -539,16 +566,16 @@ function fillIn(questions, questionIds) {
     };
 }
 //FOOD
-var fillInFood_Flow = fillIn([
+var fillIn_Uniformity = fillIn([
     {
         promptText: "<strong>To maximize immersion and engagement,</strong>",
         fillText: `I would make the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
     }
 ], ['flow_uniformity']);
 
-var fillInFood_Performance = fillIn([
+var fillInPerf_Uniformity = fillIn([
     {
-        promptText: "<strong>To maximize job performance,</strong>", // Fixed prompt text
+        promptText: "<strong>To encourage drivers to work harder,</strong>", // Fixed prompt text
         fillText: `I would make the top <input type="number" class="number-input" name="performance_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
     },
     {
@@ -559,70 +586,64 @@ var fillInFood_Performance = fillIn([
         promptText: "", 
         fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
     }
-], ['performance_prior', 'performance_posterior', 'performance_posterior2']);
+], ['performance_uniformity']);
 
-var fillInFood_Flow2 = fillIn([
+var fillIn_Diagnosticity = fillIn([
     {
         promptText: "<strong>To maximize immersion and engagement,</strong>",
-        fillText: `I would make the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
-    },
-    {
-        promptText: "", 
-        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="flow_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a bonus.`
     },
     {
         promptText: "", 
         fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
     }
-], ['flow_prior', 'flow_posterior', 'flow_posterior2']);
+], ['flow_diagnosticity1', 'flow_diagnosticity2']);
 
-    const conditionalNode = {
-      timeline: [errorMessage],
-      conditional_function: () => {
-        const fail = jsPsych.data.get().last(1).select('totalErrors').sum() > 0 ? true : false;
+var fillInPerf_Diagnosticity = fillIn([
+    {
+        promptText: "<strong>To encourage drivers to work harder,</strong>",
+        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+    },
+    {
+        promptText: "", 
+        fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+    }
+], ['flow_diagnosticity1', 'flow_diagnosticity2']);
+
+p.instLoopUniformity = {
+    timeline: [intro, uniformity, attnCheckLoop, before, fillIn_Uniformity, introPerformance, fillInPerf_Uniformity],
+    loop_function: () => {
+        // Look for the most recent attnChk trial specifically
+        const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
+        const fail = attnChkData.select('totalErrors').sum() > 0;
         return fail;
-      },
-    };
+    },
+};
 
-    p.instLoopPredict = {
-      timeline: [intro, uniformity, attnChk, fillInFood_Flow,conditionalNode, introPerformance],
-      loop_function: () => {
-        const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
+p.instLoopCardinality = {
+    timeline: [intro, cardinality, attnCheckLoop, before, fillIn_Diagnosticity, introPerformance],
+    loop_function: () => {
+        const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
+        const fail = attnChkData.select('totalErrors').sum() > 0;
         return fail;
-      },
-    };
+    },
+};
 
-    p.instLoopPlay = {
-    //timeline: [introPlay, sliderQuestion, attnChk, conditionalNode],
-       timeline: [intro, cardinality, attnChk, fillInFood_Flow,conditionalNode, introPerformance],
-      loop_function: () => {
-        const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
+p.instLoopDiagnosticity = {
+    timeline: [intro, diagnosticity, attnCheckLoop, before, fillIn_Diagnosticity, introPerformance, fillInPerf_Diagnosticity],
+    loop_function: () => {
+        const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
+        const fail = attnChkData.select('totalErrors').sum() > 0;
         return fail;
-      },
-    };
+    },
+};
 
-    p.instLoopPredict1 = {
-      timeline: [attnChk, conditionalNode],
-      loop_function: () => {
-        const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
-        return fail;
-      },
-    };
-
-    p.instLoopPlay1 = {
-      timeline: [attnChk, conditionalNode],
-      loop_function: () => {
-        const fail = jsPsych.data.get().last(2).select('totalErrors').sum() > 0 ? true : false;
-        return fail;
-      },
-    };
-
-    p.consent = {
-        type: jsPsychInstructions,
-        pages: [consent],
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-    };
+p.consent = {
+    type: jsPsychInstructions,
+    pages: [consent],
+    show_clickable_nav: true,
+    post_trial_gap: 500,
+};
 
    /*
     *
@@ -630,53 +651,7 @@ var fillInFood_Flow2 = fillIn([
     *
     */
 
-    p.demographics = (function() {
-
-
-        const genFlowScale = ['-2<br>Totally<br>Disagree', '-1<br>Disagree', '0<br>Neither agree<br>nor disagree', '1<br>Agree', '2<br>Totally<br>Agree'];
-
-        const flowGenQuestions = {
-            type: jsPsychSurveyLikert,
-            preamble:
-                `<div style='padding-top: 50px; width: 900px; font-size:16px'>
-                    <p>Please express the extent to which you disagree or agree with each statement.</p>
-                </div>`,
-            questions: [
-
-                {
-                    prompt: `I rarely find tasks only moderately engaging—I find most activities either completely immersive or extremely boring.`,
-                    name: `genFlow_1`,
-                    labels: genFlowScale,
-                    required: true,
-                },
-
-                {
-                    prompt: `I often alternate between feelings of intense engagement and complete boredom.`,
-                    name: `genFlow_2`,
-                    labels: genFlowScale,
-                    required: true,
-                },
-
-                {
-                    prompt: `For me, activities are either extremely engaging or dull—there's rarely an in-between.`,
-                    name: `genFlow_3`,
-                    labels: genFlowScale,
-                    required: true,
-                },
-
-                {
-                    prompt: `My mood often swings between being deeply engaged in what I'm doing and feeling totally bored.`,
-                    name: `genFlow_4`,
-                    labels: genFlowScale,
-                    required: true,
-                },
-            ],
-            randomize_question_order: false,
-            scale_width: 500,
-            on_finish: (data) => {
-                saveSurveyData(data); 
-            },
-        };
+p.demographics = (function() {
 
         const gender = {
             type: jsPsychHtmlButtonResponse,
@@ -743,30 +718,29 @@ if (randomAssignment === 1) {
     *
     */
 
-
 p.preload = {
     type: jsPsychPreload,
     images: ['./img/foodfast.png', './img/foodfaststars.png']
 };
 
-    p.save_data = {
-        type: jsPsychPipe,
-        action: "save",
-        experiment_id: "133taaH9iM67",
-        filename: filename,
-        data_string: ()=>jsPsych.data.get().csv()
-    };
+p.save_data = {
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "133taaH9iM67",
+    filename: filename,
+    data_string: ()=>jsPsych.data.get().csv()
+};
 
-    p.end = {
-        type: jsPsychHtmlButtonResponse,
-        stimulus: '<p>Thank you! Please press the button to submit your response and exit the page. </p>',
-        choices: ['Submit!'],
-        on_finish: (data) => {
-            saveSurveyData(data); 
-            },
-        };
+p.end = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: '<p>Thank you! Please press the button to submit your response and exit the page. </p>',
+    choices: ['Submit!'],
+    on_finish: (data) => {
+    saveSurveyData(data); 
+        },
+};
 
-    return p;
+return p;
 
 }());
 
@@ -775,16 +749,11 @@ let timeline;
 
 
 if (randomAssignment === 1) {
-    timeline = [exp.preload, exp.instLoopPlay, exp.postPlay, exp.preview,  exp.goalPlay, exp.instLoopPlay1, exp.readyPlay, exp.task, exp.demographics, exp.save_data, exp.end];
-   //timeline = [exp.consent, exp.instLoopPlay, exp.postPlay, exp.preview, exp.goalPlay, exp.instLoopPlay1, exp.readyPlay, exp.task, exp.demographics, exp.save_data, exp.end];
- // [exp.instLoopPlay, exp.postPlay, exp.preview, exp.readyPlay, exp.task, exp.demographics];
-} else {
-      timeline = [exp.preload,exp.instLoopPredict, exp.postPredict, exp.preview, exp.goalPredict, exp.instLoopPredict1, exp.readyPredict, exp.taskPredict, exp.demographics, exp.save_data, exp.end];
- //timeline = [exp.taskPredict, exp.demographics, exp.save_data, exp.end];
-
+    timeline = [exp.preload, exp.instLoopCardinality, exp.postPlay, exp.preview, exp.goalPlay, exp.instLoopPlay1, exp.readyPlay, exp.task, exp.demographics, exp.save_data, exp.end];
+} else if (randomAssignment === 2) {
+    timeline = [exp.preload, exp.instLoopUniformity, exp.postPredict, exp.preview, exp.goalPredict, exp.instLoopPredict1, exp.readyPredict, exp.taskPredict, exp.demographics, exp.save_data, exp.end];
+} else if (randomAssignment === 3) {
+    timeline = [exp.preload, exp.instLoopDiagnosticity, exp.postPredict, exp.preview, exp.goalPredict, exp.instLoopPredict1, exp.readyPredict, exp.taskPredict, exp.demographics, exp.save_data, exp.end];
 }
-
-
-// const timeline = [exp.consent, exp.instLoop, exp.postIntro, exp.task, exp.demographics, exp.save_data];
 
 jsPsych.run(timeline);
