@@ -5,9 +5,15 @@ const randomAssignment = Math.floor(Math.random() * 3) + 1;
 //randomAssignment = 2 = uniformity
 //randomAssignment = 3 = diagnosticity
 
+console.log("RandomAssignment is " + randomAssignment);
 
-console.log(randomAssignment);
-// const randomAssignment = 2;
+
+const company = Math.floor(Math.random() * 3) + 1; 
+//company = 1 = FoodFast
+//company = 2 = NextConnect
+//company = 3 = RedPen
+
+console.log("Company is " + company);
 
 
 const exp = (function() {
@@ -22,14 +28,40 @@ var p = {};
     *
     */
 
-/*
+
 var textNew = {
-    scenari2: [2].includes(randomAssignment) ? 'two' : 'one',
-    attnchk1: [2].includes(randomAssignment) ? 'a wheel' : 'you',
-    their: [2].includes(randomAssignment) ? 'the' : 'your',
-    s: [2].includes(randomAssignment) ? 's' : '',
-}
-*/
+    company: company === 1 ? 'FoodFast' :
+             company === 2 ? 'NextConnect' : 'DataFlow',
+
+    imageCompany: company === 1 ? 'foodfast' :
+                company === 2 ? 'nextconnect' : 'dataflow',
+
+    imageProgram: company === 1 ? 'foodfaststars' :
+                company === 2 ? 'nextconnectachieve' : 'dataflowkeyboardchampions',
+    
+    employee: company === 1 ? 'driver' :
+                company === 2 ? 'call center agent' : 'data entry specialist',
+
+    employees: company === 1 ? 'drivers' :
+                company === 2 ? 'call center agents' : 'data entry specialists',
+
+    Capitalizedemployees: company === 1 ? 'Drivers' :
+                company === 2 ? 'Call center agents' : 'Data entry specialists',
+    
+    programName: company === 1 ? 'FoodFast Stars' :
+                 company === 2 ? `NextConnect Achievers` : `DataFlow Keyboard Champions`,
+    
+    industry: company === 1 ? 'food delivery' :
+                company === 2 ? 'call center' : 'data entry',
+
+    programNameone: company === 1 ? 'FoodFast Star' :
+                 company === 2 ? `NextConnect Achiever` : `DataFlow Keyboard Champion`,
+
+    metric: company === 1 ? 'driving time' :
+                 company === 2 ? `call time` : `completed data entry`,
+};
+
+
 const introPage = [
         `<div class='parent'>
             <p><strong>Welcome to the Manager Challenge!</strong></p>
@@ -37,102 +69,102 @@ const introPage = [
         </div>`,
 
         `<div class='tight'>
-            <img src="./img/foodfast.png" style="width:40%; height:40%">
-            <p>You're the manager of FoodFast.</p>
+            <img src="./img/${textNew.imageCompany}.png" style="width:40%; height:40%">
+            <p>You're the manager of ${textNew.company}.</p>
         </div>`,
 
         `<div class='tight'>
-            <img src="./img/foodfast.png" style="width:40%; height:40%">
-            <p>FoodFast is a food delivery company like UberEats or DoorDash. </p>
+            <img src="./img/${textNew.imageCompany}.png" style="width:40%; height:40%">
+            <p>${textNew.company} is a ${textNew.industry} company. </p>
         </div>`,
 
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p> FoodFast is launching a new driver incentive program, called <br> <strong>"FoodFast Stars".</strong> </p>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p> ${textNew.company} is launching a new ${textNew.employee} incentive program, called <strong>"${textNew.programName}".</strong> </p>
         </div>`,
 
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p>The objective of the "FoodFast Stars" Program is to help FoodFast drivers feel more <strong>immersed and engaged in their work. </strong></p>
-            <p>In other words, the aim of the program is to help drivers "get in the zone" while working, so much so that they feel <br>totally absorbed in their work. </p>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>The objective of the "${textNew.programName}" Program is to help ${textNew.company} ${textNew.employees} feel more <strong>immersed and engaged in their work. </strong></p>
+            <p>In other words, the aim of the program is to help ${textNew.employees} "get in the zone" while working, so much so that they feel <br>totally absorbed in their work. </p>
         </div>`,
 
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p>Each day, whether a driver is named a FoodFast Star determines their chances of earning a daily bonus. </p>
-            <p>A certain percentage of top-performing drivers will earn the FoodFast Star title based on their average driving time that day.</p>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Each day, whether a ${textNew.employee} is named a ${textNew.programNameone} determines their chances of earning a daily bonus. </p>
+            <p>A certain percentage of top-performing ${textNew.employees} will earn the ${textNew.programNameone} title based on their average ${textNew.metric} that day.</p>
         </div>`,
 ];
 
 const beforePage = [
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p>Now, please indicate how you would design the remaining aspect of the FoodFast Star program <b> to maximize drivers' immersion and engagement. </b></p>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Now, please indicate how you would design the remaining aspect of the ${textNew.programName} Program <b> <br>to maximize ${textNew.employees}' immersion and engagement. </b></p>
         </div>`
 ];
 
 const introPerformancePage = [
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p>Your manager has decided to update the objective of the "FoodFast Stars" Program. It is now designed to motivate FoodFast drivers to <strong>work harder.</strong></p>
-            <p>In other words, the aim of the program is to help drivers put forth more effort in their work. </p>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Your manager has decided to update the objective of the "${textNew.programName}" Program. It is now designed to motivate ${textNew.company} ${textNew.employees} to <strong>work harder.</strong></p>
+            <p>In other words, the aim of the program is to help ${textNew.employees} put forth more effort in their work. </p>
         </div>`,
 
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
-            <p>Now, please indicate how you would design the FoodFast Star program <b> to encourage drivers to work harder. </p>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Now, please indicate how you would design the ${textNew.programName} Program <b> to encourage ${textNew.employees} to work harder. </p>
         </div>`
 ];
 
 const uniformityPage = [
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your manager has decided the following:</p>
-            <p>Drivers will be categorized into FoodFast stars or Non-FoodFast Stars based on their average driving time that day.</p>
-            <p>Each day, FoodFast Stars will have 100% chance of receiving a bonus. </p>
-            <p>Each day, drivers who are <b>not</b> FoodFast Stars will have 0% chance of receiving a bonus. </p>
+            <p>${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average ${textNew.metric} that day.</p>
+            <p>Each day, ${textNew.programName} will have 100% chance of receiving a bonus. </p>
+            <p>Each day, ${textNew.employees} who are <b>not</b> ${textNew.programName} will have 0% chance of receiving a bonus. </p>
         </div>`
 ];
 
 const uniformityPage1 = [
-            `<p>As a reminder, your goal is to help FoodFast drivers feel more immersed and engaged in their work.</p>
-            <p>Drivers will be categorized into FoodFast stars or Non-FoodFast Stars based on their average driving time that day.</p>
-            <p>Each day, FoodFast Stars will have 100% chance of receiving a bonus. </p>
-            <p>Each day, drivers who are <b>not</b> FoodFast Stars will have 0% chance of receiving a bonus. </p>
+        `<p>As a reminder, your goal is to help ${textNew.employees} feel more immersed and engaged in their work.</p>
+            <p>${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average ${textNew.metric} that day.</p>
+            <p>Each day, ${textNew.programName} will have 100% chance of receiving a bonus. </p>
+            <p>Each day, ${textNew.employees} who are <b>not</b> ${textNew.programName} will have 0% chance of receiving a bonus. </p>
         </div>`
 ];
 
 const diagnosticityPage = [
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your manager has decided the following:</p>
-            <p>Drivers will be categorized into FoodFast stars or Non-FoodFast Stars based on their average driving time that day.</p>
-            <p>The top 50% of daily best-performing drivers are categorized as FoodFast Stars. </p>
+            <p>Drivers will be categorized into ${textNew.programName} or ${textNew.programName} based on their average driving time that day.</p>
+            <p>The top 50% of daily best-performing drivers are categorized as ${textNew.programName}. </p>
         </div>`
 ];
 
 const diagnosticityPage1 = [
-        `<p>As a reminder, your goal is to help FoodFast drivers feel more immersed and engaged in their work.</p>
-            <p>Drivers will be categorized into FoodFast stars or Non-FoodFast Stars based on their average driving time that day.</p>
-            <p>The top 50% of daily best-performing drivers are categorized as FoodFast Stars. </p>
+        `<p>As a reminder, your goal is to help ${textNew.employees} feel more immersed and engaged in their work.</p>
+            <p>Drivers will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average driving time that day.</p>
+            <p>The top 50% of daily best-performing ${textNew.employees} are categorized as ${textNew.programName}. </p>
         </div>`
 ];
 
 const cardinalityPage = [
         `<div class='tight'>
-            <img src="./img/foodfaststars.png" style="width:40%; height:40%">
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your manager has decided the following:</p>
             <p>Drivers will be categorized into certain percentiles based on their average driving time that day.</p>
-            <p>Each day, drivers who have been allocated a bonus will have 100% chance of receiving that bonus. </p>
-            <p>Each day, drivers who have not been allocated a bonus will have 0% chance of receiving that bonus. </p>
+            <p>Each day, ${textNew.employees} who have been allocated a bonus will have 100% chance of receiving that bonus. </p>
+            <p>Each day, ${textNew.employees} who have not been allocated a bonus will have 0% chance of receiving that bonus. </p>
         </div>`
 ];
 
 const cardinalityPage1 = [
-        `<p>As a reminder, your goal is to help FoodFast drivers feel more immersed and engaged in their work.</p>
-            <p>Drivers will be categorized into certain percentiles based on their average driving time that day.</p>
-            <p>Each day, drivers who have been allocated a bonus will have 100% chance of receiving that bonus. </p>
-            <p>Each day, drivers who have not been allocated a bonus will have 0% chance of receiving that bonus. </p>
+        `<p>As a reminder, your goal is to help ${textNew.employees} feel more immersed and engaged in their work.</p>
+            <p>${textNew.Capitalizedemployees} will be categorized into certain percentiles based on their average driving time that day.</p>
+            <p>Each day, ${textNew.employees} who have been allocated a bonus will have 100% chance of receiving that bonus. </p>
+            <p>Each day, ${textNew.employees} who have not been allocated a bonus will have 0% chance of receiving that bonus. </p>
         </div>`
 ];
 
@@ -216,10 +248,6 @@ const introPerformance = {
         allow_keys: false,
 };
 
-
-
-let correctAnswers = [`To boost drivers' immersion and engagement`, `True`, `True`, `True`];
-
 const conditionMap = {
     1: 'cardinality',
     2: 'uniformity', 
@@ -239,52 +267,52 @@ function getQuestionsForCondition(assignment) {
     const baseQuestion = {
         prompt: `What is your goal?`, 
         name: `attnChk1`, 
-        options: [`To boost drivers' immersion and engagement`, `To boost drivers to work harder`]
+        options: [`To boost ${textNew.employees}' immersion and engagement`, `To boost ${textNew.employees} to work harder`]
     };
     
     const conditionQuestions = {
         1: [ // Cardinality
             {
-                prompt: `Drivers will be categorized into certain percentiles based on their average driving time that day.`, 
+                prompt: `${textNew.Capitalizedemployees} will be categorized into certain percentiles based on their average ${textNew.metric} that day.`, 
                 name: `attnChk2`, 
                 options: ['True', 'False']
             },
             {
-                prompt: `Each day, drivers who have been allocated a bonus will have 100% chance of receiving that bonus.`, 
+                prompt: `Each day, ${textNew.employees} who have been allocated a bonus will have 100% chance of receiving that bonus.`, 
                 name: `attnChk3`, 
                 options: ['True', 'False']
             },
             {
-                prompt: `Each day, drivers who have not been allocated a bonus will have 0% chance of receiving that bonus.`, 
+                prompt: `Each day, ${textNew.employees} who have not been allocated a bonus will have 0% chance of receiving that bonus.`, 
                 name: `attnChk4`, 
                 options: ['True', 'False']
             }
         ],
         2: [ // Uniformity
             {
-                prompt: `Drivers will be categorized into FoodFast stars or Non-FoodFast Stars based on their average driving time that day.`, 
+                prompt: `${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average ${textNew.metric} that day.`, 
                 name: `attnChk2`, 
                 options: ['True', 'False']
             },
             {
-                prompt: `FoodFast Stars will have 100% chance of obtaining a bonus.`, 
+                prompt: `${textNew.programName} will have 100% chance of obtaining a bonus.`, 
                 name: `attnChk3`, 
                 options: ['True', 'False']
             },
             {
-                prompt: `Non-FoodFast Stars will have 0% chance of obtaining a bonus.`, 
+                prompt: `Non-${textNew.programName} will have 0% chance of obtaining a bonus.`, 
                 name: `attnChk4`, 
                 options: ['True', 'False']
             }
         ],
         3: [ // Diagnosticity
             {
-                prompt: `Drivers will be categorized into FoodFast stars or Non-FoodFast Stars based on their average driving time that day.`, 
+                prompt: `${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average ${textNew.metric} that day.`, 
                 name: `attnChk2`, 
                 options: ['True', 'False']
             },
             {
-                prompt: `The top 50% of daily best-performing drivers are categorized as FoodFast Stars.`, 
+                prompt: `The top 50% of daily best-performing ${textNew.employees} are categorized as ${textNew.programName}.`, 
                 name: `attnChk3`, 
                 options: ['True', 'False']
             }
@@ -294,12 +322,12 @@ function getQuestionsForCondition(assignment) {
     return [baseQuestion].concat(conditionQuestions[assignment] || []);
 }
 
-// Helper function to get correct answers
+
 function getCorrectAnswers(assignment) {
-    const baseAnswer = [`To boost drivers' immersion and engagement`];
+    const baseAnswer = [`To boost ${textNew.employees}' immersion and engagement`];
     const conditionAnswers = {
         1: ["True", "True", "True"],     // Cardinality answers
-        2: ["True", "False", "False"],   // Uniformity answers  
+        2: ["True", "True", "True"],   // Uniformity answers  
         3: ["True", "True"]              // Diagnosticity answers
     };
     return baseAnswer.concat(conditionAnswers[assignment] || []);
@@ -316,7 +344,6 @@ function getTotalErrors(data, correctAnswers) {
     return errors;
 }
 
-
 const conditionalNode = {
     timeline: [errorMessage],
     conditional_function: () => {
@@ -325,7 +352,7 @@ const conditionalNode = {
     },
 };
 
-// Main attention check object
+
 const attnChk = {
     type: jsPsychSurveyMultiChoice,
     preamble: () => {
@@ -334,7 +361,7 @@ const attnChk = {
         const scenarioPage = getScenarioPage(pageName);
         
         return `
-            <div class='parent'>
+            <div>
                 ${scenarioPage}
                 <p><strong>Please answer the following questions.</p></strong>
             </div>
@@ -565,7 +592,7 @@ function fillIn(questions, questionIds) {
         }
     };
 }
-//FOOD
+
 var fillIn_Uniformity = fillIn([
     {
         promptText: "<strong>To maximize immersion and engagement,</strong>",
@@ -577,14 +604,6 @@ var fillInPerf_Uniformity = fillIn([
     {
         promptText: "<strong>To encourage drivers to work harder,</strong>", // Fixed prompt text
         fillText: `I would make the top <input type="number" class="number-input" name="performance_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
-    },
-    {
-        promptText: "", 
-        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a bonus.`
-    },
-    {
-        promptText: "", 
-        fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
     }
 ], ['performance_uniformity']);
 
@@ -608,7 +627,161 @@ var fillInPerf_Diagnosticity = fillIn([
         promptText: "", 
         fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
     }
-], ['flow_diagnosticity1', 'flow_diagnosticity2']);
+], ['performance_diagnosticity1', 'performance_diagnosticity2']);
+
+
+/*
+function createStaticSliderChoice() {
+    return {
+        type: jsPsychSurveyMultiChoice,
+        questions: [
+            {
+                prompt: `
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="text-align: center; margin-bottom: 40px;">I would choose the following option to categorize FoodFast Stars. Each coin is worth $0.10 of bonus.</h3>
+                        
+                        <!-- First Slider Option -->
+                        <div style="margin-bottom: 40px; padding: 20px; border: 2px solid #ddd; border-radius: 8px;">
+                            <div style="position: relative; width: 100%; height: 80px; margin: 20px 0;">
+                                <!-- Performance labels -->
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                    <div style="text-align: center; width: 50%; font-weight: bold; color: #333;">Bottom 50%</div>
+                                    <div style="text-align: center; width: 50%; font-weight: bold; color: #333;">Top 50%</div>
+                                </div>
+                                
+                                <!-- Coin labels -->
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
+                                    <div style="text-align: center; width: 50%; font-size: 15px; color: #666;">1 coin</div>
+                                    <div style="text-align: center; width: 50%; font-size: 15px; color: #666;">11 coins</div>
+                                </div>
+                                
+                                <!-- Slider visual -->
+                                <div style="display: flex; width: 100%; height: 30px; border-radius: 15px; overflow: hidden; border: 2px solid #ccc;">
+                                    <div style="width: 50%; background-color: #ff4444; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 50%; background-color: #44ff44; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Second Slider Option -->
+                        <div style="margin-bottom: 40px; padding: 20px; border: 2px solid #ddd; border-radius: 8px;">
+                            <div style="position: relative; width: 100%; height: 80px; margin: 20px 0;">
+                                <!-- Performance labels -->
+                                <div style="display: flex; margin-bottom: 10px;">
+                                    <div style="text-align: center; width: 33.33%; font-weight: bold; color: #333;">Bottom 33%</div>
+                                    <div style="text-align: center; width: 33.33%; font-weight: bold; color: #333;">Middle 33%</div>
+                                    <div style="text-align: center; width: 33.33%; font-weight: bold; color: #333;">Top 33%</div>
+                                </div>
+                                
+                                <!-- Coin labels -->
+                                <div style="display: flex; margin-bottom: 15px;">
+                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">1 coin</div>
+                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">6 coins</div>
+                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">11 coins</div>
+                                </div>
+                                
+                                <!-- Slider visual -->
+                                <div style="display: flex; width: 100%; height: 30px; border-radius: 15px; overflow: hidden; border: 2px solid #ccc;">
+                                    <div style="width: 33.33%; background-color: #ff4444; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 33.33%; background-color: #ffaa00; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 33.33%; background-color: #44ff44; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Third Slider Option -->
+                        <div style="margin-bottom: 40px; padding: 20px; border: 2px solid #ddd; border-radius: 8px;">
+                            <div style="position: relative; width: 100%; height: 80px; margin: 20px 0;">
+                                <!-- Performance labels -->
+                                <div style="display: flex; margin-bottom: 10px;">
+                                    <div style="text-align: center; width: 25%; font-weight: bold; color: #333;">Bottom 25%</div>
+                                    <div style="text-align: center; width: 25%; font-weight: bold; color: #333;">Middle 25-50%</div>
+                                    <div style="text-align: center; width: 25%; font-weight: bold; color: #333;">Middle 50-75%</div>
+                                    <div style="text-align: center; width: 25%; font-weight: bold; color: #333;">Top 25%</div>
+                                </div>
+                                
+                                <!-- Coin labels -->
+                                <div style="display: flex; margin-bottom: 15px;">
+                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">1 coin</div>
+                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">4 coins</div>
+                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">8 coins</div>
+                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">11 coins</div>
+                                </div>
+                                
+                                <!-- Slider visual -->
+                                <div style="display: flex; width: 100%; height: 30px; border-radius: 15px; overflow: hidden; border: 2px solid #ccc;">
+                                    <div style="width: 25%; background-color: #ff4444; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 25%; background-color: #ff8800; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 25%; background-color: #aaff00; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 25%; background-color: #44ff44; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                name: 'slider_choice',
+                options: ['Option 1', 'Option 2', 'Option 3'],
+                required: true
+            }
+        ],
+        button_label: 'Continue',
+        on_finish: function(data) {
+            data.selected_slider_option = data.response.slider_choice;
+            console.log('Selected slider option:', data.selected_slider_option);
+        }
+    };
+} 
+
+var staticSliderChoice = createStaticSliderChoice();
+*/
+
+const choose_Cardinality = {
+    type: jsPsychSurveyMultiChoice,
+    preamble: () => {
+        return `
+            <div style="text-align: center; margin-bottom: 40px;">
+                <strong>To maximize immersion and engagement,</strong> 
+                <br>I would choose the following incentive structure:
+            </div>
+            
+            <style>
+                .jspsych-survey-multi-choice-option {
+                    display: flex !important;
+                    align-items: center !important;
+                    margin: 20px 0 !important;
+                }
+                
+                .jspsych-survey-multi-choice-option input[type="radio"] {
+                    margin-right: 20px !important;
+                }
+                
+                .jspsych-survey-multi-choice-option label {
+                    display: flex !important;
+                    align-items: center !important;
+                    width: 100% !important;
+                }
+                
+            </style>
+        `;
+    },
+    questions: () => {
+        return [{
+            prompt: '',
+            name: 'slider_choice',
+            options: [
+                '<img src="./img/slider1.png"',
+                '<img src="./img/slider2.png"',
+                '<img src="./img/slider3.png"'
+            ]
+        }];
+    },
+    randomize_question_order: false,
+    button_label: 'Continue',
+    on_finish: (data) => {
+        data.selected_slider_option = data.response.slider_choice;
+    }
+};
+
 
 p.instLoopUniformity = {
     timeline: [intro, uniformity, attnCheckLoop, before, fillIn_Uniformity, introPerformance, fillInPerf_Uniformity],
@@ -621,7 +794,7 @@ p.instLoopUniformity = {
 };
 
 p.instLoopCardinality = {
-    timeline: [intro, cardinality, attnCheckLoop, before, fillIn_Diagnosticity, introPerformance],
+    timeline: [intro, cardinality, attnCheckLoop, before, choose_Cardinality, introPerformance],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
@@ -749,11 +922,11 @@ let timeline;
 
 
 if (randomAssignment === 1) {
-    timeline = [exp.preload, exp.instLoopCardinality, exp.postPlay, exp.preview, exp.goalPlay, exp.instLoopPlay1, exp.readyPlay, exp.task, exp.demographics, exp.save_data, exp.end];
+    timeline = [exp.instLoopCardinality, exp.demographics, exp.save_data, exp.end];
 } else if (randomAssignment === 2) {
-    timeline = [exp.preload, exp.instLoopUniformity, exp.postPredict, exp.preview, exp.goalPredict, exp.instLoopPredict1, exp.readyPredict, exp.taskPredict, exp.demographics, exp.save_data, exp.end];
+    timeline = [exp.instLoopUniformity, exp.demographics, exp.save_data, exp.end];
 } else if (randomAssignment === 3) {
-    timeline = [exp.preload, exp.instLoopDiagnosticity, exp.postPredict, exp.preview, exp.goalPredict, exp.instLoopPredict1, exp.readyPredict, exp.taskPredict, exp.demographics, exp.save_data, exp.end];
+    timeline = [exp.instLoopDiagnosticity, exp.demographics, exp.save_data, exp.end];
 }
 
 jsPsych.run(timeline);
