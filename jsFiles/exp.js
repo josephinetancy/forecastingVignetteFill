@@ -783,6 +783,53 @@ const choose_Cardinality = {
 };
 
 
+const choosePerf_Cardinality = {
+    type: jsPsychSurveyMultiChoice,
+    preamble: () => {
+        return `
+            <div style="text-align: center; margin-bottom: 40px;">
+                <strong>To encourage ${textNew.employees} to work harder,</strong> 
+                <br>I would choose the following incentive structure:
+            </div>
+            
+            <style>
+                .jspsych-survey-multi-choice-option {
+                    display: flex !important;
+                    align-items: center !important;
+                    margin: 20px 0 !important;
+                }
+                
+                .jspsych-survey-multi-choice-option input[type="radio"] {
+                    margin-right: 20px !important;
+                }
+                
+                .jspsych-survey-multi-choice-option label {
+                    display: flex !important;
+                    align-items: center !important;
+                    width: 100% !important;
+                }
+                
+            </style>
+        `;
+    },
+    questions: () => {
+        return [{
+            prompt: '',
+            name: 'slider_choice',
+            options: [
+                '<img src="./img/slider1.png"',
+                '<img src="./img/slider2.png"',
+                '<img src="./img/slider3.png"'
+            ]
+        }];
+    },
+    randomize_question_order: false,
+    button_label: 'Continue',
+    on_finish: (data) => {
+        data.selected_slider_option = data.response.slider_choice;
+    }
+};
+
 p.instLoopUniformity = {
     timeline: [intro, uniformity, attnCheckLoop, before, fillIn_Uniformity, introPerformance, fillInPerf_Uniformity],
     loop_function: () => {
@@ -794,7 +841,7 @@ p.instLoopUniformity = {
 };
 
 p.instLoopCardinality = {
-    timeline: [intro, cardinality, attnCheckLoop, before, choose_Cardinality, introPerformance],
+    timeline: [intro, cardinality, attnCheckLoop, before, choose_Cardinality, introPerformance, choosePerf_Cardinality],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
