@@ -58,7 +58,7 @@ var textNew = {
                  company === 2 ? `NextConnect Achiever` : `DataFlow Keyboard Champion`,
 
     metric: company === 1 ? 'driving time' :
-                 company === 2 ? `call time` : `completed data entry`,
+                 company === 2 ? `call time` : `completed data entries`,
 };
 
 
@@ -138,14 +138,14 @@ const diagnosticityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your manager has decided the following:</p>
-            <p>Drivers will be categorized into ${textNew.programName} or ${textNew.programName} based on their average driving time that day.</p>
-            <p>The top 50% of daily best-performing drivers are categorized as ${textNew.programName}. </p>
+            <p>${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or ${textNew.programName} based on their average ${textNew.metric} that day.</p>
+            <p>The top 50% of daily best-performing ${textNew.employees} are categorized as ${textNew.programName}. </p>
         </div>`
 ];
 
 const diagnosticityPage1 = [
         `<p>As a reminder, your goal is to help ${textNew.employees} feel more immersed and engaged in their work.</p>
-            <p>Drivers will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average driving time that day.</p>
+            <p>${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average driving time that day.</p>
             <p>The top 50% of daily best-performing ${textNew.employees} are categorized as ${textNew.programName}. </p>
         </div>`
 ];
@@ -154,7 +154,7 @@ const cardinalityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your manager has decided the following:</p>
-            <p>Drivers will be categorized into certain percentiles based on their average driving time that day.</p>
+            <p>${textNew.Capitalizedemployees} will be categorized into certain percentiles based on their average driving time that day.</p>
             <p>Each day, ${textNew.employees} who have been allocated a bonus will have 100% chance of receiving that bonus. </p>
             <p>Each day, ${textNew.employees} who have not been allocated a bonus will have 0% chance of receiving that bonus. </p>
         </div>`
@@ -596,36 +596,36 @@ function fillIn(questions, questionIds) {
 var fillIn_Uniformity = fillIn([
     {
         promptText: "<strong>To maximize immersion and engagement,</strong>",
-        fillText: `I would make the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
+        fillText: `I would make the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of daily best-performing ${textNew.employees} as ${textNew.programName}.`
     }
 ], ['flow_uniformity']);
 
 var fillInPerf_Uniformity = fillIn([
     {
-        promptText: "<strong>To encourage drivers to work harder,</strong>", // Fixed prompt text
-        fillText: `I would make the top <input type="number" class="number-input" name="performance_prior" min="0" max="100" required>% of daily best-performing drivers as FoodFast Stars.`
+        promptText: `<strong>To encourage ${textNew.employees} to work harder,</strong>`, // Fixed prompt text
+        fillText: `I would make the top <input type="number" class="number-input" name="performance_prior" min="0" max="100" required>% of daily best-performing ${textNew.employees} as ${textNew.programName}.`
     }
 ], ['performance_uniformity']);
 
 var fillIn_Diagnosticity = fillIn([
     {
         promptText: "<strong>To maximize immersion and engagement,</strong>",
-        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+        fillText: `Each day, ${textNew.programName} will have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a bonus.`
     },
     {
         promptText: "", 
-        fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+        fillText: `Each day, ${textNew.employees} who are <strong>not</strong> ${textNew.programName} will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
     }
 ], ['flow_diagnosticity1', 'flow_diagnosticity2']);
 
 var fillInPerf_Diagnosticity = fillIn([
     {
-        promptText: "<strong>To encourage drivers to work harder,</strong>",
-        fillText: `Each day, FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a bonus.`
+        promptText: `<strong>To encourage ${textNew.employees} to work harder,</strong>`,
+        fillText: `Each day, ${textNew.programName} will have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a bonus.`
     },
     {
         promptText: "", 
-        fillText: `Each day, drivers who are <strong>not</strong> FoodFast Stars will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
+        fillText: `Each day, ${textNew.employees} who are <strong>not</strong> ${textNew.programName} will have a <input type="number" class="number-input" name="performance_posterior2" min="0" max="100" required>% chance of receiving a bonus.`
     }
 ], ['performance_diagnosticity1', 'performance_diagnosticity2']);
 
@@ -893,7 +893,7 @@ if (randomAssignment === 1) {
 
 p.preload = {
     type: jsPsychPreload,
-    images: ['./img/foodfast.png', './img/foodfaststars.png']
+    images: ['./img/foodfast.png', './img/foodfaststars.png', './img/dataflow.png', './img/dataflowkeyboardchampions.png', './img/nextconnect.png', './img/nextconnectachieve.png']
 };
 
 p.save_data = {
