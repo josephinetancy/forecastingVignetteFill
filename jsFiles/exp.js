@@ -39,11 +39,11 @@ var textNew = {
     imageProgram: company === 1 ? 'foodfaststars' :
                 company === 2 ? 'nextconnectachieve' : 'dataflowkeyboardchampions',
     
-    employee: company === 1 ? 'driver' :
+    employeeLong: company === 1 ? 'driver' :
                 company === 2 ? 'call center agent' : 'data entry specialist',
 
-    employees: company === 1 ? 'drivers' :
-                company === 2 ? 'call center agents' : 'data entry specialists',
+    employee: company === 1 ? 'driver' :
+                company === 2 ? 'agent' : 'specialist',
 
     Capitalizedemployees: company === 1 ? 'Drivers' :
                 company === 2 ? 'Call center agents' : 'Data entry specialists',
@@ -80,20 +80,22 @@ const introPage = [
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p> ${textNew.company} is launching a new ${textNew.employee} incentive program, called <strong>"${textNew.programName}".</strong> </p>
+            <p>${textNew.company} is launching a new incentive program for ${textNew.employeeLong}s.</p>
+            <p>The program is called <strong>"${textNew.programName}."</strong> </p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>The objective of the "${textNew.programName}" Program is to help ${textNew.company} ${textNew.employees} feel more <strong>immersed and engaged in their work. </strong></p>
-            <p>In other words, the aim of the program is to help ${textNew.employees} "get in the zone" while working, so much so that they feel <br>totally absorbed in their work. </p>
+            <p>The objective of the "${textNew.programName}" Program is to help ${textNew.employee}s feel more <strong>immersed and engaged</strong> in their work.
+            In other words, the objective is to help ${textNew.employee}s </strong>"get in the zone"</strong> while working, so they feel totally <strong>absorbed</strong> in what they are doing. </p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Each day, whether a ${textNew.employee} is named a ${textNew.programNameone} determines their chances of earning a daily bonus. </p>
-            <p>A certain percentage of top-performing ${textNew.employees} will earn the ${textNew.programNameone} title based on their average ${textNew.metric} that day.</p>
+            <p>At the end of each day, each ${textNew.employee} is ranked by average ${textNew.metric}.</p>
+            <p><strong>A ${textNew.employee}'s rank determines their chance of earning a bonus for the day.</strong></p>
         </div>`,
+
 ];
 
 const beforePage = [
@@ -119,10 +121,9 @@ const introPerformancePage = [
 const uniformityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your manager has decided the following:</p>
-            <p>${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average ${textNew.metric} that day.</p>
-            <p>Each day, ${textNew.programName} will have 100% chance of receiving a bonus. </p>
-            <p>Each day, ${textNew.employees} who are <b>not</b> ${textNew.programName} will have 0% chance of receiving a bonus. </p>
+            <p>Your job is to decide which percentage of top-ranked ${textNew.employee}s will receive a bonus.</p>
+            <p>Remember: <strong>Your sole objective is to maximize immersion and engagement.</strong>
+            Therefore, when deciding which percentage of top-ranked ${textNew.employee}s will receive a bonus, you should based your decision entirely on helping ${textNew.employee} get "in the zone" while working.</p>
         </div>`
 ];
 
