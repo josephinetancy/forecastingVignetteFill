@@ -624,6 +624,11 @@
     width: 750px;
 }
 
+.attnchk {
+    position: relative;
+    width: 1000px;
+}
+
 .parentGoal {
     position: relative;
     width: 900px;

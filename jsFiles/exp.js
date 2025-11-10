@@ -31,34 +31,34 @@ var p = {};
 
 var textNew = {
     company: company === 1 ? 'FoodFast' :
-             company === 2 ? 'NextConnect' : 'DataFlow',
+             company === 2 ? 'NextConnect' : 'WarehouseCo',
 
     imageCompany: company === 1 ? 'foodfast' :
-                company === 2 ? 'nextconnect' : 'dataflow',
+                company === 2 ? 'nextconnect' : 'warehouseCo',
 
     imageProgram: company === 1 ? 'foodfaststars' :
-                company === 2 ? 'nextconnectachieve' : 'dataflowkeyboardchampions',
+                company === 2 ? 'nextconnectachieve' : 'warehousecochampions',
     
     employeeLong: company === 1 ? 'driver' :
-                company === 2 ? 'call center agent' : 'data entry specialist',
+                company === 2 ? 'call center agent' : 'warehouse packers',
 
     employee: company === 1 ? 'driver' :
-                company === 2 ? 'agent' : 'specialist',
+                company === 2 ? 'agent' : 'packer',
 
     Capitalizedemployees: company === 1 ? 'Drivers' :
-                company === 2 ? 'Call center agents' : 'Data entry specialists',
+                company === 2 ? 'Call center agents' : 'Packers',
     
     programName: company === 1 ? 'FoodFast Stars' :
-                 company === 2 ? `NextConnect Achievers` : `DataFlow Keyboard Champions`,
+                 company === 2 ? `NextConnect Achievers` : `WarehouseCo Champions`,
     
     industry: company === 1 ? 'food delivery' :
-                company === 2 ? 'call center' : 'data entry',
+                company === 2 ? 'call center' : 'warehouse packing',
 
     programNameone: company === 1 ? 'FoodFast Star' :
-                 company === 2 ? `NextConnect Achiever` : `DataFlow Keyboard Champion`,
+                 company === 2 ? `NextConnect Achiever` : `WarehouseCo Champions`,
 
     metric: company === 1 ? 'driving time' :
-                 company === 2 ? `call time` : `completed data entries`,
+                 company === 2 ? `call time` : `packing time`,
 };
 
 
@@ -87,13 +87,13 @@ const introPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>The objective of the "${textNew.programName}" Program is to help ${textNew.employee}s feel more <strong>immersed and engaged</strong> in their work.
-            In other words, the objective is to help ${textNew.employee}s </strong>"get in the zone"</strong> while working, so they feel totally <strong>absorbed</strong> in what they are doing. </p>
+            In other words, the objective is to help ${textNew.employee}s </strong>"get in the zone"</strong> while working, so that they feel totally <strong>absorbed</strong> in what they are doing. </p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>At the end of each day, each ${textNew.employee} is ranked by average ${textNew.metric}.</p>
-            <p><strong>A ${textNew.employee}'s rank determines their chance of earning a bonus for the day.</strong></p>
+            <p><strong>A ${textNew.employee}'s rank determines their chance of earning a bigger bonus for the day.</strong></p>
         </div>`,
 
 ];
@@ -108,39 +108,52 @@ const beforePage = [
 const introPerformancePage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your manager has decided to update the objective of the "${textNew.programName}" Program. It is now designed to motivate ${textNew.company} ${textNew.employees} to <strong>work harder.</strong></p>
-            <p>In other words, the aim of the program is to help ${textNew.employees} put forth more effort in their work. </p>
+            <p>Your objective has now changed. </p>
+            <p>"${textNew.programName}" is now designed to motivate ${textNew.company} ${textNew.employee}s to <strong>work harder.</strong></p>
+            <p>In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Now, please indicate how you would design the ${textNew.programName} Program <b> to encourage ${textNew.employees} to work harder. </p>
+            <p><b>Your job is still to decide which percentage of ${textNew.employee}s will receive a bigger bonus of $11.</b></p>
+            <p>The lower-ranked ${textNew.employee}s will receive a smaller bonus of $1.</p>
+        </div>`,
+
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Remember: <strong>Your sole objective is now to motivate ${textNew.company} ${textNew.employee}s to work harder.</strong>
+            Therefore, when deciding which percentage of ${textNew.employee}s will receive the bigger (vs. smaller) bonus, you should base your decision entirely on helping ${textNew.employee}s put forth more effort while working.</p>
         </div>`
 ];
 
 const uniformityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your job is to decide which percentage of top-ranked ${textNew.employee}s will receive a bonus.</p>
+            <p><b>Your job is to decide which percentage of ${textNew.employee}s will receive a bigger bonus of $11.</b></p>
+            <p>The lower-ranked ${textNew.employee}s will receive a smaller bonus of $1.</p>
+        </div>`,
+
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Remember: <strong>Your sole objective is to maximize immersion and engagement.</strong>
-            Therefore, when deciding which percentage of top-ranked ${textNew.employee}s will receive a bonus, you should based your decision entirely on helping ${textNew.employee} get "in the zone" while working.</p>
+            Therefore, when deciding which percentage of ${textNew.employee}s will receive the bigger (vs. smaller) bonus, you should base your decision entirely on helping ${textNew.employee}s get "in the zone" while working.</p>
         </div>`
 ];
 
 const uniformityPage1 = [
-        `<p>As a reminder, your goal is to help ${textNew.employees} feel more immersed and engaged in their work.</p>
-            <p>${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average ${textNew.metric} that day.</p>
-            <p>Each day, ${textNew.programName} will have 100% chance of receiving a bonus. </p>
-            <p>Each day, ${textNew.employees} who are <b>not</b> ${textNew.programName} will have 0% chance of receiving a bonus. </p>
+        `<div class='tight'>
+            <p>Your sole objective is to maximize immersion and engagement.</p>
+            <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger bonus.</p>
+            <p>Lower-ranked ${textNew.employee}s will receive the smaller bonus.</p>
         </div>`
 ];
 
 const diagnosticityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your manager has decided the following:</p>
-            <p>${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or ${textNew.programName} based on their average ${textNew.metric} that day.</p>
-            <p>The top 50% of daily best-performing ${textNew.employees} are categorized as ${textNew.programName}. </p>
+            <p>Your job is to decide (1) the chances that the top-ranked ${textNew.employee}s will receive a bonus, and (2) the chances that the lower-ranked ${textNew.employee}s will receive a bonus.</p>
+            <p>Remember: <strong>Your sole objective is to maximize immersion and engagement.</strong>
+            Therefore, when deciding the chances of whether the top-ranked and lower-ranked ${textNew.employee}s will receive a bonus, you should based your decision entirely on helping ${textNew.employee} get "in the zone" while working.</p>
         </div>`
 ];
 
@@ -266,9 +279,9 @@ function getScenarioPage(pageName) {
 
 function getQuestionsForCondition(assignment) {
     const baseQuestion = {
-        prompt: `What is your goal?`, 
+        prompt: `What is your objective?`, 
         name: `attnChk1`, 
-        options: [`To boost ${textNew.employees}' immersion and engagement`, `To boost ${textNew.employees} to work harder`]
+        options: [`To maximize immersion and engagement`, `To encourage putting forth more effort`]
     };
     
     const conditionQuestions = {
@@ -291,18 +304,8 @@ function getQuestionsForCondition(assignment) {
         ],
         2: [ // Uniformity
             {
-                prompt: `${textNew.Capitalizedemployees} will be categorized into ${textNew.programName} or Non-${textNew.programName} based on their average ${textNew.metric} that day.`, 
+                prompt: `I'll decide which percentage of top ${textNew.employee}s will receive the bigger (vs. the smaller) bonus.`, 
                 name: `attnChk2`, 
-                options: ['True', 'False']
-            },
-            {
-                prompt: `${textNew.programName} will have 100% chance of obtaining a bonus.`, 
-                name: `attnChk3`, 
-                options: ['True', 'False']
-            },
-            {
-                prompt: `Non-${textNew.programName} will have 0% chance of obtaining a bonus.`, 
-                name: `attnChk4`, 
                 options: ['True', 'False']
             }
         ],
@@ -325,10 +328,10 @@ function getQuestionsForCondition(assignment) {
 
 
 function getCorrectAnswers(assignment) {
-    const baseAnswer = [`To boost ${textNew.employees}' immersion and engagement`];
+    const baseAnswer = [`To maximize immersion and engagement`];
     const conditionAnswers = {
         1: ["True", "True", "True"],     // Cardinality answers
-        2: ["True", "True", "True"],   // Uniformity answers  
+        2: ["True"],   // Uniformity answers  
         3: ["True", "True"]              // Diagnosticity answers
     };
     return baseAnswer.concat(conditionAnswers[assignment] || []);
@@ -362,7 +365,7 @@ const attnChk = {
         const scenarioPage = getScenarioPage(pageName);
         
         return `
-            <div>
+            <div class='tight'>
                 ${scenarioPage}
                 <p><strong>Please answer the following questions.</p></strong>
             </div>
@@ -597,14 +600,14 @@ function fillIn(questions, questionIds) {
 var fillIn_Uniformity = fillIn([
     {
         promptText: "<strong>To maximize immersion and engagement,</strong>",
-        fillText: `I would make the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of daily best-performing ${textNew.employees} as ${textNew.programName}.`
+        fillText: `I would have the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of ${textNew.employee}s receive the bigger (vs. the smaller) bonus.`
     }
 ], ['flow_uniformity']);
 
 var fillInPerf_Uniformity = fillIn([
     {
-        promptText: `<strong>To encourage ${textNew.employees} to work harder,</strong>`, // Fixed prompt text
-        fillText: `I would make the top <input type="number" class="number-input" name="performance_prior" min="0" max="100" required>% of daily best-performing ${textNew.employees} as ${textNew.programName}.`
+        promptText: `<strong>To encourage ${textNew.employee}s to work harder,</strong>`,
+        fillText: `I would have the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of ${textNew.employee}s receive the bigger (vs. the smaller) bonus.`
     }
 ], ['performance_uniformity']);
 
@@ -832,7 +835,7 @@ const choosePerf_Cardinality = {
 };
 
 p.instLoopUniformity = {
-    timeline: [intro, uniformity, attnCheckLoop, before, fillIn_Uniformity, introPerformance, fillInPerf_Uniformity],
+    timeline: [intro, uniformity, attnCheckLoop, fillIn_Uniformity, introPerformance, fillInPerf_Uniformity],
     loop_function: () => {
         // Look for the most recent attnChk trial specifically
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
@@ -842,7 +845,7 @@ p.instLoopUniformity = {
 };
 
 p.instLoopCardinality = {
-    timeline: [intro, cardinality, attnCheckLoop, before, choose_Cardinality, introPerformance, choosePerf_Cardinality],
+    timeline: [intro, cardinality, attnCheckLoop, choose_Cardinality, introPerformance, choosePerf_Cardinality],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
@@ -851,7 +854,7 @@ p.instLoopCardinality = {
 };
 
 p.instLoopDiagnosticity = {
-    timeline: [intro, diagnosticity, attnCheckLoop, before, fillIn_Diagnosticity, introPerformance, fillInPerf_Diagnosticity],
+    timeline: [intro, diagnosticity, attnCheckLoop, fillIn_Diagnosticity, introPerformance, fillInPerf_Diagnosticity],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
