@@ -937,7 +937,7 @@ const choosePerf_Cardinality = {
     preamble: () => {
         return `
             <div style="text-align: center; margin-bottom: 40px;">
-                <strong>To encourage ${textNew.employees} to work harder,</strong> 
+                <strong>To encourage ${textNew.employee}s to work harder,</strong> 
                 <br>I would choose the following incentive structure:
             </div>
             
