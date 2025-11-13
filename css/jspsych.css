@@ -624,6 +624,11 @@
     width: 750px;
 }
 
+.slider {
+    position: relative;
+    width: 900px;
+}
+
 .attnchk {
     position: relative;
     width: 1000px;
