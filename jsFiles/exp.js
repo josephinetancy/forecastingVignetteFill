@@ -721,8 +721,8 @@ var fillInPerf_Diagnosticity = fillIn([
     }
 ], ['performance_diagnosticity1', 'performance_diagnosticity2']);
 
-
 /*
+
 function createStaticSliderChoice() {
     return {
         type: jsPsychSurveyMultiChoice,
@@ -743,8 +743,8 @@ function createStaticSliderChoice() {
                                 
                                 <!-- Coin labels -->
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                                    <div style="text-align: center; width: 50%; font-size: 15px; color: #666;">1 coin</div>
-                                    <div style="text-align: center; width: 50%; font-size: 15px; color: #666;">11 coins</div>
+                                    <div style="text-align: center; width: 50%; font-size: 15px; color: #666;">Earns $1</div>
+                                    <div style="text-align: center; width: 50%; font-size: 15px; color: #666;">Earns $11</div>
                                 </div>
                                 
                                 <!-- Slider visual -->
@@ -767,9 +767,9 @@ function createStaticSliderChoice() {
                                 
                                 <!-- Coin labels -->
                                 <div style="display: flex; margin-bottom: 15px;">
-                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">1 coin</div>
-                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">6 coins</div>
-                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">11 coins</div>
+                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">Earns $1</div>
+                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">Earns $6</div>
+                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">Earns $11</div>
                                 </div>
                                 
                                 <!-- Slider visual -->
@@ -794,10 +794,10 @@ function createStaticSliderChoice() {
                                 
                                 <!-- Coin labels -->
                                 <div style="display: flex; margin-bottom: 15px;">
-                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">1 coin</div>
-                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">4 coins</div>
-                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">8 coins</div>
-                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">11 coins</div>
+                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">Earns $1</div>
+                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">Earns $4</div>
+                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">Earns $8</div>
+                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">Earns $11</div>
                                 </div>
                                 
                                 <!-- Slider visual -->
