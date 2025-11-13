@@ -34,7 +34,7 @@ var textNew = {
              company === 2 ? 'NextConnect' : 'WarehouseCo',
 
     imageCompany: company === 1 ? 'foodfast' :
-                company === 2 ? 'nextconnect' : 'warehouseCo',
+                company === 2 ? 'nextconnect' : 'warehouseco',
 
     imageProgram: company === 1 ? 'foodfaststars' :
                 company === 2 ? 'nextconnectachieve' : 'warehousecochampions',
@@ -759,11 +759,11 @@ var fillInPerf_Uniformity = fillIn([
 var fillIn_Diagnosticity = fillIn([
     {
         promptText: "<strong>To maximize immersion and engagement,</strong>",
-        fillText: `I would have the top 50% of ${textNew.employee}s have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% of receiving the $11 bonus.`
+        fillText: `I would have the top 50% of ${textNew.employee}s have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving the $11 bonus.`
     },
     {
         promptText: "", 
-        fillText: `I would have the bottom 50% of ${textNew.employee}s have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% of receiving the $1 bonus.`
+        fillText: `I would have the bottom 50% of ${textNew.employee}s have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving the $1 bonus.`
     }
 ], ['flow_diagnosticity1', 'flow_diagnosticity2']);
 
@@ -1089,7 +1089,7 @@ if (randomAssignment === 1) {
 
 p.preload = {
     type: jsPsychPreload,
-    images: ['./img/foodfast.png', './img/foodfaststars.png', './img/warehouseco.png', './img/warehousecochampions.png', './img/nextconnect.png', './img/nextconnectachieve.png']
+    images: ['./img/foodfast.png', './img/foodfaststars.png', './img/warehouseco.png', './img/warehousecochampions.png', './img/nextconnect.png', './img/nextconnectachieve.png', './img/slider1.png', './img/slider2.png', './img/slider3.png']
 };
 
 p.save_data = {
