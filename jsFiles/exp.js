@@ -256,6 +256,55 @@ const cardinalityPage1 = [
             </div>`
 ];
 
+const introPerformancePageCardinality = [
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Your objective has now changed. </p>
+            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong></p>
+            <p>In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
+        </div>`,
+
+            `<p>Your job is still to decide on <strong>one</strong> of the following 3 incentive structures.</p>
+            <p style="font-size: 16px;">Structure 1</p>
+            <img src="./img/slider1.png" style="width:80%; height:80%">
+            <p style="font-size: 16px;">Structure 2</p>
+            <img src="./img/slider2.png" style="width:80%; height:80%">
+            <p style="font-size: 16px;">Structure 3</p>
+            <img src="./img/slider3.png" style="width:80%; height:80%">
+            <p>Click "Next" to learn more about each structure.</p>
+        </div>`,
+
+        `<div class='slider'>
+            <p><strong>Structure 1</strong></p>
+            <p>Top 50% of ${textNew.employee}s earn $11/day</p>
+            </p>Bottom 50% of ${textNew.employee}s earn $1/day</p>
+            <img src="./img/slider1.png">
+        </div>`,
+
+        `<div class='slider'>
+            <p><strong>Structure 2</strong></p>
+            <p>Top 33% ${textNew.employee}s earn $11/day</p>
+            <p>Middle 33% ${textNew.employee}s earn $6/day</p>
+            </p>Bottom 33% ${textNew.employee}s earn $1/day</p>
+            <img src="./img/slider2.png">
+        </div>`,
+
+        `<div class='slider'>
+            <p><strong>Structure 3</strong></p>
+            <p>Top 25% of ${textNew.employee}s earn $11/day</p>
+            </p>Middle 50% - 75% of ${textNew.employee}s earn $8/day</p>
+            </p>Middle 25% - 50% of ${textNew.employee}s earn $4/day</p>
+            </p>Bottom 25% ${textNew.employee}s earn $1/day</p>
+            <img src="./img/slider3.png">
+        </div>`,
+
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Remember: <strong>Your sole objective is now to motivate ${textNew.employee}s to work harder.</strong>
+            Therefore, when deciding on one of 3 incentive structures, base your decision entirely on helping ${textNew.employee}s put forth more effort while working.</p>
+        </div>`
+];
+
 const consent = `
     <div class='parent' style='height: 1000px; width: 1000px'>
     <p><b>Consent Form<br>
@@ -331,6 +380,14 @@ const diagnosticity = {
 const introPerformanceUniformity = {
         type: jsPsychInstructions,
         pages: introPerformancePageUniformity,
+        show_clickable_nav: true,
+        post_trial_gap: 500,
+        allow_keys: false,
+};
+
+const introPerformanceCardinality = {
+        type: jsPsychInstructions,
+        pages: introPerformancePageCardinality,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
@@ -933,7 +990,7 @@ p.instLoopUniformity = {
 };
 
 p.instLoopCardinality = {
-    timeline: [intro, cardinality, attnCheckLoop, choose_Cardinality, choosePerf_Cardinality],
+    timeline: [intro, cardinality, attnCheckLoop, choose_Cardinality, introPerformanceCardinality, choosePerf_Cardinality],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
