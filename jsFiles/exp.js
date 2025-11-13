@@ -144,8 +144,7 @@ const uniformityPage = [
 ];
 
 const uniformityPage1 = [
-        `<div class='tight'>
-            <p>Your sole objective is to maximize immersion and engagement.</p>
+            `<p>Your sole objective is to maximize immersion and engagement.</p>
             <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger $11 bonus.</p>
             <p>Bottom-ranked ${textNew.employee}s will receive the smaller $1 bonus.</p>
         </div>`
@@ -194,8 +193,7 @@ const diagnosticityPage = [
 ];
 
 const diagnosticityPage1 = [
-        `<div class='tight'>
-            <p>Your sole objective is to maximize immersion and engagement.</p>
+        `<p>Your sole objective is to maximize immersion and engagement.</p>
             <p>Your job is to set the chances that each group receives its bonus.
             Specifically, you'll set the chance that the top 50% ${textNew.employee}s receives the $11 bonus, and the chance that the bottom 50% ${textNew.employee}s receives the $1 bonus. </p>
         </div>`
@@ -247,8 +245,7 @@ const cardinalityPage = [
 ];
 
 const cardinalityPage1 = [
-        `<div class='slider'>
-            <p>Your sole objective is to maximize immersion and engagement.</p>
+        `<p>Your sole objective is to maximize immersion and engagement.</p>
             <p>Your job is to decide on one of 3 incentive structures.
             <img src="./img/slider1.png" style="width:80%; height:80%">      
             <img src="./img/slider2.png" style="width:80%; height:80%">      
@@ -510,7 +507,7 @@ const attnChk = {
         const scenarioPage = getScenarioPage(pageName);
         
         return `
-            <div class='tight'>
+            <div class='attnchk'>
                 ${scenarioPage}
                 <p><strong>Please answer the following questions.</p></strong>
             </div>

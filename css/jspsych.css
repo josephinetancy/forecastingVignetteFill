@@ -624,6 +624,13 @@
     width: 750px;
 }
 
+.attnchk {
+  position: relative;
+  width: 800px;
+  margin: 0 auto; /* centers the block horizontally */
+  text-align: center; /* centers inline and inline-block elements */
+}
+
 .slider {
     position: relative;
     width: 900px;
