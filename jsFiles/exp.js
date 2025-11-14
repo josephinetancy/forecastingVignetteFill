@@ -112,8 +112,8 @@ const introPerformancePageUniformity = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your objective has now changed. </p>
-            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong></p>
-            <p>In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
+            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong>
+            In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
         </div>`,
 
         `<div class='tight'>
@@ -154,8 +154,8 @@ const introPerformancePageDiagnosticity = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your objective has now changed. </p>
-            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong></p>
-            <p>In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
+            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong>
+            In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
         </div>`,
 
         `<div class='tight'>
@@ -257,8 +257,8 @@ const introPerformancePageCardinality = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your objective has now changed. </p>
-            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong></p>
-            <p>In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
+            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong>
+            In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
         </div>`,
 
             `<p>Your job is still to decide on <strong>one</strong> of the following 3 incentive structures.</p>
