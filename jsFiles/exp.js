@@ -457,7 +457,7 @@ function getQuestionsForCondition(assignment) {
                 options: ['True', 'False']
             },
             {
-                prompt: `I'll decide the chance that a bottom 50% ${textNew.employee}s will receive the $1 bonus.`, 
+                prompt: `I'll decide the chance that a bottom 50% ${textNew.employee} will receive the $1 bonus.`, 
                 name: `attnChk3`, 
                 options: ['True', 'False']
             }
