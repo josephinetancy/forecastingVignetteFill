@@ -222,9 +222,9 @@ const cardinalityPage = [
 
         `<div class='slider'>
             <p><strong>Structure 2</strong></p>
-            <p>Top 33% ${textNew.employee}s earn $11/day</p>
-            <p>Middle 33% ${textNew.employee}s earn $6/day</p>
-            </p>Bottom 33% ${textNew.employee}s earn $1/day</p>
+            <p>Top 33% of ${textNew.employee}s earn $11/day</p>
+            <p>Middle 33% of ${textNew.employee}s earn $6/day</p>
+            </p>Bottom 33% of ${textNew.employee}s earn $1/day</p>
             <img src="./img/slider2.png">
         </div>`,
 
@@ -233,7 +233,7 @@ const cardinalityPage = [
             <p>Top 25% of ${textNew.employee}s earn $11/day</p>
             </p>Middle 50% - 75% of ${textNew.employee}s earn $8/day</p>
             </p>Middle 25% - 50% of ${textNew.employee}s earn $4/day</p>
-            </p>Bottom 25% ${textNew.employee}s earn $1/day</p>
+            </p>Bottom 25% of ${textNew.employee}s earn $1/day</p>
             <img src="./img/slider3.png">
         </div>`,
 
