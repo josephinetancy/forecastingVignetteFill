@@ -68,7 +68,7 @@ var textNew = {
 const introPage = [
         `<div class='parent'>
             <p><strong>Welcome to the Manager Challenge!</strong></p>
-            <p>This game involves you imagining yourself as a manager of an organization. </p>
+            <p>In this game, you will play the role of manager in an organization. </p>
         </div>`,
 
         `<div class='tight'>
@@ -89,14 +89,14 @@ const introPage = [
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>The objective of the "${textNew.programName}" Program is to help ${textNew.employee}s feel more <strong>immersed and engaged</strong> in their work.
-            In other words, the objective is to help ${textNew.employee}s </strong>"get in the zone"</strong> while working, so that they feel totally <strong>absorbed</strong> in what they are doing. </p>
+            <p>The aim of the "${textNew.programName}" Program is to help ${textNew.employee}s feel more <strong>immersed and engaged</strong> in their work.
+            The goal is to help ${textNew.employee}s </strong>"get in the zone"</strong> while working, so that they feel totally <strong>absorbed</strong> in what they are doing. </p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>At the end of each day, each ${textNew.employee} is ranked by average ${textNew.metric}.</p>
-            <p><strong>${textNew.An} ${textNew.employee}'s rank determines their chance of earning a bigger bonus for the day.</strong></p>
+            <p>At the end of each day, each ${textNew.employee} is ranked from worst-perfoming<br>to best-perfoming in terms of average ${textNew.metric}.</p>
+            <p><strong>${textNew.An} ${textNew.employee}'s rank determines the size of their bonus for the day.</strong></p>
         </div>`,
 
 ];
@@ -111,35 +111,35 @@ const beforePage = [
 const introPerformancePageUniformity = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your objective has now changed. </p>
-            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong>
-            In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
+            <p>Your objective has now changed.</p>
+            <p>"${textNew.programName}" has a new aim: to make ${textNew.employee}s <strong>work as hard as possible</strong>.
+            In other words, the goal of the program is to make ${textNew.employee}s <strong>put forth maximum effort</strong> while working.</p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p><b>Your job is still to decide which percentage of ${textNew.employee}s will receive a bigger bonus of $11.</b></p>
-            <p>The bottom-ranked ${textNew.employee}s will receive a smaller bonus of $1.</p>
+            <p><Your job is still to choose the percentage of ${textNew.employee}s who will receive an $11 bonus.</p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is now to motivate ${textNew.employee}s to work harder.</strong>
-            Therefore, when deciding which percentage of ${textNew.employee}s will receive the bigger (vs. smaller) bonus, base your decision entirely on helping ${textNew.employee}s put forth more effort while working.</p>
+            <p>Remember: <strong>Your sole objective is now to make ${textNew.employee}s work has hard as possible.</strong>
+            Therefore, when deciding which percentage of ${textNew.employee}s will receive an $11 bonus, base your decision entirely on making ${textNew.employee}s put forth maximum effort.</p>
         </div>`
 ];
 
 const uniformityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p><b>Your job is to decide which percentage of top-ranked ${textNew.employee}s will receive a bigger $11 bonus.</b></p>
-            <p>The bottom-ranked ${textNew.employee}s will receive a smaller $1 bonus.</p>
+            <p>Each day, all ${textNew.employee}s ranked in the top <strong>X percent</strong> will receive an <strong>$11 bonus</strong>.<br>
+            All remaining ${textNew.employee}s will receive a <strong>$1 bonus</strong>.</p>
+            <p><strong>Your job is to choose the value of X</strong>—that is, the percentage<br>of ${textNew.employee}s who will receive the $11 bonus.</strong></p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is to maximize immersion and engagement.</strong>
-            Therefore, when deciding which percentage of ${textNew.employee}s will receive the bigger $11 (vs. smaller $1) bonus, base your decision entirely on helping ${textNew.employee}s get "in the zone" while working.</p>
+            <p>Remember: <strong>Your sole objective is to maximize feelings of immersion and engagement.</strong>
+            Therefore, when deciding what percentage of ${textNew.employee}s will receive the $11 bonus, base your decision entirely on what will keep ${textNew.employee}s feeling absorbed in their work.</p>
         </div>`
 ];
 
@@ -153,42 +153,39 @@ const uniformityPage1 = [
 const introPerformancePageDiagnosticity = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your objective has now changed. </p>
-            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong>
-            In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
+            <p>Your objective has now changed.</p>
+            <p>"${textNew.programName}" has a new aim: to make ${textNew.employee}s <strong>work as hard as possible</strong>.
+            In other words, the goal of the program is to make ${textNew.employee}s <strong>put forth maximum effort</strong> in their work. </p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p><b>Your job is still to decide which percentage of ${textNew.employee}s will receive a bigger bonus of $11.</b></p>
-            <p>The bottom-ranked ${textNew.employee}s will receive a smaller bonus of $1.</p>
+            <p>Your job is still to choose two probabilities:</p>
+            <p><strong>(1) The probability of an $11 bonus for ${textNew.employee}s in the top 50%</strong><br>
+            <strong>(2) The probability of an $11 bonus for ${textNew.employee}s in the bottom 50%</strong></p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is now to motivate ${textNew.employee}s to work harder.</strong>
-            Therefore, when deciding which percentage of ${textNew.employee}s will receive the bigger (vs. smaller) bonus, base your decision entirely on helping ${textNew.employee}s put forth more effort while working.</p>
+            <p>Remember: <strong>Your sole objective is now to make ${textNew.employee}s work as hard as possible.</strong>
+            Therefore, when choosing the probabilities, base your choices entirely on making ${textNew.employee}s put forth maximum effort.</p>
         </div>`
 ];
 
 const diagnosticityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>The top 50% of ${textNew.employee}s receive a $11 bonus. </p>
-            <p>The bottom 50% of ${textNew.employee}s receive a $1 bonus. </p>
-         </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p><b>Your job is to set the chances that each group receives its bonus. </b>
-            Specifically, being in the top 50% may not guarantee the $11 bonus. Being in the bottom 50% may not guarantee the $1 bonus. </p>
-            <p>You'll set the chance that the top 50% ${textNew.employee}s receives the $11 bonus, and the chance that the bottom 50% ${textNew.employee}s receives the $1 bonus. </p>
+            <p>Every day, each ${textNew.employee} has some chance of getting an <strong>$11 bonus</strong>. Those who don't get an $11 bonus get a <strong>$1 bonus</strong>.
+            ${textNew.An} ${textNew.employee}'s chance of getting an $11 bonus depends on whether they are ranked in the <strong>top or bottom 50%</strong>.</p>
+            <p>Your job is to choose two probabilities:</p>
+            <p><strong>(1) The probability of an $11 bonus for ${textNew.employee}s in the top 50%</strong><br>
+            <strong>(2) The probability of an $11 bonus for ${textNew.employee}s in the bottom 50%</strong></p>
          </div>`,
 
          `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is to maximize immersion and engagement.</strong>
-            Therefore, when setting the chances that each group receives its bonus, base your decision entirely on helping ${textNew.employee}s get "in the zone" while working.</p>
+            <p>Remember: <strong>Your sole objective is to maximize feelings immersion and engagement.</strong>
+            Therefore, when choosing probabilities, base your decisions entirely on what will keep ${textNew.employee}s feeling absorbed in their work.</p>
         </div>`,
 ];
 
@@ -203,44 +200,38 @@ const diagnosticityPage1 = [
 const cardinalityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your job is to decide on <strong>one</strong> of the following 3 incentive structures.</p>
-            <p style="font-size: 16px;">Structure 1</p>
-            <img src="./img/slider1.png" style="width:80%; height:80%">
-            <p style="font-size: 16px;">Structure 2</p>
-            <img src="./img/slider2.png" style="width:80%; height:80%">
-            <p style="font-size: 16px;">Structure 3</p>
-            <img src="./img/slider3.png" style="width:80%; height:80%">
-            <p>Click "Next" to learn more about each structure.</p>
+            <p>Your job is to decide on <strong>one</strong> of three different incentive structures.</p>
+            <p>Click "Next" to learn about each incentive structure.</p>
         </div>`,
 
         `<div class='slider'>
-            <p><strong>Structure 1</strong></p>
-            <p>Top 50% of ${textNew.employee}s earn $11/day</p>
-            </p>Bottom 50% of ${textNew.employee}s earn $1/day</p>
+            <p><strong>Incentive Structure 1</strong></p>
+            <p>Each day, all ${textNew.employee}s ranked in the top 50% earn an $11 bonus,</br>
+            <p>and all ${textNew.employee}s ranked in the bottom 50% earn a $1 bonus.</p>
             <img src="./img/slider1.png">
         </div>`,
 
         `<div class='slider'>
-            <p><strong>Structure 2</strong></p>
-            <p>Top 33% of ${textNew.employee}s earn $11/day</p>
-            <p>Middle 33% of ${textNew.employee}s earn $6/day</p>
-            </p>Bottom 33% of ${textNew.employee}s earn $1/day</p>
+            <p><strong>Incentive Structure 2</strong></p>
+            <p>Each day, all ${textNew.employee}s ranked in the top 33% earn an $11 bonus,</p>
+            <p>all ${textNew.employee}s ranked in the middle 33% earn a $6 bonus,</p>
+            <p>and all ${textNew.employee}s ranked in the bottom 33% earn a $1 bonus.</p>
             <img src="./img/slider2.png">
         </div>`,
 
         `<div class='slider'>
-            <p><strong>Structure 3</strong></p>
-            <p>Top 25% of ${textNew.employee}s earn $11/day</p>
-            </p>Middle 50% - 75% of ${textNew.employee}s earn $8/day</p>
-            </p>Middle 25% - 50% of ${textNew.employee}s earn $4/day</p>
-            </p>Bottom 25% of ${textNew.employee}s earn $1/day</p>
+            <p><strong>Incentive Structure 3</strong></p>
+            <p>Each day, all ${textNew.employee}s ranked in the top 25% earn an $11 bonus,</p>
+            <p>all ${textNew.employee}s ranked in the middle 50% - 75% earn an $8 bonus,</p>
+            <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn a $4 bonus,</p>
+            <p>and all ${textNew.employee}s ranked in the bottom 25% earn a $1.</p>
             <img src="./img/slider3.png">
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is to maximize immersion and engagement.</strong>
-            Therefore, when deciding on one of 3 incentive structures, base your decision entirely on helping ${textNew.employee}s get "in the zone" while working.</p>
+            <p>Remember: <strong>Your sole objective is to maximize feelings of immersion and engagement.</strong>
+            Therefore, when choosing between the three incentive structures, base your decision entirely on what will keep ${textNew.employee}s feeling absorbed in their work.</p>
         </div>`
 ];
 
@@ -257,48 +248,19 @@ const introPerformancePageCardinality = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Your objective has now changed. </p>
-            <p>"${textNew.programName}" is now designed to motivate ${textNew.employee}s to <strong>work harder.</strong>
-            In other words, the aim of the program is to help ${textNew.employee}s <strong>put forth more effort</strong> in their work. </p>
-        </div>`,
-
-            `<p>Your job is still to decide on <strong>one</strong> of the following 3 incentive structures.</p>
-            <p style="font-size: 16px;">Structure 1</p>
-            <img src="./img/slider1.png" style="width:80%; height:80%">
-            <p style="font-size: 16px;">Structure 2</p>
-            <img src="./img/slider2.png" style="width:80%; height:80%">
-            <p style="font-size: 16px;">Structure 3</p>
-            <img src="./img/slider3.png" style="width:80%; height:80%">
-            <p>Click "Next" to learn more about each structure.</p>
-        </div>`,
-
-        `<div class='slider'>
-            <p><strong>Structure 1</strong></p>
-            <p>Top 50% of ${textNew.employee}s earn $11/day</p>
-            </p>Bottom 50% of ${textNew.employee}s earn $1/day</p>
-            <img src="./img/slider1.png">
-        </div>`,
-
-        `<div class='slider'>
-            <p><strong>Structure 2</strong></p>
-            <p>Top 33% ${textNew.employee}s earn $11/day</p>
-            <p>Middle 33% ${textNew.employee}s earn $6/day</p>
-            </p>Bottom 33% ${textNew.employee}s earn $1/day</p>
-            <img src="./img/slider2.png">
-        </div>`,
-
-        `<div class='slider'>
-            <p><strong>Structure 3</strong></p>
-            <p>Top 25% of ${textNew.employee}s earn $11/day</p>
-            </p>Middle 50% - 75% of ${textNew.employee}s earn $8/day</p>
-            </p>Middle 25% - 50% of ${textNew.employee}s earn $4/day</p>
-            </p>Bottom 25% ${textNew.employee}s earn $1/day</p>
-            <img src="./img/slider3.png">
+            <p>"${textNew.programName}" has a new aim: to make ${textNew.employee}s <strong>work as hard as possible</strong>.
+            In other words, the goal of the program is to make ${textNew.employee}s <strong>put forth maximum effort</strong> in their work. </p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is now to motivate ${textNew.employee}s to work harder.</strong>
-            Therefore, when deciding on one of 3 incentive structures, base your decision entirely on helping ${textNew.employee}s put forth more effort while working.</p>
+            <p>Your job is still to decide between the same three incentive structures.</p>
+        </div>`,
+
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Remember: <strong>Your sole objective is now to make ${textNew.employee}s work as hard as possible.</strong>
+            Therefore, when choosing between the incentive structures, base your decision entirely on making ${textNew.employee}s put forth maximum effort.</p>
         </div>`
 ];
 
@@ -741,37 +703,37 @@ function fillIn(questions, questionIds) {
 
 var fillIn_Uniformity = fillIn([
     {
-        promptText: "<strong>To maximize immersion and engagement,</strong>",
-        fillText: `I would have the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of ${textNew.employee}s receive the bigger $11 (vs. the smaller $1) bonus.`
+        promptText: "<strong>What would you do to maximize immersion and engagement?</strong>",
+        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% would receive an $11 bonus. All remaining ${textNew.employee}s would receive a $1 bonus.`
     }
 ], ['flow_uniformity']);
 
 var fillInPerf_Uniformity = fillIn([
     {
-        promptText: `<strong>To encourage ${textNew.employee}s to work harder,</strong>`,
-        fillText: `I would have the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% of ${textNew.employee}s receive the bigger (vs. the smaller) bonus.`
+        promptText: `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`,
+        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% would receive an $11 bonus. All remaining ${textNew.employee}s would receive a $1 bonus.`
     }
 ], ['performance_uniformity']);
 
 var fillIn_Diagnosticity = fillIn([
     {
-        promptText: "<strong>To maximize immersion and engagement,</strong>",
-        fillText: `I would have the top 50% of ${textNew.employee}s have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving the $11 bonus.`
+        promptText: "<strong>What would you do to maximize immersion and engagement?</strong>",
+        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving an $11 bonus.`
     },
     {
         promptText: "", 
-        fillText: `I would have the bottom 50% of ${textNew.employee}s have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving the $1 bonus.`
+        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving an $11 bonus. Everyone who doesn't receive an $11 bonus would receive a $1 bonus.`
     }
 ], ['flow_diagnosticity1', 'flow_diagnosticity2']);
 
 var fillInPerf_Diagnosticity = fillIn([
     {
-        promptText: `<strong>To encourage ${textNew.employee}s to work harder,</strong>`,
-        fillText: `I would have the top 50% of ${textNew.employee}s have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% of receiving the $11 bonus.`
+        promptText: `<strong>What would you do to make ${textNew.employee}s exert maximum effort?</strong>`,
+        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving an $11 bonus.`
     },
     {
         promptText: "", 
-        fillText: `I would have the bottom 50% of ${textNew.employee}s have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% of receiving the $1 bonus.`
+        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chane of receiving an $11 bonus. Everyone who doesn't receive an $11 bonus would receive a $1 bonus.`
     }
 ], ['performance_diagnosticity1', 'performance_diagnosticity2']);
 
