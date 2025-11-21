@@ -73,87 +73,66 @@ var textNew = {
                  company === 2 ? `call time` : `packing time`
 };
 
-var firstGoal = 
-    order === 1 || order === 2 ? "<b>feel more immersed and engaged in their work</b>" :
-    order === 3 || order === 4 ? "<b>work as hard as possible</b>" :
-    order === 5 || order === 6 ? "<b>feel more unfocused and disengaged in their work</b>" :
-    "";
+const goalCategory = {
+    first:  (order === 1 || order === 2) ? "maxEngage" :
+            (order === 3 || order === 4) ? "maxEffort" :
+            "minEngage",
 
-var firstGoalDescription = 
-    order === 1 || order === 2 ? "<b>get in the zone</b> while working, so that they feel totally <b>absorbed</b> in what they are doing" :
-    order === 3 || order === 4 ? "<b>put forth maximum effort</b> while working" :
-    order === 5 || order === 6 ? "<b>not get in the zone</b> while working, so that they feel totally <b>unabsorbed</b> in what they are doing" :
-    "";
+    second: (order === 3 || order === 5) ? "maxEngage" :
+            (order === 2 || order === 6) ? "maxEffort" :
+            "minEngage",
 
+    third:  (order === 4 || order === 6) ? "maxEngage" :
+            (order === 1 || order === 5) ? "maxEffort" :
+            "minEngage"
+};
 
-var rememberGoal = 
-    order === 1 || order === 2 ? "maximize feelings of immersion and engagement" :
-    order === 3 || order === 4 ? `help ${textNew.employee}s work as hard as possible` :
-    order === 5 || order === 6 ? "minimize feelings of immersion and engagement" :
-    "";
+const goalText = {
+    maxEngage: {
+        goal: "<b>feel more immersed and engaged in their work</b>",
+        description: "<b>get in the zone</b> while working, so that they feel totally <b>absorbed</b> in what they are doing",
+        remember: "maximize feelings of immersion and engagement",
+        rememberAgain: `what will keep ${textNew.employee}s feeling absorbed in their work`
+    },
+    maxEffort: {
+        goal: "<b>work as hard as possible</b>",
+        description: "<b>put forth maximum effort</b> while working",
+        remember: `help ${textNew.employee}s work as hard as possible`,
+        rememberAgain: `making ${textNew.employee}s put forth maximum effort`
+    },
+    minEngage: {
+        goal: "<b>feel more unfocused and disengaged in their work</b>",
+        description: "<b>not get in the zone</b> while working, so that they feel totally <b>unabsorbed</b> in what they are doing",
+        remember: "minimize feelings of immersion and engagement",
+        rememberAgain: `what will keep ${textNew.employee}s feeling less absorbed in their work`
+    }
+};
 
-var rememberGoalAgain = 
-    order === 1 || order === 2 ? `what will keep ${textNew.employee}s feeling absorbed in their work` :
-    order === 3 || order === 4 ? `making ${textNew.employee}s put forth maximum effort` :
-    order === 5 || order === 6 ? `what will keep ${textNew.employee}s feeling less absorbed in their work` :
-    "";
+var firstGoal              = goalText[goalCategory.first].goal;
+var firstGoalDescription   = goalText[goalCategory.first].description;
+var rememberGoal           = goalText[goalCategory.first].remember;
+var rememberGoalAgain      = goalText[goalCategory.first].rememberAgain;
+
+var secondGoal             = goalText[goalCategory.second].goal;
+var secondGoalDescription  = goalText[goalCategory.second].description;
+var rememberGoal2          = goalText[goalCategory.second].remember;
+var rememberGoalAgain2     = goalText[goalCategory.second].rememberAgain;
+
+var thirdGoal              = goalText[goalCategory.third].goal;
+var thirdGoalDescription   = goalText[goalCategory.third].description;
+var rememberGoal3          = goalText[goalCategory.third].remember;
+var rememberGoalAgain3     = goalText[goalCategory.third].rememberAgain;
 
 var conditionGoal = 
     randomAssignment === 1 ? "when choosing between the three incentive structures" :
-    randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive the $11 bonus` : `when choosing the probabilities`;
+    randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive the $11 bonus` :
+    "when choosing the probabilities";
 
 var stillConditionGoal = 
     randomAssignment === 1 ? "to choose between the three incentive structures" :
-    randomAssignment === 2 ? `to decide what percentage of ${textNew.employee}s will receive the $11 bonus` : `to choose the probabilities`;
+    randomAssignment === 2 ? `to decide what percentage of ${textNew.employee}s will receive the $11 bonus` :
+    "to choose the probabilities";
 
-var secondGoal = 
-    order === 3 || order === 5 ? "<b>feel more immersed and engaged in their work</b>" :
-    order === 2 || order === 6 ? "<b>work as hard as possible</b>" :
-    order === 1 || order === 4 ? "<b>feel more unfocused and disengaged in their work</b>" :
-    "";
-
-var secondGoalDescription = 
-    order === 3 || order === 5 ? "<b>get in the zone</b> while working, so that they feel totally <b>absorbed</b> in what they are doing" :
-    order === 2 || order === 6 ? "<b>put forth maximum effort</b> while working" :
-    order === 1 || order === 4 ? "<b>not get in the zone</b> while working, so that they feel totally <b>unabsorbed</b> in what they are doing" :
-    "";
-
-var rememberGoal2 = 
-    order === 3 || order === 5 ? "maximize feelings of immersion and engagement" :
-    order === 2 || order === 6 ? `help ${textNew.employee}s work as hard as possible` :
-    order === 1 || order === 4 ? "minimize feelings of immersion and engagement" :xw
-    "";
-
-var rememberGoalAgain2 = 
-    order === 3 || order === 5 ? `what will keep ${textNew.employee}s feeling absorbed in their work` :
-    order === 2 || order === 6 ? `making ${textNew.employee}s put forth maximum effort` :
-    order === 1 || order === 4 ? `what will keep ${textNew.employee}s feeling less absorbed in their work` :
-    "";
-
-var thirdGoal = 
-    order === 4 || order === 6 ? "<b>feel more immersed and engaged in their work</b>" :
-    order === 1 || order === 5 ? "<b>work as hard as possible</b>" :
-    order === 2 || order === 3 ? "<b>feel more unfocused and disengaged in their work</b>" :
-    "";
-
-var thirdGoalDescription = 
-    order === 4 || order === 6 ? "<b>get in the zone</b> while working, so that they feel totally <b>absorbed</b> in what they are doing" :
-    order === 1 || order === 5 ? "<b>put forth maximum effort</b> while working" :
-    order === 2 || order === 3 ? "<b>not get in the zone</b> while working, so that they feel totally <b>unabsorbed</b> in what they are doing" :
-    "";
-
-var rememberGoal3 = 
-    order === 4 || order === 6 ? "maximize feelings of immersion and engagement" :
-    order === 1 || order === 5 ? `help ${textNew.employee}s work as hard as possible` :
-    order === 2 || order === 3 ? "minimize feelings of immersion and engagement" :
-    "";
-
-
-var rememberGoalAgain3 = 
-    order === 4 || order === 6 ? `what will keep ${textNew.employee}s feeling absorbed in their work` :
-    order === 1 || order === 5 ? `making ${textNew.employee}s put forth maximum effort` :
-    order === 2 || order === 3 ? `what will keep ${textNew.employee}s feeling less absorbed in their work` :
-    "";
 
 const introPage = [
         `<div class='parent'>
@@ -320,26 +299,6 @@ const cardinalityPage1 = [
             </div>`
 ];
 
-const introPerformancePageCardinality = [
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your objective has now changed. </p>
-            <p>"${textNew.programName}" has a new aim: to make ${textNew.employee}s <strong>work as hard as possible</strong>.
-            In other words, the goal of the program is to make ${textNew.employee}s <strong>put forth maximum effort</strong> in their work. </p>
-        </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your job is still to decide between the same three incentive structures.</p>
-        </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is now to make ${textNew.employee}s work as hard as possible.</strong>
-            Therefore, when choosing between the incentive structures, base your decision entirely on making ${textNew.employee}s put forth maximum effort.</p>
-        </div>`
-];
-
 const consent = `
     <div class='parent' style='height: 1000px; width: 1000px'>
     <p><b>Consent Form<br>
@@ -364,13 +323,6 @@ const consent = `
     Questions: If you have any questions, concerns or complaints about this research, its procedures, risks and benefits, contact the Protocol Director, Josephine Tan (josetan@stanford.edu) or Assistant Professor David Melnikoff (dmelnik@stanford.edu).
     Independent Contact: If you are not satisfied with how this study is being conducted, or if you have any concerns, complaints, or general questions about the research or your rights as a participant, please contact the Stanford Institutional Review Board (IRB) to speak to someone independent of the research team at (650)-723-2480 or toll free at 1-866-680-2906, or email at irbnonmed@stanford.edu. You can also write to the Stanford IRB, Stanford University, 1705 El Camino Real, Palo Alto, CA 94306. </p>
     <p>If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
-
-const errorMessage = {
-    type: jsPsychInstructions,
-    pages: [`<div class='parent'><p>You provided the wrong answer.<br>To make sure you understand the game, please continue to re-read the instructions.</p></div>`],
-    show_clickable_nav: true,
-    allow_keys: false,
-};
 
 
 function makeIntro() {
@@ -493,6 +445,14 @@ function getScenarioPage(pageName) {
     return pageMap[pageName] || '';
 }
 
+
+const errorMessage = {
+    type: jsPsychInstructions,
+    pages: [`<div class='parent'><p>You provided the wrong answer.<br>To make sure you understand the game, please continue to re-read the instructions.</p></div>`],
+    show_clickable_nav: true,
+    allow_keys: false,
+};
+
 function getQuestionsForCondition(assignment) {
     const baseQuestion = {
         prompt: `What is your objective?`, 
@@ -601,7 +561,6 @@ const conditionalNode = {
     return fail;
     },
 };
-
 
 const attnChk = {
     type: jsPsychSurveyMultiChoice,
