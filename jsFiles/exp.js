@@ -186,7 +186,7 @@ const introPerformancePageUniformity = [
 ];
 
 const uniformityPage1 = [
-            `<p>Your sole objective is to maximize immersion and engagement.</p>
+            `<p>Your sole objective is to ${rememberGoal}.</p>
             <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger $11 bonus.</p>
             <p>Bottom-ranked ${textNew.employee}s will receive the smaller $1 bonus.</p>
         </div>`
@@ -359,7 +359,8 @@ return {
         post_trial_gap: 500,
         allow_keys: false,
     on_finish: (data) => {
-        data.round = round;
+        jsPsych.data.addProperties({round});
+        jsPsych.data.addProperties({order});
     }
     };
 }
@@ -367,16 +368,20 @@ return {
 makeIntro = makeIntro()
 
 function makeRememberPage() {
-return {
+  return {
     type: jsPsychInstructions,
-    pages: () => [...rememberPage],
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
+    pages: () => {
+      const round = jsPsych.data.getLastTrialData().values()[0].round;
+      return [...rememberPage];
+    },
+    show_clickable_nav: true,
+    post_trial_gap: 500,
+    allow_keys: false,
     on_finish: (data) => {
-        data.round = round;
+      const round = jsPsych.data.getLastTrialData().values()[0].round;
+      data.round = round;
     }
-    };
+  };
 }
 
 makeRememberPage = makeRememberPage() 
@@ -448,7 +453,7 @@ function getQuestionsForCondition(assignment) {
     const baseQuestion = {
         prompt: `What is your objective?`, 
         name: `attnChk1`, 
-        options: [`To maximize immersion and engagement`, `To encourage putting forth more effort`]
+        options: [`To maximize immersion and engagement`, `To encourage putting forth more effort`, `To minimize immersion and engagement`, ]
     };
     
     const conditionQuestions = {
@@ -501,14 +506,38 @@ function getQuestionsForCondition(assignment) {
 
 
 function getCorrectAnswers(assignment) {
-    const baseAnswer = [`To maximize immersion and engagement`];
+    let round = jsPsych.data.get().last(1).values()[0].round;
+    let order = jsPsych.data.get().last(1).values()[0].order;
+
+    const attnChkTrials = jsPsych.data.get().filter({ trial_type: 'survey-multi-choice' });
+
+    let baseAnswer;
+
+    // Determine baseAnswer depending on order + round
+    if (round === 0) {
+        if (order === 1 || order === 2) {
+            baseAnswer = ["To maximize immersion and engagement"];
+        } else if (order === 3 || order === 4) {
+            baseAnswer = ["To encourage putting forth more effort"];
+        } else if (order === 5 || order === 6) {
+            baseAnswer = ["To minimize immersion and engagement"];
+        } else {
+            baseAnswer = []; // fallback if unexpected order
+        }
+    } else {
+        // default baseAnswer for later rounds if needed
+        baseAnswer = ["To maximize immersion and engagement"];
+    }
+    // Your existing condition-specific answers
     const conditionAnswers = {
-        1: ["True", "True", "True", "True"],     // Cardinality answers
-        2: ["True"],   // Uniformity answers  
-        3: ["True", "True"]              // Diagnosticity answers
+        1: ["True", "True", "True", "True"], 
+        2: ["True"], 
+        3: ["True", "True"]
     };
+
     return baseAnswer.concat(conditionAnswers[assignment] || []);
 }
+
 
 function getTotalErrors(data, correctAnswers) {
     let errors = 0;
@@ -533,6 +562,7 @@ const conditionalNode = {
 const attnChk = {
     type: jsPsychSurveyMultiChoice,
     preamble: () => {
+        let round = jsPsych.data.get().last(1).values()[0].round;
         const condition = conditionMap[randomAssignment];
         const pageName = `${condition}Page1`; // e.g., "cardinalityPage1"
         const scenarioPage = getScenarioPage(pageName);
@@ -700,7 +730,7 @@ function fillIn(questions, questionIds) {
         Please fill in all required fields before continuing.
     </div>
     
-    ${questions[0].promptText ? `<div class="prompt-text">${questions[0].promptText}</div>` : ''}
+    <div class="prompt-text">${questions[0].promptText || ''}</div>
     
     <div class="paragraph-container">
         <div class="fill-paragraph">
@@ -713,8 +743,31 @@ function fillIn(questions, questionIds) {
         data: {
             questions: questionIds
         },
-        on_load: function() {
-            // Add input validation
+         on_load: function() {
+
+            // ---------------------------
+            // Dynamic prompt text
+            // ---------------------------
+            const lastTrial = jsPsych.data.get().last(1).values()[0];
+            const round = lastTrial.round;
+            const order = lastTrial.order;
+
+            if (round === 0) {
+                let promptEl = document.querySelector('.prompt-text');
+                if (promptEl) {
+                    if (order === 1 || order === 2) {
+                        promptEl.innerHTML = "<strong>What would you do to maximize immersion and engagement?</strong>";
+                    } else if (order === 3 || order === 4) {
+                        promptEl.innerHTML = `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`;
+                    } else if (order === 5 || order === 6) {
+                        promptEl.innerHTML = "<strong>What would you do to minimize immersion and engagement?</strong>";
+                    }
+                }
+            }
+
+            // ---------------------------
+            // Input validation
+            // ---------------------------
             document.querySelectorAll('.number-input').forEach(input => {
                 input.addEventListener('input', function() {
                     let value = parseInt(this.value);
@@ -723,20 +776,22 @@ function fillIn(questions, questionIds) {
                     } else if (value > 100) {
                         this.value = '100';
                     }
-                    
+
                     // Remove error styling when user starts typing
                     this.classList.remove('required-empty');
                     document.getElementById('error-message').style.display = 'none';
                 });
             });
-            
-            // Add form submission validation
+
+            // ---------------------------
+            // Form submission validation
+            // ---------------------------
             const form = document.querySelector('#jspsych-survey-html-form-form');
             if (form) {
                 form.addEventListener('submit', function(e) {
                     const inputs = document.querySelectorAll('.number-input');
                     let allFilled = true;
-                    
+
                     inputs.forEach(input => {
                         if (!input.value || input.value.trim() === '') {
                             input.classList.add('required-empty');
@@ -745,7 +800,7 @@ function fillIn(questions, questionIds) {
                             input.classList.remove('required-empty');
                         }
                     });
-                    
+
                     if (!allFilled) {
                         e.preventDefault();
                         document.getElementById('error-message').style.display = 'block';
@@ -774,7 +829,7 @@ function fillIn(questions, questionIds) {
 
 var fillIn_Uniformity = fillIn([
     {
-        promptText: "<strong>What would you do to maximize immersion and engagement?</strong>",
+        promptText: "",
         fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% would receive an $11 bonus. All remaining ${textNew.employee}s would receive a $1 bonus.`
     }
 ], ['flow_uniformity']);
@@ -1010,7 +1065,7 @@ const choosePerf_Cardinality = {
 };
 
 p.instLoopUniformity = {
-    timeline: [makeIntro, uniformity, makeRememberPage, attnCheckLoop, fillIn_Uniformity, introPerformanceUniformity, fillInPerf_Uniformity],
+    timeline: [makeIntro, uniformity, makeRememberPage, attnCheckLoop, fillIn_Uniformity, uniformity, fillIn_Uniformity],
     loop_function: () => {
         // Look for the most recent attnChk trial specifically
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
