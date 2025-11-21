@@ -422,14 +422,6 @@ function makeIntroAgainAgain() {
 
 makeIntroAgainAgain = makeIntroAgainAgain()
 
-const introPerformanceCardinality = {
-        type: jsPsychInstructions,
-        pages: introPerformancePageCardinality,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
-};
-
 const conditionMap = {
     1: 'cardinality',
     2: 'uniformity', 
@@ -748,52 +740,58 @@ function fillIn(questions, questionIds) {
         },
          on_load: function() {
 
-            // ---------------------------
-            // Dynamic prompt text
-            // ---------------------------
-            const lastTrial = jsPsych.data.get().last(1).values()[0];
-            const round = lastTrial.round;
-            const order = lastTrial.order;
+    // ---------------------------
+    // Dynamic prompt text
+    // ---------------------------
+    const lastTrial = jsPsych.data.get().last(1).values()[0];
+    const round = lastTrial.round;
+    const order = lastTrial.order;
 
-            console.log(round);
+    console.log(round);
 
-            if (round === 0) {
-                let promptEl = document.querySelector('.prompt-text');
-                if (promptEl) {
-                    if (order === 1 || order === 2) {
-                        promptEl.innerHTML = "<strong>What would you do to maximize immersion and engagement?</strong>";
-                    } else if (order === 3 || order === 4) {
-                        promptEl.innerHTML = `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`;
-                    } else if (order === 5 || order === 6) {
-                        promptEl.innerHTML = "<strong>What would you do to minimize immersion and engagement?</strong>";
+            let promptEl = document.querySelector('.prompt-text');
+            if (promptEl) {
+
+                // Mapping of which orders → which prompt, by round
+                const promptMap = {
+                    0: {
+                        maxEngage: [1, 2],
+                        maxEffort: [3, 4],
+                        minEngage: [5, 6]
+                    },
+                    1: {
+                        maxEngage: [3, 5],
+                        maxEffort: [2, 6],
+                        minEngage: [1, 4]
+                    },
+                    2: {
+                        maxEngage: [4, 6],
+                        maxEffort: [1, 5],
+                        minEngage: [2, 3]
                     }
+                };
+
+                // Text for each prompt type
+                const promptText = {
+                    maxEngage: "<strong>What would you do to maximize immersion and engagement?</strong>",
+                    maxEffort: `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`,
+                    minEngage: "<strong>What would you do to minimize immersion and engagement?</strong>"
+                };
+
+                const map = promptMap[round];
+                let selectedPrompt = "";
+
+                if (map.maxEngage.includes(order)) {
+                    selectedPrompt = promptText.maxEngage;
+                } else if (map.maxEffort.includes(order)) {
+                    selectedPrompt = promptText.maxEffort;
+                } else if (map.minEngage.includes(order)) {
+                    selectedPrompt = promptText.minEngage;
                 }
-            }
-            if (round === 1) {
-                let promptEl = document.querySelector('.prompt-text');
-                if (promptEl) {
-                    if (order === 3 || order === 5) {
-                        promptEl.innerHTML = "<strong>What would you do to maximize immersion and engagement?</strong>";
-                    } else if (order === 2 || order === 6) {
-                        promptEl.innerHTML = `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`;
-                    } else if (order === 1 || order === 4) {
-                        promptEl.innerHTML = "<strong>What would you do to minimize immersion and engagement?</strong>";
-                    }
-                }
+
+                promptEl.innerHTML = selectedPrompt;
             }
 
-            if (round === 2) {
-                let promptEl = document.querySelector('.prompt-text');
-                if (promptEl) {
-                    if (order === 4 || order === 6) {
-                        promptEl.innerHTML = "<strong>What would you do to maximize immersion and engagement?</strong>";
-                    } else if (order === 1 || order === 5) {
-                        promptEl.innerHTML = `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`;
-                    } else if (order === 2 || order === 3) {
-                        promptEl.innerHTML = "<strong>What would you do to minimize immersion and engagement?</strong>";
-                    }
-                }
-            }
             // ---------------------------
             // Input validation
             // ---------------------------
