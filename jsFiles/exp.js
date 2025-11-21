@@ -21,7 +21,6 @@ const order = Math.floor(Math.random() * 6) + 1;
 //4 = effort, decrease flow, increase flow
 //5 = decrease flow, increase flow, effort 
 //6 = decrease flow, effort, increase flow 
-
 console.log("Order is " + order)
 
 const exp = (function() {
@@ -269,7 +268,7 @@ const cardinalityPage = [
             <p><strong>Incentive Structure 1</strong></p>
             <p>Each day, all ${textNew.employee}s ranked in the top 50% earn an $11 bonus,</br>
             <p>and all ${textNew.employee}s ranked in the bottom 50% earn a $1 bonus.</p>
-            <img src="./img/slider1.png">
+            <img src="./img/slider1.png" style="width:80%; height:80%">
         </div>`,
 
         `<div class='slider'>
@@ -277,7 +276,7 @@ const cardinalityPage = [
             <p>Each day, all ${textNew.employee}s ranked in the top 33% earn an $11 bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 33% earn a $6 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 33% earn a $1 bonus.</p>
-            <img src="./img/slider2.png">
+            <img src="./img/slider1.png" style="width:80%; height:80%">
         </div>`,
 
         `<div class='slider'>
@@ -286,7 +285,7 @@ const cardinalityPage = [
             <p>all ${textNew.employee}s ranked in the middle 50% - 75% earn an $8 bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn a $4 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 25% earn a $1.</p>
-            <img src="./img/slider3.png">
+            <img src="./img/slider3.png" style="width:80%; height:80%">
         </div>`
 ];
 
@@ -841,7 +840,6 @@ function fillIn(questions, questionIds) {
             }
         },
         on_finish: function(data) {
-            // Process the fill-in-the-blank responses
             questionIds.forEach((qId, index) => {
                 const inputValue = parseInt(data.response[`percentage_${qId}`]) || 0;
                 data[`${qId}_percentage`] = inputValue;
@@ -869,17 +867,6 @@ var fillIn_Diagnosticity = fillIn([
         fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving an $11 bonus. Everyone who doesn't receive an $11 bonus would receive a $1 bonus.`
     }
 ], ['flow_diagnosticity1', 'flow_diagnosticity2']);
-
-var fillInPerf_Diagnosticity = fillIn([
-    {
-        promptText: `<strong>What would you do to make ${textNew.employee}s exert maximum effort?</strong>`,
-        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving an $11 bonus.`
-    },
-    {
-        promptText: "", 
-        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chane of receiving an $11 bonus. Everyone who doesn't receive an $11 bonus would receive a $1 bonus.`
-    }
-], ['performance_diagnosticity1', 'performance_diagnosticity2']);
 
 /*
 
@@ -1035,33 +1022,52 @@ const choose_Cardinality = {
                 <br>I would choose the following incentive structure:
             </div>
 
-            <style>
-                .jspsych-survey-multi-choice-option {
-                    display: flex !important;
-                    align-items: center !important;
-                    margin: 20px 0 !important;
-                }
-                
-                .jspsych-survey-multi-choice-option input[type="radio"] {
-                    margin-right: 20px !important;
-                }
-                
-                .jspsych-survey-multi-choice-option label {
-                    display: flex !important;
-                    align-items: center !important;
-                    width: 100% !important;
-                }
-            </style>
+                <style>
+                    /* Center the entire option row */
+                    .jspsych-survey-multi-choice-option {
+                        display: flex !important;
+                        justify-content: center !important;   /* centers the radio+image group */
+                        align-items: center !important;
+                        margin: 20px 0 !important;
+                    }
+
+                    /* Radio button sits right next to the image */
+                    .jspsych-survey-multi-choice-option input[type="radio"] {
+                        margin-right: 10px !important;
+                    }
+
+                    /* Keep label tight around the image */
+                    .jspsych-survey-multi-choice-option label {
+                        display: inline-flex !important;
+                        align-items: center !important;
+                        justify-content: center !important;   /* centers the image inside */
+                        width: auto !important;
+                    }
+
+                    /* Your scale images */
+                    .jspsych-survey-multi-choice-option img {
+                        width: 50% !important;   /* or 80% */
+                        height: auto !important;
+                        object-fit: contain !important;
+                        display: block !important;
+                    }
+                </style>
         `;
     },
-    questions: () => { return [{ 
-        prompt: '', 
-        name: 'slider_choice', 
-        options: [ '<img src="./img/slider1.png"', '<img src="./img/slider2.png"', '<img src="./img/slider3.png"' ] 
-    }]; 
-    },
+        questions: () => {
+            return [{
+                prompt: '',
+                name: 'slider_choice',
+                options: [
+                    '<img src="./img/slider1.png"',
+                    '<img src="./img/slider2.png"',
+                    '<img src="./img/slider3.png"'
+                ]
+            }];
+        },
     randomize_question_order: false,
     button_label: 'Continue',
+
     on_finish: (data) => {
         data.selected_slider_option = data.response.slider_choice;
     }
@@ -1175,12 +1181,6 @@ if (randomAssignment === 1) {
     *   SAVE DATA
     *
     */
-
-
-p.preload = {
-    type: jsPsychPreload,
-    images: ['./img/foodfast.png', './img/foodfaststars.png', './img/warehouseco.png', './img/warehousecochampions.png', './img/nextconnect.png', './img/nextconnectachieve.png', './img/slider1.png', './img/slider2.png', './img/slider3.png']
-};
 
 p.save_data = {
     type: jsPsychPipe,
