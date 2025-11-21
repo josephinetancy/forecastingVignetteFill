@@ -70,13 +70,7 @@ var textNew = {
                  company === 2 ? `NextConnect Achiever` : `WarehouseCo Champions`,
 
     metric: company === 1 ? 'driving time' :
-                 company === 2 ? `call time` : `packing time`,
-
-    roundText: round === 0 ? '':
-                round === 1 ? `Your objective has now changed.` : `Your objective has now changed.`,
-
-    new: round === 0 ? '':
-                round === 1 ? `new ` : `new `, 
+                 company === 2 ? `call time` : `packing time`
 };
 
 var firstGoal = 
@@ -104,13 +98,62 @@ var rememberGoalAgain =
     order === 5 || order === 6 ? `what will keep ${textNew.employee}s feeling less absorbed in their work` :
     "";
 
-
 var conditionGoal = 
     randomAssignment === 1 ? "when choosing between the three incentive structures" :
-    randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive the $11 bonus` : `when choosing the probabilities`
-;
+    randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive the $11 bonus` : `when choosing the probabilities`;
+
+var stillConditionGoal = 
+    randomAssignment === 1 ? "to choose between the three incentive structures" :
+    randomAssignment === 2 ? `to decide what percentage of ${textNew.employee}s will receive the $11 bonus` : `to choose the probabilities`;
+
+var secondGoal = 
+    order === 3 || order === 5 ? "<b>feel more immersed and engaged in their work</b>" :
+    order === 2 || order === 6 ? "<b>work as hard as possible</b>" :
+    order === 1 || order === 4 ? "<b>feel more unfocused and disengaged in their work</b>" :
+    "";
+
+var secondGoalDescription = 
+    order === 3 || order === 5 ? "<b>get in the zone</b> while working, so that they feel totally <b>absorbed</b> in what they are doing" :
+    order === 2 || order === 6 ? "<b>put forth maximum effort</b> while working" :
+    order === 1 || order === 4 ? "<b>not get in the zone</b> while working, so that they feel totally <b>unabsorbed</b> in what they are doing" :
+    "";
+
+var rememberGoal2 = 
+    order === 3 || order === 5 ? "maximize feelings of immersion and engagement" :
+    order === 2 || order === 6 ? `help ${textNew.employee}s work as hard as possible` :
+    order === 1 || order === 4 ? "minimize feelings of immersion and engagement" :xw
+    "";
+
+var rememberGoalAgain2 = 
+    order === 3 || order === 5 ? `what will keep ${textNew.employee}s feeling absorbed in their work` :
+    order === 2 || order === 6 ? `making ${textNew.employee}s put forth maximum effort` :
+    order === 1 || order === 4 ? `what will keep ${textNew.employee}s feeling less absorbed in their work` :
+    "";
+
+var thirdGoal = 
+    order === 4 || order === 6 ? "<b>feel more immersed and engaged in their work</b>" :
+    order === 1 || order === 5 ? "<b>work as hard as possible</b>" :
+    order === 2 || order === 3 ? "<b>feel more unfocused and disengaged in their work</b>" :
+    "";
+
+var thirdGoalDescription = 
+    order === 4 || order === 6 ? "<b>get in the zone</b> while working, so that they feel totally <b>absorbed</b> in what they are doing" :
+    order === 1 || order === 5 ? "<b>put forth maximum effort</b> while working" :
+    order === 2 || order === 3 ? "<b>not get in the zone</b> while working, so that they feel totally <b>unabsorbed</b> in what they are doing" :
+    "";
+
+var rememberGoal3 = 
+    order === 4 || order === 6 ? "maximize feelings of immersion and engagement" :
+    order === 1 || order === 5 ? `help ${textNew.employee}s work as hard as possible` :
+    order === 2 || order === 3 ? "minimize feelings of immersion and engagement" :
+    "";
 
 
+var rememberGoalAgain3 = 
+    order === 4 || order === 6 ? `what will keep ${textNew.employee}s feeling absorbed in their work` :
+    order === 1 || order === 5 ? `making ${textNew.employee}s put forth maximum effort` :
+    order === 2 || order === 3 ? `what will keep ${textNew.employee}s feeling less absorbed in their work` :
+    "";
 
 const introPage = [
         `<div class='parent'>
@@ -136,11 +179,59 @@ const introPage = [
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>${textNew.roundText}</p>
-            <p>The ${textNew.new} aim of the "${textNew.programName}" Program is to help ${textNew.employee}s ${firstGoal}.
+            <p>The aim of the "${textNew.programName}" Program is to help ${textNew.employee}s ${firstGoal}.
             The goal is to help ${textNew.employee}s ${firstGoalDescription}.</p>
         </div>`,
 ];
+
+const rememberPage = [
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Remember: <strong>Your sole objective is to ${rememberGoal}.</strong>
+            Therefore, ${conditionGoal}, base your decision entirely on ${rememberGoalAgain}.</p>
+        </div>`
+];
+
+const introPageAgain = [
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Your objective has now changed. </p>
+            <p>"${textNew.programName}" has a new aim: to help ${textNew.employee}s ${secondGoal}.
+            The goal is to help ${textNew.employee}s ${secondGoalDescription}.</p>
+        </div>`,
+
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Your job is still ${stillConditionGoal}.</p>
+        </div>`,
+
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Remember: <strong>Your sole objective is now to ${rememberGoal2}.</strong>
+            Therefore, ${conditionGoal}, base your decision entirely on ${rememberGoalAgain2}.</p>
+        </div>`
+];
+
+const introPageAgainAgain = [
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Your objective has changed for the last time. </p>
+            <p>"${textNew.programName}" has a new aim: to help ${textNew.employee}s ${thirdGoal}.
+            The goal is to help ${textNew.employee}s ${thirdGoalDescription}.</p>
+        </div>`,
+
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Your job is still to ${stillConditionGoal}.</p>
+        </div>`,
+
+        `<div class='tight'>
+            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
+            <p>Remember: <strong>Your sole objective is now to ${rememberGoal3}.</strong>
+            Therefore, ${conditionGoal}, base your decision entirely on ${rememberGoalAgain3}.</p>
+        </div>`
+];
+
 
 const uniformityPage = [
         `<div class='tight'>
@@ -157,66 +248,10 @@ const uniformityPage = [
         </div>`
 ];
 
-const rememberPage = [
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is to ${rememberGoal}.</strong>
-            Therefore, ${conditionGoal}, base your decision entirely on ${rememberGoalAgain}.</p>
-        </div>`
-];
-
-const introPerformancePageUniformity = [
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>${textNew.roundText}</p>
-            <p>"${textNew.programName}" has a ${textNew.new}aim: to help ${textNew.employee}s <strong>work as hard as possible</strong>.
-            In other words, the goal of the program is to make ${textNew.employee}s <strong>put forth maximum effort</strong> while working.</p>
-        </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p><Your job is still to choose the percentage of ${textNew.employee}s who will receive an $11 bonus.</p>
-        </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is now to make ${textNew.employee}s work as hard as possible.</strong>
-            Therefore, when deciding which percentage of ${textNew.employee}s will receive an $11 bonus, base your decision entirely on making ${textNew.employee}s put forth maximum effort.</p>
-        </div>`
-];
-
 const uniformityPage1 = [
             `<p>Your sole objective is to ${rememberGoal}.</p>
             <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger $11 bonus.</p>
             <p>Bottom-ranked ${textNew.employee}s will receive the smaller $1 bonus.</p>
-        </div>`
-];
-
-const introPerformancePageDiagnosticity = [
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>At the end of each day, each ${textNew.employee} is ranked from worst-perfoming<br>to best-perfoming in terms of average ${textNew.metric}.</p>
-            <p><strong>${textNew.An} ${textNew.employee}'s rank determines the size of their bonus for the day.</strong></p>
-        </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your objective has now changed.</p>
-            <p>"${textNew.programName}" has a new aim: to make ${textNew.employee}s <strong>work as hard as possible</strong>.
-            In other words, the goal of the program is to make ${textNew.employee}s <strong>put forth maximum effort</strong> in their work. </p>
-        </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your job is still to choose two probabilities:</p>
-            <p><strong>(1) The probability of an $11 bonus for ${textNew.employee}s in the top 50%</strong><br>
-            <strong>(2) The probability of an $11 bonus for ${textNew.employee}s in the bottom 50%</strong></p>
-        </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is now to make ${textNew.employee}s work as hard as possible.</strong>
-            Therefore, when choosing the probabilities, base your choices entirely on making ${textNew.employee}s put forth maximum effort.</p>
         </div>`
 ];
 
@@ -228,22 +263,15 @@ const diagnosticityPage = [
             <p>Your job is to choose two probabilities:</p>
             <p><strong>(1) The probability of an $11 bonus for ${textNew.employee}s in the top 50%</strong><br>
             <strong>(2) The probability of an $11 bonus for ${textNew.employee}s in the bottom 50%</strong></p>
-         </div>`,
-
-         `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is to maximize feelings immersion and engagement.</strong>
-            Therefore, when choosing probabilities, base your decisions entirely on what will keep ${textNew.employee}s feeling absorbed in their work.</p>
-        </div>`,
+         </div>`
 ];
 
 const diagnosticityPage1 = [
-        `<p>Your sole objective is to maximize immersion and engagement.</p>
+        `<p>Your sole objective is to ${rememberGoal}.</p>
             <p>Your job is to set the chances that each group receives its bonus.
             Specifically, you'll set the chance that the top 50% ${textNew.employee}s receives the $11 bonus, and the chance that the bottom 50% ${textNew.employee}s receives the $1 bonus. </p>
         </div>`
 ];
-
 
 const cardinalityPage = [
         `<div class='tight'>
@@ -280,17 +308,11 @@ const cardinalityPage = [
             <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn a $4 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 25% earn a $1.</p>
             <img src="./img/slider3.png">
-        </div>`,
-
-        `<div class='tight'>
-            <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is to maximize feelings of immersion and engagement.</strong>
-            Therefore, when choosing between the three incentive structures, base your decision entirely on what will keep ${textNew.employee}s feeling absorbed in their work.</p>
         </div>`
 ];
 
 const cardinalityPage1 = [
-        `<p>Your sole objective is to maximize immersion and engagement.</p>
+        `<p>Your sole objective is to ${rememberGoal}.</p>
             <p>Your job is to decide on one of 3 incentive structures.
             <img src="./img/slider1.png" style="width:80%; height:80%">      
             <img src="./img/slider2.png" style="width:80%; height:80%">      
@@ -410,25 +432,47 @@ const diagnosticity = {
         allow_keys: false,
 };
 
-const introPerformanceUniformity = {
-        type: jsPsychInstructions,
-        pages: introPerformancePageUniformity,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
-};
+function makeIntroAgain() {
+  return {
+    type: jsPsychInstructions,
+    pages: () => {
+      const round = jsPsych.data.getLastTrialData().values()[0].round;
+      return [...introPageAgain];
+    },
+    show_clickable_nav: true,
+    post_trial_gap: 500,
+    allow_keys: false,
+    on_finish: (data) => {
+      round++;
+      data.round = round;
+    }
+  };
+}
+
+makeIntroAgain = makeIntroAgain()
+
+function makeIntroAgainAgain() {
+  return {
+    type: jsPsychInstructions,
+    pages: () => {
+      const round = jsPsych.data.getLastTrialData().values()[0].round;
+      return [...introPageAgainAgain];
+    },
+    show_clickable_nav: true,
+    post_trial_gap: 500,
+    allow_keys: false,
+    on_finish: (data) => {
+      round++;
+      data.round = round;
+    }
+  };
+}
+
+makeIntroAgainAgain = makeIntroAgainAgain()
 
 const introPerformanceCardinality = {
         type: jsPsychInstructions,
         pages: introPerformancePageCardinality,
-        show_clickable_nav: true,
-        post_trial_gap: 500,
-        allow_keys: false,
-};
-
-const introPerformanceDiagnosticity = {
-        type: jsPsychInstructions,
-        pages: introPerformancePageDiagnosticity,
         show_clickable_nav: true,
         post_trial_gap: 500,
         allow_keys: false,
@@ -752,6 +796,8 @@ function fillIn(questions, questionIds) {
             const round = lastTrial.round;
             const order = lastTrial.order;
 
+            console.log(round);
+
             if (round === 0) {
                 let promptEl = document.querySelector('.prompt-text');
                 if (promptEl) {
@@ -764,7 +810,31 @@ function fillIn(questions, questionIds) {
                     }
                 }
             }
+            if (round === 1) {
+                let promptEl = document.querySelector('.prompt-text');
+                if (promptEl) {
+                    if (order === 3 || order === 5) {
+                        promptEl.innerHTML = "<strong>What would you do to maximize immersion and engagement?</strong>";
+                    } else if (order === 2 || order === 6) {
+                        promptEl.innerHTML = `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`;
+                    } else if (order === 1 || order === 4) {
+                        promptEl.innerHTML = "<strong>What would you do to minimize immersion and engagement?</strong>";
+                    }
+                }
+            }
 
+            if (round === 2) {
+                let promptEl = document.querySelector('.prompt-text');
+                if (promptEl) {
+                    if (order === 4 || order === 6) {
+                        promptEl.innerHTML = "<strong>What would you do to maximize immersion and engagement?</strong>";
+                    } else if (order === 1 || order === 5) {
+                        promptEl.innerHTML = `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`;
+                    } else if (order === 2 || order === 3) {
+                        promptEl.innerHTML = "<strong>What would you do to minimize immersion and engagement?</strong>";
+                    }
+                }
+            }
             // ---------------------------
             // Input validation
             // ---------------------------
@@ -819,9 +889,7 @@ function fillIn(questions, questionIds) {
                 const inputValue = parseInt(data.response[`percentage_${qId}`]) || 0;
                 data[`${qId}_percentage`] = inputValue;
                 data[`${qId}_input_value`] = inputValue;
-                console.log(data)
             });
-            round++;
             console.log(round);
         }
     };
@@ -833,13 +901,6 @@ var fillIn_Uniformity = fillIn([
         fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% would receive an $11 bonus. All remaining ${textNew.employee}s would receive a $1 bonus.`
     }
 ], ['flow_uniformity']);
-
-var fillInPerf_Uniformity = fillIn([
-    {
-        promptText: `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`,
-        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% would receive an $11 bonus. All remaining ${textNew.employee}s would receive a $1 bonus.`
-    }
-], ['performance_uniformity']);
 
 var fillIn_Diagnosticity = fillIn([
     {
@@ -972,12 +1033,51 @@ var staticSliderChoice = createStaticSliderChoice();
 const choose_Cardinality = {
     type: jsPsychSurveyMultiChoice,
     preamble: () => {
+
+        // --- Mapping which orders map to which prompt for each round ---
+        const promptMap = {
+            0: {
+                maxEngage: [1, 2],
+                maxEffort: [3, 4],
+                minEngage: [5, 6]
+            },
+            1: {
+                maxEngage: [3, 5],
+                maxEffort: [2, 6],
+                minEngage: [1, 4]
+            },
+            2: {
+                maxEngage: [4, 6],
+                maxEffort: [1, 5],
+                minEngage: [2, 3]
+            }
+        };
+
+        // --- Actual preamble texts ---
+        const preambleText = {
+            maxEngage: `<strong>To maximize immersion and engagement,</strong>`,
+            maxEffort: `<strong>To encourage ${textNew.employee}s to exert maximum effort,</strong>`,
+            minEngage: `<strong>To minimize immersion and engagement,</strong>`
+        };
+
+        const mapping = promptMap[round];
+
+        let selected = "";
+        if (mapping.maxEngage.includes(order)) {
+            selected = preambleText.maxEngage;
+        } else if (mapping.maxEffort.includes(order)) {
+            selected = preambleText.maxEffort;
+        } else {
+            selected = preambleText.minEngage;
+        }
+
+        // Return the full preamble HTML
         return `
             <div style="text-align: center; margin-bottom: 40px;">
-                <strong>To maximize immersion and engagement,</strong> 
+                ${selected}
                 <br>I would choose the following incentive structure:
             </div>
-            
+
             <style>
                 .jspsych-survey-multi-choice-option {
                     display: flex !important;
@@ -994,20 +1094,14 @@ const choose_Cardinality = {
                     align-items: center !important;
                     width: 100% !important;
                 }
-                
             </style>
         `;
     },
-    questions: () => {
-        return [{
-            prompt: '',
-            name: 'slider_choice',
-            options: [
-                '<img src="./img/slider1.png"',
-                '<img src="./img/slider2.png"',
-                '<img src="./img/slider3.png"'
-            ]
-        }];
+    questions: () => { return [{ 
+        prompt: '', 
+        name: 'slider_choice', 
+        options: [ '<img src="./img/slider1.png"', '<img src="./img/slider2.png"', '<img src="./img/slider3.png"' ] 
+    }]; 
     },
     randomize_question_order: false,
     button_label: 'Continue',
@@ -1016,56 +1110,9 @@ const choose_Cardinality = {
     }
 };
 
-
-const choosePerf_Cardinality = {
-    type: jsPsychSurveyMultiChoice,
-    preamble: () => {
-        return `
-            <div style="text-align: center; margin-bottom: 40px;">
-                <strong>To encourage ${textNew.employee}s to work harder,</strong> 
-                <br>I would choose the following incentive structure:
-            </div>
-            
-            <style>
-                .jspsych-survey-multi-choice-option {
-                    display: flex !important;
-                    align-items: center !important;
-                    margin: 20px 0 !important;
-                }
-                
-                .jspsych-survey-multi-choice-option input[type="radio"] {
-                    margin-right: 20px !important;
-                }
-                
-                .jspsych-survey-multi-choice-option label {
-                    display: flex !important;
-                    align-items: center !important;
-                    width: 100% !important;
-                }
-                
-            </style>
-        `;
-    },
-    questions: () => {
-        return [{
-            prompt: '',
-            name: 'slider_choice',
-            options: [
-                '<img src="./img/slider1.png"',
-                '<img src="./img/slider2.png"',
-                '<img src="./img/slider3.png"'
-            ]
-        }];
-    },
-    randomize_question_order: false,
-    button_label: 'Continue',
-    on_finish: (data) => {
-        data.selected_slider_option = data.response.slider_choice;
-    }
-};
 
 p.instLoopUniformity = {
-    timeline: [makeIntro, uniformity, makeRememberPage, attnCheckLoop, fillIn_Uniformity, uniformity, fillIn_Uniformity],
+    timeline: [makeIntro, uniformity, makeRememberPage, attnCheckLoop,fillIn_Uniformity, makeIntroAgain, fillIn_Uniformity, makeIntroAgainAgain, fillIn_Uniformity],
     loop_function: () => {
         // Look for the most recent attnChk trial specifically
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
@@ -1075,7 +1122,7 @@ p.instLoopUniformity = {
 };
 
 p.instLoopCardinality = {
-    timeline: [makeIntro, cardinality, attnCheckLoop, choose_Cardinality, introPerformanceCardinality, choosePerf_Cardinality],
+    timeline: [makeIntro, cardinality, makeRememberPage, attnCheckLoop, choose_Cardinality, makeIntroAgain, choose_Cardinality, makeIntroAgainAgain, choose_Cardinality],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
@@ -1084,7 +1131,7 @@ p.instLoopCardinality = {
 };
 
 p.instLoopDiagnosticity = {
-    timeline: [makeIntro, diagnosticity, attnCheckLoop, fillIn_Diagnosticity, introPerformanceDiagnosticity, fillInPerf_Diagnosticity],
+    timeline: [makeIntro, diagnosticity, makeRememberPage, attnCheckLoop,fillIn_Diagnosticity, makeIntroAgain, fillIn_Diagnosticity, makeIntroAgainAgain, fillIn_Diagnosticity],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
