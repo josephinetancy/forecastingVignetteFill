@@ -88,22 +88,22 @@ const goalCategory = {
 
 const goalText = {
     maxEngage: {
-        goal: "<b>feel more immersed and engaged in their work</b>",
-        description: "<b>get in the zone</b> while working, so that they feel totally <b>absorbed</b> in what they are doing",
+        goal: "to <b>feel more immersed and engaged in their work</b>",
+        description: "<b>in the zone</b> while working, so they feel totally <b>absorbed</b> in what they're doing",
         remember: "maximize feelings of immersion and engagement",
-        rememberAgain: `what will keep ${textNew.employee}s feeling absorbed in their work`
+        rememberAgain: `what will keep ${textNew.employee}s feeling maximally absorbed in their work`
     },
     maxEffort: {
-        goal: "<b>work as hard as possible</b>",
-        description: "<b>put forth maximum effort</b> while working",
-        remember: `help ${textNew.employee}s work as hard as possible`,
-        rememberAgain: `making ${textNew.employee}s put forth maximum effort`
+        goal: "to <b>work as hard as possible</b>",
+        description: "to <b>exert maximum effort</b> while working",
+        remember: `get ${textNew.employee}s to work as hard as possible`,
+        rememberAgain: `making ${textNew.employee}s exert maximum effort`
     },
     minEngage: {
-        goal: "<b>feel more unfocused and disengaged in their work</b>",
-        description: "<b>not get in the zone</b> while working, so that they feel totally <b>unabsorbed</b> in what they are doing",
+        goal: "to <b>feel less immersed and engaged in their work</b>",
+        description: "to <b>zone out</b> while working, so they feel totally <b>unabsorbed</b> in what they're doing",
         remember: "minimize feelings of immersion and engagement",
-        rememberAgain: `what will keep ${textNew.employee}s feeling less absorbed in their work`
+        rememberAgain: `what will keep ${textNew.employee}s feeling minimally absorbed in their work`
     }
 };
 
@@ -124,19 +124,27 @@ var rememberGoalAgain3     = goalText[goalCategory.third].rememberAgain;
 
 var conditionGoal = 
     randomAssignment === 1 ? "when choosing between the three incentive structures" :
-    randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive the $11 bonus` :
-    "when choosing the probabilities";
+    randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive an $11 bonus` :
+    `when the probabilities of ${textNew.employee}s winning an $11 bonus`;
 
 var stillConditionGoal = 
     randomAssignment === 1 ? "to choose between the three incentive structures" :
-    randomAssignment === 2 ? `to decide what percentage of ${textNew.employee}s will receive the $11 bonus` :
-    "to choose the probabilities";
+    randomAssignment === 2 ? `to decide what percentage of ${textNew.employee}s will receive an $11 bonus` :
+    `to choose the probabilities of ${textNew.employee}s winning an $11 bonus`;
 
 
 const introPage = [
-        `<div class='parent'>
+        `<div class='parent' style="text-align:left">
             <p><strong>Welcome to the Manager Challenge!</strong></p>
-            <p>In this game, you will play the role of manager in an organization. </p>
+            <p>We are interested in your intutions about human motivation.</p>
+            <p>To help us explore this topic, you will play the role of manager in an organization. You will tell us what you'd do as manager to achieve specific changes in employee motivation. We are interested both in how you'd improve  motivation as well as how you'd undermine it.</p>
+            <p>Specifically, you will be asked to design an incentive program that you think would:
+            <ul>
+                <li>Maximize how immersed and engaged employees feel in their work</li>
+                <li>Minimize how immersed and engaged employees feel in their work</li>
+                <li>Maximize how much effort employees exert</li>
+            </ul>
+            <p>Continue to begin the Manager Challenge!</p>
         </div>`,
 
         `<div class='tight'>
@@ -157,15 +165,16 @@ const introPage = [
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>The aim of the "${textNew.programName}" Program is to help ${textNew.employee}s ${firstGoal}.
-            The goal is to help ${textNew.employee}s ${firstGoalDescription}.</p>
+            <p>For now, we're interested in how you'd design the "${textNew.programName}" Program to get ${textNew.employee}s ${firstGoal}.
+            In other words, we're interested in how you'd get ${textNew.employee}s ${firstGoalDescription}.</p>
+            <p>Proceed to learn more about the "${textNew.programName}" Program.</p>
         </div>`,
 ];
 
 const rememberPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is to ${rememberGoal}.</strong>
+            <p>Remember: <strong>We're interested solely in how you'd ${rememberGoal}.</strong>
             Therefore, ${conditionGoal}, base your decision entirely on ${rememberGoalAgain}.</p>
         </div>`
 ];
@@ -173,9 +182,8 @@ const rememberPage = [
 const introPageAgain = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your objective has now changed. </p>
-            <p>"${textNew.programName}" has a new aim: to help ${textNew.employee}s ${secondGoal}.
-            The goal is to help ${textNew.employee}s ${secondGoalDescription}.</p>
+            <p>Now, we're interested in how you'd design "${textNew.programName}" to achieve a different aim: to get ${textNew.employee}s ${secondGoal}.
+            In other words, we're now interested in how you'd get ${textNew.employee}s ${secondGoalDescription}.</p>
         </div>`,
 
         `<div class='tight'>
@@ -185,7 +193,7 @@ const introPageAgain = [
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is now to ${rememberGoal2}.</strong>
+            <p>Remember: <strong>We're now solely interested in how you'd ${rememberGoal2}.</strong>
             Therefore, ${conditionGoal}, base your decision entirely on ${rememberGoalAgain2}.</p>
         </div>`
 ];
@@ -193,19 +201,18 @@ const introPageAgain = [
 const introPageAgainAgain = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your objective has changed for the last time. </p>
-            <p>"${textNew.programName}" has a new aim: to help ${textNew.employee}s ${thirdGoal}.
-            The goal is to help ${textNew.employee}s ${thirdGoalDescription}.</p>
+            <p>Now, we're interested in how you'd design "${textNew.programName}" to achieve yet another aim: to get ${textNew.employee}s ${thirdGoal}.
+            In other words, we're now interested in how you'd get ${textNew.employee}s ${thirdGoalDescription}.</p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Your job is still to ${stillConditionGoal}.</p>
+            <p>Your job is still ${stillConditionGoal}.</p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Remember: <strong>Your sole objective is now to ${rememberGoal3}.</strong>
+            <p>Remember: <strong>We're now solely interesting in how you'd ${rememberGoal3}.</strong>
             Therefore, ${conditionGoal}, base your decision entirely on ${rememberGoalAgain3}.</p>
         </div>`
 ];
@@ -220,9 +227,9 @@ const uniformityPage = [
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Each day, all ${textNew.employee}s ranked in the top <strong>X percent</strong> will receive an <strong>$11 bonus</strong>.<br>
-            All remaining ${textNew.employee}s will receive a <strong>$1 bonus</strong>.</p>
-            <p><strong>Your job is to choose the value of X&mdash;that is, the percentage<br>of ${textNew.employee}s who will receive the \$11 bonus.</strong></p>
+            <p>Each day, the highest-ranked ${textNew.employee}s each receive an <strong>$11 bonus</strong>.<br>
+            All remaining ${textNew.employee}s receive a <strong>$1 bonus</strong>.</p>
+            <p><strong>You'll choose the percentage of ${textNew.employee}s who will receive the $11 bonus.</strong></p>
         </div>`
 ];
 
@@ -237,7 +244,7 @@ const diagnosticityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
             <p>Every day, each ${textNew.employee} has some chance of getting an <strong>$11 bonus</strong>. Those who don't get an $11 bonus get a <strong>$1 bonus</strong>.
-            ${textNew.An} ${textNew.employee}'s chance of getting an $11 bonus depends on whether they are ranked in the <strong>top or bottom 50%</strong>.</p>
+            ${textNew.An} ${textNew.employee}'s chance of getting an $11 bonus depends on whether they're ranked in the <strong>top or bottom 50%</strong>.</p>
             <p>Your job is to choose two probabilities:</p>
             <p><strong>(1) The probability of an $11 bonus for ${textNew.employee}s in the top 50%</strong><br>
             <strong>(2) The probability of an $11 bonus for ${textNew.employee}s in the bottom 50%</strong></p>
@@ -276,7 +283,7 @@ const cardinalityPage = [
             <p>Each day, all ${textNew.employee}s ranked in the top 33% earn an $11 bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 33% earn a $6 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 33% earn a $1 bonus.</p>
-            <img src="./img/slider1.png" style="width:80%; height:80%">
+            <img src="./img/slider2.png" style="width:80%; height:80%">
         </div>`,
 
         `<div class='slider'>
@@ -773,7 +780,7 @@ function fillIn(questions, questionIds) {
                 // Text for each prompt type
                 const promptText = {
                     maxEngage: "<strong>What would you do to maximize immersion and engagement?</strong>",
-                    maxEffort: `<strong>What would you do to encourage ${textNew.employee}s to exert maximum effort?</strong>`,
+                    maxEffort: `<strong>What would you do to get ${textNew.employee}s to exert maximum effort?</strong>`,
                     minEngage: "<strong>What would you do to minimize immersion and engagement?</strong>"
                 };
 
