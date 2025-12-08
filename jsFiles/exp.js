@@ -233,12 +233,14 @@ const uniformityPage = [
         </div>`
 ];
 
-const uniformityPage1 = [
-            `<p>Your sole objective is to ${rememberGoal}.</p>
-            <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger $11 bonus.</p>
-            <p>Bottom-ranked ${textNew.employee}s will receive the smaller $1 bonus.</p>
-        </div>`
-];
+function uniformityPage1(round) {
+    const remember = getRememberGoalForRound(round);
+    return `
+        <p>Your sole objective is to ${remember}.</p>
+        <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger $11 bonus.</p>
+        <p>Bottom-ranked ${textNew.employee}s will receive the smaller $1 bonus.</p>
+        </div>`;
+}
 
 const diagnosticityPage = [
         `<div class='tight'>
@@ -251,12 +253,14 @@ const diagnosticityPage = [
          </div>`
 ];
 
-const diagnosticityPage1 = [
-        `<p>Your sole objective is to ${rememberGoal}.</p>
+function diagnosticityPage1(round) {
+    const remember = getRememberGoalForRound(round);
+    return `
+        <p>Your sole objective is to ${remember}.</p>
             <p>Your job is to set the chances that each group receives its bonus.
             Specifically, you'll set the chance that the top 50% ${textNew.employee}s receives the $11 bonus, and the chance that the bottom 50% ${textNew.employee}s receives the $1 bonus. </p>
-        </div>`
-];
+        </div>`;
+}
 
 const cardinalityPage = [
         `<div class='tight'>
@@ -296,14 +300,22 @@ const cardinalityPage = [
         </div>`
 ];
 
-const cardinalityPage1 = [
-        `<p>Your sole objective is to ${rememberGoal}.</p>
-            <p>Your job is to decide on one of 3 incentive structures.
-            <img src="./img/slider1.png" style="width:80%; height:80%">      
-            <img src="./img/slider2.png" style="width:80%; height:80%">      
-            <img src="./img/slider3.png" style="width:80%; height:80%">     
-            </div>`
-];
+function cardinalityPage1(round) {
+    const remember = getRememberGoalForRound(round);
+    return `
+        <p>Your sole objective is to ${remember}.</p>
+        <p>Your job is to decide on one of 3 incentive structures.</p>
+        <img src="./img/slider1.png" style="width:80%; height:80%">
+        <img src="./img/slider2.png" style="width:80%; height:80%">
+        <img src="./img/slider3.png" style="width:80%; height:80%">
+    `;
+}
+
+function getRememberGoalForRound(round) {
+    if (round === 0) return rememberGoal;
+    if (round === 1) return rememberGoal2;
+    return rememberGoal3;   // round === 2 or 3
+}
 
 const consent = `
     <div class='parent' style='height: 1000px; width: 1000px'>
@@ -428,22 +440,6 @@ function makeIntroAgainAgain() {
 
 makeIntroAgainAgain = makeIntroAgainAgain()
 
-const conditionMap = {
-    1: 'cardinality',
-    2: 'uniformity', 
-    3: 'diagnosticity'
-};
-
-function getScenarioPage(pageName) {
-    const pageMap = {
-        'cardinalityPage1': cardinalityPage1,
-        'uniformityPage1': uniformityPage1,
-        'diagnosticityPage1': diagnosticityPage1
-    };
-    return pageMap[pageName] || '';
-}
-
-
 const errorMessage = {
     type: jsPsychInstructions,
     pages: [`<div class='parent'><p>You provided the wrong answer.<br>To make sure you understand the game, please continue to re-read the instructions.</p></div>`],
@@ -453,91 +449,56 @@ const errorMessage = {
 
 function getQuestionsForCondition(assignment) {
     const baseQuestion = {
-        prompt: `What is your objective?`, 
+        prompt: `Next, I will indicate`, 
         name: `attnChk1`, 
-        options: [`To maximize immersion and engagement`, `To encourage putting forth more effort`, `To minimize immersion and engagement`, ]
+        options: [`... how I would maximize employees' immersion and engagement`, `... how I would minimize employees' immersion and engagement`, `... how I would maximize employees' effort`, `... how I would minimize employees' effort`]
     };
     
-    const conditionQuestions = {
-        1: [ // Cardinality
-            {
-                prompt: `I'll decide on one of the three incentive structures.`, 
-                name: `attnChk2`, 
-                options: ['True', 'False']
-            },
-            {
-                prompt: `One option is that the top 50% of ${textNew.employee}s earn $11/day and the bottom 50% of ${textNew.employee}s earn $1/day. </p>`, 
-                name: `attnChk3`, 
-                options: ['True', 'False']
-            },
-            {
-                prompt: `One option is that the top 33% of ${textNew.employee}s earn $11/day, the middle 33% of ${textNew.employee}s earn $6/day and the bottom 33% of ${textNew.employee}s earn $1/day. </p>`, 
-                name: `attnChk4`, 
-                options: ['True', 'False']
-            },
-            {
-                prompt: `One option is that the top 25% of ${textNew.employee}s earn $11/day, the middle 50-75% of ${textNew.employee}s earn $8/day, the middle 25-50% of ${textNew.employee}s earn $4/day, the bottom 25% of ${textNew.employee}s earn $1/day. </p>`, 
-                name: `attnChk5`, 
-                options: ['True', 'False']
-            }
-        ],
-        2: [ // Uniformity
-            {
-                prompt: `I'll decide which percentage of top ${textNew.employee}s will receive the bigger $11 (vs. the smaller $1) bonus.`, 
-                name: `attnChk2`, 
-                options: ['True', 'False']
-            }
-        ],
-        3: [ // Diagnosticity
-            {
-                prompt: `I'll decide the chance that a top 50% ${textNew.employee} will receive the $11 bonus.`, 
-                name: `attnChk2`, 
-                options: ['True', 'False']
-            },
-            {
-                prompt: `I'll decide the chance that a bottom 50% ${textNew.employee} will receive the $1 bonus.`, 
-                name: `attnChk3`, 
-                options: ['True', 'False']
-            }
-
-        ]
-    };
-    
-    return [baseQuestion].concat(conditionQuestions[assignment] || []);
+    return [baseQuestion];
 }
 
 
-function getCorrectAnswers(assignment) {
-    let round = jsPsych.data.get().last(1).values()[0].round;
-    let order = jsPsych.data.get().last(1).values()[0].order;
-
-    const attnChkTrials = jsPsych.data.get().filter({ trial_type: 'survey-multi-choice' });
+function getCorrectAnswers() {
+    console.log("round:", round);
+    console.log("order:", order);
 
     let baseAnswer;
 
-    // Determine baseAnswer depending on order + round
     if (round === 0) {
         if (order === 1 || order === 2) {
-            baseAnswer = ["To maximize immersion and engagement"];
+            baseAnswer = ["... how I would maximize employees' immersion and engagement"];
         } else if (order === 3 || order === 4) {
-            baseAnswer = ["To encourage putting forth more effort"];
+            baseAnswer = ["... how I would maximize employees' effort"];
         } else if (order === 5 || order === 6) {
-            baseAnswer = ["To minimize immersion and engagement"];
+            baseAnswer = ["... how I would minimize employees' immersion and engagement"];
         } else {
-            baseAnswer = []; // fallback if unexpected order
+            baseAnswer = [];
         }
-    } else {
-        // default baseAnswer for later rounds if needed
-        baseAnswer = ["To maximize immersion and engagement"];
-    }
-    // Your existing condition-specific answers
-    const conditionAnswers = {
-        1: ["True", "True", "True", "True"], 
-        2: ["True"], 
-        3: ["True", "True"]
-    };
 
-    return baseAnswer.concat(conditionAnswers[assignment] || []);
+    } else if (round === 1) {
+        if (order === 3 || order === 5) {
+            baseAnswer = ["... how I would maximize employees' immersion and engagement"];
+        } else if (order === 2 || order === 6) {
+            baseAnswer = ["... how I would maximize employees' effort"];
+        } else if (order === 1 || order === 4) {
+            baseAnswer = ["... how I would minimize employees' immersion and engagement"];
+        } else {
+            baseAnswer = [];
+        }
+
+    } else if (round === 2) {
+        if (order === 4 || order === 6) {
+            baseAnswer = ["... how I would maximize employees' immersion and engagement"];
+        } else if (order === 1 || order === 5) {
+            baseAnswer = ["... how I would maximize employees' effort"];
+        } else if (order === 2 || order === 3) {
+            baseAnswer = ["... how I would minimize employees' immersion and engagement"];
+        } else {
+            baseAnswer = [];
+        }
+    }
+
+    return baseAnswer;
 }
 
 
@@ -560,31 +521,72 @@ const conditionalNode = {
     },
 };
 
+
+const conditionMap = {
+    1: 'cardinality',
+    2: 'uniformity', 
+    3: 'diagnosticity'
+};
+
+function getScenarioPage(pageName, round) {
+    const pageMap = {
+        "cardinalityPage1": cardinalityPage1,
+        "uniformityPage1": uniformityPage1,
+        "diagnosticityPage1": diagnosticityPage1
+    };
+
+    return pageMap[pageName](round);
+}
+
 const attnChk = {
     type: jsPsychSurveyMultiChoice,
+
     preamble: () => {
-        let round = jsPsych.data.get().last(1).values()[0].round;
+        const last = jsPsych.data.get().last(1).values()[0];
+        const round = last.round;
+
+        console.log("preamble round:", round);
+
         const condition = conditionMap[randomAssignment];
-        const pageName = `${condition}Page1`; // e.g., "cardinalityPage1"
-        const scenarioPage = getScenarioPage(pageName);
-        
+        const pageName = `${condition}Page1`;
+        const scenarioPage = getScenarioPage(pageName, round);
+
         return `
             <div class='attnchk'>
                 ${scenarioPage}
-                <p><strong>Please answer the following questions.</p></strong>
+                <p><strong>Please answer the following questions.</strong></p>
             </div>
         `;
     },
+
     questions: () => {
         return getQuestionsForCondition(randomAssignment);
     },
+
     randomize_question_order: false,
     scale_width: 500,
+
     on_finish: (data) => {
-        const correctAnswers = getCorrectAnswers(randomAssignment);
+        const lastTaskTrial = jsPsych.data
+            .get()
+            .filter(t => t.round !== undefined)
+            .last(1)
+            .values()[0];
+
+        const round = lastTaskTrial.round;
+        const order = lastTaskTrial.order;
+
+        console.log("on_finish round:", round);
+        console.log("on_finish order:", order);
+
+        // Pass round + order into function
+        const correctAnswers = getCorrectAnswers();
+
         const totalErrors = getTotalErrors(data, correctAnswers);
+
         data.totalErrors = totalErrors;
-        data.condition = conditionMap[randomAssignment]; // Store condition name
+        data.condition = conditionMap[randomAssignment];
+        data.round = round; // store correct round
     }
 };
 
@@ -749,7 +751,7 @@ function fillIn(questions, questionIds) {
     // ---------------------------
     // Dynamic prompt text
     // ---------------------------
-    const lastTrial = jsPsych.data.get().last(1).values()[0];
+    const lastTrial = jsPsych.data.get().last(2).values()[0];
     const round = lastTrial.round;
     const order = lastTrial.order;
 
@@ -1082,7 +1084,7 @@ const choose_Cardinality = {
 
 
 p.instLoopUniformity = {
-    timeline: [makeIntro, uniformity, makeRememberPage, attnCheckLoop,fillIn_Uniformity, makeIntroAgain, fillIn_Uniformity, makeIntroAgainAgain, fillIn_Uniformity],
+    timeline: [makeIntro, uniformity, makeRememberPage, attnCheckLoop,fillIn_Uniformity, makeIntroAgain, attnCheckLoop, fillIn_Uniformity, makeIntroAgainAgain, attnCheckLoop, fillIn_Uniformity],
     loop_function: () => {
         // Look for the most recent attnChk trial specifically
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
@@ -1092,7 +1094,7 @@ p.instLoopUniformity = {
 };
 
 p.instLoopCardinality = {
-    timeline: [makeIntro, cardinality, makeRememberPage, attnCheckLoop, choose_Cardinality, makeIntroAgain, choose_Cardinality, makeIntroAgainAgain, choose_Cardinality],
+    timeline: [makeIntro, cardinality, makeRememberPage, attnCheckLoop, choose_Cardinality, makeIntroAgain, attnCheckLoop, choose_Cardinality, makeIntroAgainAgain, attnCheckLoop, choose_Cardinality],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
@@ -1101,7 +1103,7 @@ p.instLoopCardinality = {
 };
 
 p.instLoopDiagnosticity = {
-    timeline: [makeIntro, diagnosticity, makeRememberPage, attnCheckLoop,fillIn_Diagnosticity, makeIntroAgain, fillIn_Diagnosticity, makeIntroAgainAgain, fillIn_Diagnosticity],
+    timeline: [makeIntro, diagnosticity, makeRememberPage, attnCheckLoop,fillIn_Diagnosticity, makeIntroAgain, attnCheckLoop, fillIn_Diagnosticity, makeIntroAgainAgain, attnCheckLoop, fillIn_Diagnosticity],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
