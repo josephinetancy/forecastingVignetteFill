@@ -37,8 +37,8 @@ var p = {};
 
 let round = 0; 
 
-var bigNumber =  `$11`;
-var smallNumber = `$1`;
+var bigNumber =  `$16`;
+var smallNumber = `$4`;
 
 
 var textNew = {
@@ -129,7 +129,7 @@ var rememberGoalAgain3     = goalText[goalCategory.third].rememberAgain;
 var conditionGoal = 
     randomAssignment === 1 ? "when choosing between the three incentive structures" :
     randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive a ${bigNumber} bonus` :
-    `when the probabilities of ${textNew.employee}s winning a ${bigNumber} bonus`;
+    `when deciding the probabilities of ${textNew.employee}s winning a ${bigNumber} bonus`;
 
 var stillConditionGoal = 
     randomAssignment === 1 ? "to choose between the three incentive structures" :
@@ -231,7 +231,7 @@ const uniformityPage = [
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Each day, the highest-ranked ${textNew.employee}s each receive an <strong>${bigNumber} bonus</strong>.<br>
+            <p>Each day, the highest-ranked ${textNew.employee}s each receive a <strong>${bigNumber} bonus</strong>.<br>
             All remaining ${textNew.employee}s receive a <strong>${smallNumber} bonus</strong>.</p>
             <p><strong>You'll choose the percentage of ${textNew.employee}s who will receive the ${bigNumber} bonus.</strong></p>
         </div>`
@@ -289,7 +289,7 @@ const cardinalityPage = [
         `<div class='slider'>
             <p><strong>Incentive Structure 2</strong></p>
             <p>Each day, all ${textNew.employee}s ranked in the top 33% earn an ${bigNumber} bonus,</p>
-            <p>all ${textNew.employee}s ranked in the middle 33% earn a $6 bonus,</p>
+            <p>all ${textNew.employee}s ranked in the middle 33% earn a $10 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 33% earn a ${smallNumber} bonus.</p>
             <img src="./img/slider2.png" style="width:80%; height:80%">
         </div>`,
@@ -297,8 +297,8 @@ const cardinalityPage = [
         `<div class='slider'>
             <p><strong>Incentive Structure 3</strong></p>
             <p>Each day, all ${textNew.employee}s ranked in the top 25% earn an ${bigNumber} bonus,</p>
-            <p>all ${textNew.employee}s ranked in the middle 50% - 75% earn an $8 bonus,</p>
-            <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn a $4 bonus,</p>
+            <p>all ${textNew.employee}s ranked in the middle 50% - 75% earn an $12 bonus,</p>
+            <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn a $8 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 25% earn a ${smallNumber}.</p>
             <img src="./img/slider3.png" style="width:80%; height:80%">
         </div>`
@@ -335,7 +335,7 @@ const consent = `
     The risks associated with this study are not anticipated to be beyond those involved in normal, daily computer use. There are no foreseeable psychological risks and benefits beyond those involved in normal, daily life. The benefits which may reasonably be expected to result from this study are none. We cannot and do not guarantee or promise that you will receive any benefits from this study.
     
     <p><b>Payment</b><br>
-    You will receive $2.75 payment for your participation. You'll receive an additional bonus based on your performance in the experiment.  
+    You will receive $2.75 payment for your participation. 
 
      <p><b>Payment</b><br>
     If you have read this form and have decided to participate in this project, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. The alternative is not to participate. You have the right to refuse to answer particular questions. The results of this research study may be presented at scientific or professional meetings or published in scientific journals. Your individual privacy will be maintained in all published and written data resulting from the study.
@@ -453,9 +453,9 @@ const errorMessage = {
 
 function getQuestionsForCondition(assignment) {
     const baseQuestion = {
-        prompt: `Next, I will indicate`, 
+        prompt: `Next, I will indicate...`, 
         name: `attnChk1`, 
-        options: [`... how I would maximize employees' immersion and engagement`, `... how I would minimize employees' immersion and engagement`, `... how I would maximize employees' effort`, `... how I would minimize employees' effort`]
+        options: [`how I would maximize employees' immersion and engagement`, `how I would minimize employees' immersion and engagement`, `how I would maximize employees' effort`, `how I would minimize employees' effort`]
     };
     
     return [baseQuestion];
@@ -463,8 +463,6 @@ function getQuestionsForCondition(assignment) {
 
 
 function getCorrectAnswers() {
-    console.log("round:", round);
-    console.log("order:", order);
 
     let baseAnswer;
 
@@ -549,8 +547,6 @@ const attnChk = {
         const last = jsPsych.data.get().last(1).values()[0];
         const round = last.round;
 
-        console.log("preamble round:", round);
-
         const condition = conditionMap[randomAssignment];
         const pageName = `${condition}Page1`;
         const scenarioPage = getScenarioPage(pageName, round);
@@ -579,9 +575,6 @@ const attnChk = {
 
         const round = lastTaskTrial.round;
         const order = lastTaskTrial.order;
-
-        console.log("on_finish round:", round);
-        console.log("on_finish order:", order);
 
         // Pass round + order into function
         const correctAnswers = getCorrectAnswers();
@@ -759,8 +752,6 @@ function fillIn(questions, questionIds) {
     const round = lastTrial.round;
     const order = lastTrial.order;
 
-    console.log(round);
-
             let promptEl = document.querySelector('.prompt-text');
             if (promptEl) {
 
@@ -858,7 +849,6 @@ function fillIn(questions, questionIds) {
                 data[`${qId}_percentage`] = inputValue;
                 data[`${qId}_input_value`] = inputValue;
             });
-            console.log(round);
         }
     };
 }
