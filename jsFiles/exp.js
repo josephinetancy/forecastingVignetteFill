@@ -468,33 +468,33 @@ function getCorrectAnswers() {
 
     if (round === 0) {
         if (order === 1 || order === 2) {
-            baseAnswer = ["... how I would maximize employees' immersion and engagement"];
+            baseAnswer = ["how I would maximize employees' immersion and engagement"];
         } else if (order === 3 || order === 4) {
-            baseAnswer = ["... how I would maximize employees' effort"];
+            baseAnswer = ["how I would maximize employees' effort"];
         } else if (order === 5 || order === 6) {
-            baseAnswer = ["... how I would minimize employees' immersion and engagement"];
+            baseAnswer = ["how I would minimize employees' immersion and engagement"];
         } else {
             baseAnswer = [];
         }
 
     } else if (round === 1) {
         if (order === 3 || order === 5) {
-            baseAnswer = ["... how I would maximize employees' immersion and engagement"];
+            baseAnswer = ["how I would maximize employees' immersion and engagement"];
         } else if (order === 2 || order === 6) {
-            baseAnswer = ["... how I would maximize employees' effort"];
+            baseAnswer = ["how I would maximize employees' effort"];
         } else if (order === 1 || order === 4) {
-            baseAnswer = ["... how I would minimize employees' immersion and engagement"];
+            baseAnswer = ["how I would minimize employees' immersion and engagement"];
         } else {
             baseAnswer = [];
         }
 
     } else if (round === 2) {
         if (order === 4 || order === 6) {
-            baseAnswer = ["... how I would maximize employees' immersion and engagement"];
+            baseAnswer = ["how I would maximize employees' immersion and engagement"];
         } else if (order === 1 || order === 5) {
-            baseAnswer = ["... how I would maximize employees' effort"];
+            baseAnswer = ["how I would maximize employees' effort"];
         } else if (order === 2 || order === 3) {
-            baseAnswer = ["... how I would minimize employees' immersion and engagement"];
+            baseAnswer = ["how I would minimize employees' immersion and engagement"];
         } else {
             baseAnswer = [];
         }
@@ -554,7 +554,7 @@ const attnChk = {
         return `
             <div class='attnchk'>
                 ${scenarioPage}
-                <p><strong>Please answer the following questions.</strong></p>
+                <p><strong>Please answer the following question.</strong></p>
             </div>
         `;
     },
@@ -871,7 +871,7 @@ var fillIn_Diagnosticity = fillIn([
     }
 ], ['flow_diagnosticity1', 'flow_diagnosticity2']);
 
-/*
+
 
 function createStaticSliderChoice() {
     return {
@@ -879,83 +879,106 @@ function createStaticSliderChoice() {
         questions: [
             {
                 prompt: `
+                    <style>
+                        /* Master control for ALL performance labels */
+                        .perf-label {
+                            text-align: center;
+                            font-weight: bold;
+                            color: #333;
+                            font-size: 25px;   /* ← CHANGE THIS ONCE */
+                        }
+
+                        /* Master control for ALL coin labels */
+                        .coin-label {
+                            text-align: center;
+                            color: #666;
+                            font-size: 25px;   /* ← CHANGE THIS ONCE */
+                        }
+                    </style>
+
                     <div style="margin-bottom: 30px;">
-                        <h3 style="text-align: center; margin-bottom: 40px;">I would choose the following option to categorize FoodFast Stars. Each coin is worth $0.10 of bonus.</h3>
+                        <h3 style="text-align: center; margin-bottom: 40px;">
+                            I would choose the following option to categorize FoodFast Stars.
+                            Each coin is worth $0.10 of bonus.
+                        </h3>
                         
                         <!-- First Slider Option -->
                         <div style="margin-bottom: 40px; padding: 20px; border: 2px solid #ddd; border-radius: 8px;">
                             <div style="position: relative; width: 100%; height: 80px; margin: 20px 0;">
+
                                 <!-- Performance labels -->
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                    <div style="text-align: center; width: 50%; font-weight: bold; color: #333;">Bottom 50%</div>
-                                    <div style="text-align: center; width: 50%; font-weight: bold; color: #333;">Top 50%</div>
+                                    <div class="perf-label" style="width: 50%;">Bottom 50%</div>
+                                    <div class="perf-label" style="width: 50%;">Top 50%</div>
                                 </div>
-                                
+
                                 <!-- Coin labels -->
                                 <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                                    <div style="text-align: center; width: 50%; font-size: 15px; color: #666;">Earns $1</div>
-                                    <div style="text-align: center; width: 50%; font-size: 15px; color: #666;">Earns $11</div>
+                                    <div class="coin-label" style="width: 50%;">Earns $4</div>
+                                    <div class="coin-label" style="width: 50%;">Earns $16</div>
                                 </div>
-                                
+
                                 <!-- Slider visual -->
                                 <div style="display: flex; width: 100%; height: 30px; border-radius: 15px; overflow: hidden; border: 2px solid #ccc;">
-                                    <div style="width: 50%; background-color: #ff4444; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
-                                    <div style="width: 50%; background-color: #44ff44; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 50%; background-color: #ff4444;"></div>
+                                    <div style="width: 50%; background-color: #44ff44;"></div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Second Slider Option -->
                         <div style="margin-bottom: 40px; padding: 20px; border: 2px solid #ddd; border-radius: 8px;">
                             <div style="position: relative; width: 100%; height: 80px; margin: 20px 0;">
+
                                 <!-- Performance labels -->
                                 <div style="display: flex; margin-bottom: 10px;">
-                                    <div style="text-align: center; width: 33.33%; font-weight: bold; color: #333;">Bottom 33%</div>
-                                    <div style="text-align: center; width: 33.33%; font-weight: bold; color: #333;">Middle 33%</div>
-                                    <div style="text-align: center; width: 33.33%; font-weight: bold; color: #333;">Top 33%</div>
+                                    <div class="perf-label" style="width: 33.33%;">Bottom 33%</div>
+                                    <div class="perf-label" style="width: 33.33%;">Middle 33%</div>
+                                    <div class="perf-label" style="width: 33.33%;">Top 33%</div>
                                 </div>
-                                
+
                                 <!-- Coin labels -->
                                 <div style="display: flex; margin-bottom: 15px;">
-                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">Earns $1</div>
-                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">Earns $6</div>
-                                    <div style="text-align: center; width: 33.33%; font-size: 15px; color: #666;">Earns $11</div>
+                                    <div class="coin-label" style="width: 33.33%;">Earns $4</div>
+                                    <div class="coin-label" style="width: 33.33%;">Earns $10</div>
+                                    <div class="coin-label" style="width: 33.33%;">Earns $16</div>
                                 </div>
-                                
+
                                 <!-- Slider visual -->
                                 <div style="display: flex; width: 100%; height: 30px; border-radius: 15px; overflow: hidden; border: 2px solid #ccc;">
-                                    <div style="width: 33.33%; background-color: #ff4444; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
-                                    <div style="width: 33.33%; background-color: #ffaa00; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
-                                    <div style="width: 33.33%; background-color: #44ff44; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 33.33%; background-color: #ff4444;"></div>
+                                    <div style="width: 33.33%; background-color: #ffaa00;"></div>
+                                    <div style="width: 33.33%; background-color: #44ff44;"></div>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <!-- Third Slider Option -->
                         <div style="margin-bottom: 40px; padding: 20px; border: 2px solid #ddd; border-radius: 8px;">
                             <div style="position: relative; width: 100%; height: 80px; margin: 20px 0;">
+
                                 <!-- Performance labels -->
                                 <div style="display: flex; margin-bottom: 10px;">
-                                    <div style="text-align: center; width: 25%; font-weight: bold; color: #333;">Bottom 25%</div>
-                                    <div style="text-align: center; width: 25%; font-weight: bold; color: #333;">Middle 25-50%</div>
-                                    <div style="text-align: center; width: 25%; font-weight: bold; color: #333;">Middle 50-75%</div>
-                                    <div style="text-align: center; width: 25%; font-weight: bold; color: #333;">Top 25%</div>
+                                    <div class="perf-label" style="width: 25%;">Bottom 25%</div>
+                                    <div class="perf-label" style="width: 25%;">Middle 25-50%</div>
+                                    <div class="perf-label" style="width: 25%;">Middle 50-75%</div>
+                                    <div class="perf-label" style="width: 25%;">Top 25%</div>
                                 </div>
-                                
+
                                 <!-- Coin labels -->
                                 <div style="display: flex; margin-bottom: 15px;">
-                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">Earns $1</div>
-                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">Earns $4</div>
-                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">Earns $8</div>
-                                    <div style="text-align: center; width: 25%; font-size: 15px; color: #666;">Earns $11</div>
+                                    <div class="coin-label" style="width: 25%;">Earns $4</div>
+                                    <div class="coin-label" style="width: 25%;">Earns $8</div>
+                                    <div class="coin-label" style="width: 25%;">Earns $12</div>
+                                    <div class="coin-label" style="width: 25%;">Earns $16</div>
                                 </div>
-                                
+
                                 <!-- Slider visual -->
                                 <div style="display: flex; width: 100%; height: 30px; border-radius: 15px; overflow: hidden; border: 2px solid #ccc;">
-                                    <div style="width: 25%; background-color: #ff4444; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
-                                    <div style="width: 25%; background-color: #ff8800; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
-                                    <div style="width: 25%; background-color: #aaff00; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
-                                    <div style="width: 25%; background-color: #44ff44; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;"></div>
+                                    <div style="width: 25%; background-color: #ff4444;"></div>
+                                    <div style="width: 25%; background-color: #ff8800;"></div>
+                                    <div style="width: 25%; background-color: #aaff00;"></div>
+                                    <div style="width: 25%; background-color: #44ff44;"></div>
                                 </div>
                             </div>
                         </div>
@@ -969,13 +992,12 @@ function createStaticSliderChoice() {
         button_label: 'Continue',
         on_finish: function(data) {
             data.selected_slider_option = data.response.slider_choice;
-            console.log('Selected slider option:', data.selected_slider_option);
         }
     };
-} 
+}
 
 var staticSliderChoice = createStaticSliderChoice();
-*/
+
 
 const choose_Cardinality = {
     type: jsPsychSurveyMultiChoice,
