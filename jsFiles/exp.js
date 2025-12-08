@@ -37,6 +37,10 @@ var p = {};
 
 let round = 0; 
 
+var bigNumber =  `$11`;
+var smallNumber = `$1`;
+
+
 var textNew = {
     company: company === 1 ? 'FoodFast' :
              company === 2 ? 'NextConnect' : 'WarehouseCo',
@@ -124,13 +128,13 @@ var rememberGoalAgain3     = goalText[goalCategory.third].rememberAgain;
 
 var conditionGoal = 
     randomAssignment === 1 ? "when choosing between the three incentive structures" :
-    randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive an $11 bonus` :
-    `when the probabilities of ${textNew.employee}s winning an $11 bonus`;
+    randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive a ${bigNumber} bonus` :
+    `when the probabilities of ${textNew.employee}s winning a ${bigNumber} bonus`;
 
 var stillConditionGoal = 
     randomAssignment === 1 ? "to choose between the three incentive structures" :
-    randomAssignment === 2 ? `to decide what percentage of ${textNew.employee}s will receive an $11 bonus` :
-    `to choose the probabilities of ${textNew.employee}s winning an $11 bonus`;
+    randomAssignment === 2 ? `to decide what percentage of ${textNew.employee}s will receive a ${bigNumber} bonus` :
+    `to choose the probabilities of ${textNew.employee}s winning a ${bigNumber} bonus`;
 
 
 const introPage = [
@@ -221,15 +225,15 @@ const introPageAgainAgain = [
 const uniformityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>At the end of each day, each ${textNew.employee} is ranked from worst-perfoming<br>to best-perfoming in terms of average ${textNew.metric}.</p>
+            <p>At the end of each day, each ${textNew.employee} is ranked from worst-performing<br>to best-performing in terms of average ${textNew.metric}.</p>
             <p><strong>${textNew.An} ${textNew.employee}'s rank determines the size of their bonus for the day.</strong></p>
         </div>`,
 
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Each day, the highest-ranked ${textNew.employee}s each receive an <strong>$11 bonus</strong>.<br>
-            All remaining ${textNew.employee}s receive a <strong>$1 bonus</strong>.</p>
-            <p><strong>You'll choose the percentage of ${textNew.employee}s who will receive the $11 bonus.</strong></p>
+            <p>Each day, the highest-ranked ${textNew.employee}s each receive an <strong>${bigNumber} bonus</strong>.<br>
+            All remaining ${textNew.employee}s receive a <strong>${smallNumber} bonus</strong>.</p>
+            <p><strong>You'll choose the percentage of ${textNew.employee}s who will receive the ${bigNumber} bonus.</strong></p>
         </div>`
 ];
 
@@ -237,19 +241,19 @@ function uniformityPage1(round) {
     const remember = getRememberGoalForRound(round);
     return `
         <p>Your sole objective is to ${remember}.</p>
-        <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger $11 bonus.</p>
-        <p>Bottom-ranked ${textNew.employee}s will receive the smaller $1 bonus.</p>
+        <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger ${bigNumber} bonus.</p>
+        <p>Bottom-ranked ${textNew.employee}s will receive the smaller ${smallNumber} bonus.</p>
         </div>`;
 }
 
 const diagnosticityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Every day, each ${textNew.employee} has some chance of getting an <strong>$11 bonus</strong>. Those who don't get an $11 bonus get a <strong>$1 bonus</strong>.
-            ${textNew.An} ${textNew.employee}'s chance of getting an $11 bonus depends on whether they're ranked in the <strong>top or bottom 50%</strong>.</p>
+            <p>Every day, each ${textNew.employee} has some chance of getting an <strong>${bigNumber} bonus</strong>. Those who don't get an ${bigNumber} bonus get a <strong>${smallNumber} bonus</strong>.
+            ${textNew.An} ${textNew.employee}'s chance of getting a ${bigNumber} bonus depends on whether they're ranked in the <strong>top or bottom 50%</strong>.</p>
             <p>Your job is to choose two probabilities:</p>
-            <p><strong>(1) The probability of an $11 bonus for ${textNew.employee}s in the top 50%</strong><br>
-            <strong>(2) The probability of an $11 bonus for ${textNew.employee}s in the bottom 50%</strong></p>
+            <p><strong>(1) The probability of a ${bigNumber} bonus for ${textNew.employee}s in the top 50%</strong><br>
+            <strong>(2) The probability of a ${bigNumber} bonus for ${textNew.employee}s in the bottom 50%</strong></p>
          </div>`
 ];
 
@@ -258,14 +262,14 @@ function diagnosticityPage1(round) {
     return `
         <p>Your sole objective is to ${remember}.</p>
             <p>Your job is to set the chances that each group receives its bonus.
-            Specifically, you'll set the chance that the top 50% ${textNew.employee}s receives the $11 bonus, and the chance that the bottom 50% ${textNew.employee}s receives the $1 bonus. </p>
+            Specifically, you'll set the chance that the top 50% ${textNew.employee}s receives the ${bigNumber} bonus, and the chance that the bottom 50% ${textNew.employee}s receives the ${smallNumber} bonus. </p>
         </div>`;
 }
 
 const cardinalityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>At the end of each day, each ${textNew.employee} is ranked from worst-perfoming<br>to best-perfoming in terms of average ${textNew.metric}.</p>
+            <p>At the end of each day, each ${textNew.employee} is ranked from worst-performing<br>to best-performing in terms of average ${textNew.metric}.</p>
             <p><strong>${textNew.An} ${textNew.employee}'s rank determines the size of their bonus for the day.</strong></p>
         </div>`,
 
@@ -277,25 +281,25 @@ const cardinalityPage = [
 
         `<div class='slider'>
             <p><strong>Incentive Structure 1</strong></p>
-            <p>Each day, all ${textNew.employee}s ranked in the top 50% earn an $11 bonus,</br>
-            <p>and all ${textNew.employee}s ranked in the bottom 50% earn a $1 bonus.</p>
+            <p>Each day, all ${textNew.employee}s ranked in the top 50% earn an ${bigNumber} bonus,</br>
+            <p>and all ${textNew.employee}s ranked in the bottom 50% earn a ${smallNumber} bonus.</p>
             <img src="./img/slider1.png" style="width:80%; height:80%">
         </div>`,
 
         `<div class='slider'>
             <p><strong>Incentive Structure 2</strong></p>
-            <p>Each day, all ${textNew.employee}s ranked in the top 33% earn an $11 bonus,</p>
+            <p>Each day, all ${textNew.employee}s ranked in the top 33% earn an ${bigNumber} bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 33% earn a $6 bonus,</p>
-            <p>and all ${textNew.employee}s ranked in the bottom 33% earn a $1 bonus.</p>
+            <p>and all ${textNew.employee}s ranked in the bottom 33% earn a ${smallNumber} bonus.</p>
             <img src="./img/slider2.png" style="width:80%; height:80%">
         </div>`,
 
         `<div class='slider'>
             <p><strong>Incentive Structure 3</strong></p>
-            <p>Each day, all ${textNew.employee}s ranked in the top 25% earn an $11 bonus,</p>
+            <p>Each day, all ${textNew.employee}s ranked in the top 25% earn an ${bigNumber} bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 50% - 75% earn an $8 bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn a $4 bonus,</p>
-            <p>and all ${textNew.employee}s ranked in the bottom 25% earn a $1.</p>
+            <p>and all ${textNew.employee}s ranked in the bottom 25% earn a ${smallNumber}.</p>
             <img src="./img/slider3.png" style="width:80%; height:80%">
         </div>`
 ];
@@ -862,18 +866,18 @@ function fillIn(questions, questionIds) {
 var fillIn_Uniformity = fillIn([
     {
         promptText: "",
-        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% would receive an $11 bonus. All remaining ${textNew.employee}s would receive a $1 bonus.`
+        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% would receive a ${bigNumber} bonus. All remaining ${textNew.employee}s would receive a ${smallNumber} bonus.`
     }
 ], ['flow_uniformity']);
 
 var fillIn_Diagnosticity = fillIn([
     {
         promptText: "<strong>What would you do to maximize immersion and engagement?</strong>",
-        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving an $11 bonus.`
+        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a ${bigNumber} bonus.`
     },
     {
         promptText: "", 
-        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving an $11 bonus. Everyone who doesn't receive an $11 bonus would receive a $1 bonus.`
+        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a ${bigNumber} bonus. Everyone who doesn't receive a ${bigNumber} bonus would receive a ${smallNumber} bonus.`
     }
 ], ['flow_diagnosticity1', 'flow_diagnosticity2']);
 
