@@ -129,13 +129,12 @@ var rememberGoalAgain3     = goalText[goalCategory.third].rememberAgain;
 var conditionGoal = 
     randomAssignment === 1 ? "when choosing between the three incentive structures" :
     randomAssignment === 2 ? `when deciding what percentage of ${textNew.employee}s will receive a ${bigNumber} bonus` :
-    `when deciding the probabilities of ${textNew.employee}s winning a ${bigNumber} bonus`;
+    `when deciding the two probabilities`;
 
 var stillConditionGoal = 
     randomAssignment === 1 ? "to choose between the three incentive structures" :
     randomAssignment === 2 ? `to decide what percentage of ${textNew.employee}s will receive a ${bigNumber} bonus` :
-    `to choose the probabilities of ${textNew.employee}s winning a ${bigNumber} bonus`;
-
+    `to choose the (1) probability of a ${bigNumber} bonus for ${textNew.employee}s in the top 50% and the (2) probability of a ${bigNumber} bonus for ${textNew.employee}s in the bottom 50%`;
 
 const introPage = [
         `<div class='parent' style="text-align:left">
@@ -773,9 +772,9 @@ function fillIn(questions, questionIds) {
 
                 // Text for each prompt type
                 const promptText = {
-                    maxEngage: "<strong>Please fill in the blank to create the policy that you think would maximize immersion and engagement.</strong>",
-                    maxEffort: `<strong>Please fill in the blank to create the policy that you think would get ${textNew.employee}s to exert maximum effort.</strong>`,
-                    minEngage: "<strong>Please fill in the blank to create the policy that you think would minimize immersion and engagement.</strong>"
+                    maxEngage: "<strong>Please fill in the blank to create the policy that you think would <br> maximize immersion and engagement.</strong>",
+                    maxEffort: `<strong>Please fill in the blank to create the policy that you think would <br> get ${textNew.employee}s to exert maximum effort.</strong>`,
+                    minEngage: "<strong>Please fill in the blank to create the policy that you think would <br> minimize immersion and engagement.</strong>"
                 };
 
                 const map = promptMap[round];
