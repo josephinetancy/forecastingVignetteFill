@@ -988,7 +988,7 @@ function createStaticSliderChoice() {
         ],
         button_label: 'Continue',
         on_finish: function(data) {
-            data.selected_slider_option = data.response.slider_choice;
+            data.selected_slider_option = data.response;
         }
     };
 }
