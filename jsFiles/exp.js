@@ -644,19 +644,21 @@ function fillIn(questions, questionIds) {
                 }
                 
                 .paragraph-container {
-                    margin: 30px -20px;  /* Negative margins extend beyond parent */
-                    padding: 50px;       /* Increase padding for more internal space */
+                    margin: 20px 0;
+                    padding: 24px;
                     background-color: #fafafa;
                     border-radius: 8px;
                     border: 1px solid #e0e0e0;
-                    width: calc(100% + 40px);  /* Extends beyond parent width */
+                    width: 100%;
                     box-sizing: border-box;
                 }
                                 
                 .fill-paragraph {
-                    font-size: 17px;  
-                    line-height: 1.5;  
-                    text-align: justify;
+                    font-size: 17px;
+                    line-height: 1.6;
+                    text-align: left;
+                    max-width: 65ch;       
+                    margin: 0 auto;       
                 }
                 
                 .fill-paragraph .sentence {
@@ -721,20 +723,18 @@ function fillIn(questions, questionIds) {
             </style>
             
             <div class="fill-container">
-    </div>
-    
-    <div id="error-message" class="error-message">
-        Please fill in the blank before continuing.
-    </div>
-    
-    <div class="prompt-text">${questions[0].promptText || ''}</div>
-    
-    <div class="paragraph-container">
-        <div class="fill-paragraph">
-            ${questions.map(q => `<span class="sentence">${q.fillText}</span>`).join(' ')}
-        </div>
-    </div>
-</div>
+                <div id="error-message" class="error-message">
+                    Please fill in the blank before continuing.
+                </div>
+                
+                <div class="prompt-text">${questions[0].promptText || ''}</div>
+                
+                <div class="paragraph-container">
+                    <div class="fill-paragraph">
+                        ${questions.map(q => `<span class="sentence">${q.fillText}</span>`).join(' ')}
+                    </div>
+                </div>
+            </div>
         `,
         button_label: 'Continue',
         data: {
