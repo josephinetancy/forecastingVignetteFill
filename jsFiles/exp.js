@@ -240,16 +240,16 @@ const uniformityPage = [
 function uniformityPage1(round) {
     const remember = getRememberGoalForRound(round);
     return `
-        <p>Your sole objective is to ${remember}.</p>
         <p>Your job is to decide which percentage of daily top-ranked ${textNew.employee}s will receive the bigger ${bigNumber} bonus.</p>
         <p>Bottom-ranked ${textNew.employee}s will receive the smaller ${smallNumber} bonus.</p>
+        <p>Your sole objective is to ${remember}.</p>
         </div>`;
 }
 
 const diagnosticityPage = [
         `<div class='tight'>
             <img src="./img/${textNew.imageProgram}.png" style="width:40%; height:40%">
-            <p>Every day, each ${textNew.employee} has some chance of getting an <strong>${bigNumber} bonus</strong>. Those who don't get an ${bigNumber} bonus get a <strong>${smallNumber} bonus</strong>.
+            <p>Every day, each ${textNew.employee} has some chance of getting a <strong>${bigNumber} bonus</strong>. Those who don't get a ${bigNumber} bonus get a <strong>${smallNumber} bonus</strong>.
             ${textNew.An} ${textNew.employee}'s chance of getting a ${bigNumber} bonus depends on whether they're ranked in the <strong>top or bottom 50%</strong>.</p>
             <p>Your job is to choose two probabilities:</p>
             <p><strong>(1) The probability of a ${bigNumber} bonus for ${textNew.employee}s in the top 50%</strong><br>
@@ -260,9 +260,8 @@ const diagnosticityPage = [
 function diagnosticityPage1(round) {
     const remember = getRememberGoalForRound(round);
     return `
-        <p>Your sole objective is to ${remember}.</p>
-            <p>Your job is to set the chances that each group receives its bonus.
-            Specifically, you'll set the chance that the top 50% ${textNew.employee}s receives the ${bigNumber} bonus, and the chance that the bottom 50% ${textNew.employee}s receives the ${smallNumber} bonus. </p>
+            <p>Your job is to choose the probability of a ${bigNumber} bonus for ${textNew.employee}s in the top 50%, and the probability of a ${bigNumber} bonus for ${textNew.employee}s in the bottom 50%. </p>
+            <p>Your sole objective is to ${remember}.</p>
         </div>`;
 }
 
@@ -281,14 +280,14 @@ const cardinalityPage = [
 
         `<div class='slider'>
             <p><strong>Incentive Structure 1</strong></p>
-            <p>Each day, all ${textNew.employee}s ranked in the top 50% earn an ${bigNumber} bonus,</br>
+            <p>Each day, all ${textNew.employee}s ranked in the top 50% earn a ${bigNumber} bonus,</br>
             <p>and all ${textNew.employee}s ranked in the bottom 50% earn a ${smallNumber} bonus.</p>
             <img src="./img/slider1.png" style="width:80%; height:80%">
         </div>`,
 
         `<div class='slider'>
             <p><strong>Incentive Structure 2</strong></p>
-            <p>Each day, all ${textNew.employee}s ranked in the top 33% earn an ${bigNumber} bonus,</p>
+            <p>Each day, all ${textNew.employee}s ranked in the top 33% earn a ${bigNumber} bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 33% earn a $10 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 33% earn a ${smallNumber} bonus.</p>
             <img src="./img/slider2.png" style="width:80%; height:80%">
@@ -296,8 +295,8 @@ const cardinalityPage = [
 
         `<div class='slider'>
             <p><strong>Incentive Structure 3</strong></p>
-            <p>Each day, all ${textNew.employee}s ranked in the top 25% earn an ${bigNumber} bonus,</p>
-            <p>all ${textNew.employee}s ranked in the middle 50% - 75% earn an $12 bonus,</p>
+            <p>Each day, all ${textNew.employee}s ranked in the top 25% earn a ${bigNumber} bonus,</p>
+            <p>all ${textNew.employee}s ranked in the middle 50% - 75% earn a $12 bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn a $8 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 25% earn a ${smallNumber}.</p>
             <img src="./img/slider3.png" style="width:80%; height:80%">
@@ -307,11 +306,11 @@ const cardinalityPage = [
 function cardinalityPage1(round) {
     const remember = getRememberGoalForRound(round);
     return `
-        <p>Your sole objective is to ${remember}.</p>
         <p>Your job is to decide on one of 3 incentive structures.</p>
         <img src="./img/slider1.png" style="width:80%; height:80%">
         <img src="./img/slider2.png" style="width:80%; height:80%">
         <img src="./img/slider3.png" style="width:80%; height:80%">
+        <p>Your sole objective is to ${remember}.</p>
     `;
 }
 
@@ -722,12 +721,10 @@ function fillIn(questions, questionIds) {
             </style>
             
             <div class="fill-container">
-    <div class="instructions">
-        Please fill in the blanks.
     </div>
     
     <div id="error-message" class="error-message">
-        Please fill in all required fields before continuing.
+        Please fill in the blank before continuing.
     </div>
     
     <div class="prompt-text">${questions[0].promptText || ''}</div>
@@ -776,9 +773,9 @@ function fillIn(questions, questionIds) {
 
                 // Text for each prompt type
                 const promptText = {
-                    maxEngage: "<strong>What would you do to maximize immersion and engagement?</strong>",
-                    maxEffort: `<strong>What would you do to get ${textNew.employee}s to exert maximum effort?</strong>`,
-                    minEngage: "<strong>What would you do to minimize immersion and engagement?</strong>"
+                    maxEngage: "<strong>Please fill in the blank to create the policy that you think would maximize immersion and engagement.</strong>",
+                    maxEffort: `<strong>Please fill in the blank to create the policy that you think would get ${textNew.employee}s to exert maximum effort.</strong>`,
+                    minEngage: "<strong>Please fill in the blank to create the policy that you think would minimize immersion and engagement.</strong>"
                 };
 
                 const map = promptMap[round];
@@ -1210,7 +1207,7 @@ if (randomAssignment === 1) {
 p.save_data = {
     type: jsPsychPipe,
     action: "save",
-    experiment_id: "133taaH9iM67",
+    experiment_id: "0ztNpPGobM6Z",
     filename: filename,
     data_string: ()=>jsPsych.data.get().csv()
 };
