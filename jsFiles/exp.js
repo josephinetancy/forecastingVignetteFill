@@ -869,6 +869,7 @@ var fillIn_Diagnosticity = fillIn([
 
 
 
+
 function createStaticSliderChoice() {
     return {
         type: jsPsychSurveyMultiChoice,
@@ -987,6 +988,7 @@ function createStaticSliderChoice() {
         ],
         button_label: 'Continue',
         on_finish: function(data) {
+            console.log(data);
             const r = data.response ?? JSON.parse(data.responses || '{}');
             const v = r.slider_choice ?? r.Q0 ?? null;
             const map = { 'Option 1': '50-50_$4_$16', 'Option 2': '33/33/33_$4_$10_$16', 'Option 3': '25/25/25/25_$4_$8_$12_$16' };
@@ -999,8 +1001,9 @@ var staticSliderChoice = createStaticSliderChoice();
 
 
 const choose_Cardinality = {
-    type: jsPsychSurveyMultiChoice,
-    preamble: () => {
+    type: jsPsychHtmlButtonResponse,
+
+    stimulus: () => {
 
         // --- Mapping which orders map to which prompt for each round ---
         const promptMap = {
@@ -1021,7 +1024,6 @@ const choose_Cardinality = {
             }
         };
 
-        // --- Actual preamble texts ---
         const preambleText = {
             maxEngage: `<strong>To maximize immersion and engagement,</strong>`,
             maxEffort: `<strong>To encourage ${textNew.employee}s to exert maximum effort,</strong>`,
@@ -1039,61 +1041,63 @@ const choose_Cardinality = {
             selected = preambleText.minEngage;
         }
 
-        // Return the full preamble HTML
         return `
-            <div style="text-align: center; margin-bottom: 40px;">
+            <div style="text-align:center; margin-bottom: 40px;">
                 ${selected}
                 <br>I would choose the following incentive structure:
             </div>
-
-                <style>
-                    /* Center the entire option row */
-                    .jspsych-survey-multi-choice-option {
-                        display: flex !important;
-                        justify-content: center !important;   /* centers the radio+image group */
-                        align-items: center !important;
-                        margin: 20px 0 !important;
-                    }
-
-                    /* Radio button sits right next to the image */
-                    .jspsych-survey-multi-choice-option input[type="radio"] {
-                        margin-right: 10px !important;
-                    }
-
-                    /* Keep label tight around the image */
-                    .jspsych-survey-multi-choice-option label {
-                        display: inline-flex !important;
-                        align-items: center !important;
-                        justify-content: center !important;   /* centers the image inside */
-                        width: auto !important;
-                    }
-
-                    /* Your scale images */
-                    .jspsych-survey-multi-choice-option img {
-                        width: 50% !important;   /* or 80% */
-                        height: auto !important;
-                        object-fit: contain !important;
-                        display: block !important;
-                    }
-                </style>
         `;
     },
-        questions: () => {
-            return [{
-                prompt: '',
-                name: 'slider_choice',
-                options: [
-                    '<img src="./img/slider1.png"',
-                    '<img src="./img/slider2.png"',
-                    '<img src="./img/slider3.png"'
-                ]
-            }];
-        },
-    randomize_question_order: false,
-    button_label: 'Continue',
 
+    choices: [
+        '<img src="./img/slider1.png">',
+        '<img src="./img/slider2.png">',
+        '<img src="./img/slider3.png">'
+    ],
+
+    button_html: `
+        <button class="jspsych-btn image-btn">%choice%</button>
+    `,
+            on_load: () => {
+                const style = document.createElement('style');
+                style.innerHTML = `
+                    /* Center the entire button group as a vertical column */
+                    #jspsych-html-button-response-btngroup {
+                        display: flex !important;
+                        flex-direction: column !important;   /* stack vertically */
+                        align-items: center !important;      /* center each image horizontally */
+                        gap: 25px;
+                        margin-top: 30px;
+                    }
+
+                    /* Each button is transparent, clickable, and centers its image */
+                    .image-btn {
+                        background: none !important;
+                        border: none !important;
+                        padding: 0;
+                        cursor: pointer;
+                        display: flex !important;
+                        justify-content: center !important;  /* centers the img inside button */
+                        width: 100%;                          /* optional: makes button take full width */
+                    }
+
+                    /* Images themselves */
+                    .image-btn img {
+                        width: 50%;      /* adjust size as desired */
+                        height: auto;
+                        display: block;
+                    }
+                `;
+                document.head.appendChild(style);
+            },
     on_finish: (data) => {
-        data.selected_slider_option = data.response.slider_choice;
+        // data.response is the BUTTON INDEX (0, 1, 2)
+        const mapping = ['structure_1', 'structure_2', 'structure_3'];
+
+        data.selected_slider_index = data.response + 1;
+        data.selected_slider_option = mapping[data.response];
+
+        console.log(data);
     }
 };
 
