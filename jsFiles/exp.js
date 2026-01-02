@@ -987,7 +987,10 @@ function createStaticSliderChoice() {
         ],
         button_label: 'Continue',
         on_finish: function(data) {
-            data.selected_slider_option = data.response;
+            const r = data.response ?? JSON.parse(data.responses || '{}');
+            const v = r.slider_choice ?? r.Q0 ?? null;
+            const map = { 'Option 1': '50-50_$4_$16', 'Option 2': '33/33/33_$4_$10_$16', 'Option 3': '25/25/25/25_$4_$8_$12_$16' };
+            data.selected_slider_option = map[v] ?? v;
         }
     };
 }
