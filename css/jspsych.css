@@ -727,3 +727,36 @@
     color: black;
     line-height: 37px;
 }
+
+/* Center stacked images only for the cardinality trial */
+/* Only affects buttons/images inside cardinality trial */
+.cardinality-trial-wrapper {
+    text-align: center; /* centers the preamble */
+}
+
+.cardinality-trial-wrapper .jspsych-html-button-response-button-container {
+    display: flex;
+    flex-direction: column;  /* stack vertically */
+    align-items: center;     /* center each image */
+    gap: 25px;
+    margin-top: 30px;
+}
+
+/* Each button wraps its image */
+.cardinality-trial-wrapper .image-btn {
+    background: none !important;
+    border: none !important;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    width: auto !important;  /* prevents stretching */
+}
+
+/* Slider images themselves */
+.cardinality-trial-wrapper .image-btn img {
+    width: auto !important;
+    max-width: 250px !important; /* cap image size */
+    height: auto !important;
+    display: block;
+}

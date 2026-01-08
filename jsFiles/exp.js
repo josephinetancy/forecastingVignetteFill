@@ -353,8 +353,10 @@ return {
         post_trial_gap: 500,
         allow_keys: false,
     on_finish: (data) => {
-        jsPsych.data.addProperties({round});
+        data.round = round;
+        jsPsych.data.addProperties({ round });
         jsPsych.data.addProperties({order});
+        data.trialName = "intro";
     }
     };
 }
@@ -374,6 +376,7 @@ function makeRememberPage() {
     on_finish: (data) => {
       const round = jsPsych.data.getLastTrialData().values()[0].round;
       data.round = round;
+      data.trialName = "rememberPage";
     }
   };
 }
@@ -415,8 +418,12 @@ function makeIntroAgain() {
     post_trial_gap: 500,
     allow_keys: false,
     on_finish: (data) => {
-      round++;
+        const prevRound = jsPsych.data.get().values().slice(-1)[0].round;
+        const round = prevRound + 1;
+
       data.round = round;
+      data.trialName = "introAgain";
+      jsPsych.data.addProperties({ round });
     }
   };
 }
@@ -434,8 +441,12 @@ function makeIntroAgainAgain() {
     post_trial_gap: 500,
     allow_keys: false,
     on_finish: (data) => {
-      round++;
+      const prevRound = jsPsych.data.get().values().slice(-1)[0].round;
+        const round = prevRound + 1;
+
       data.round = round;
+      data.trialName = "introAgainAgain";
+      jsPsych.data.addProperties({ round });
     }
   };
 }
@@ -443,10 +454,25 @@ function makeIntroAgainAgain() {
 makeIntroAgainAgain = makeIntroAgainAgain()
 
 const errorMessage = {
-    type: jsPsychInstructions,
-    pages: [`<div class='parent'><p>You provided the wrong answer.<br>To make sure you understand the game, please continue to re-read the instructions.</p></div>`],
-    show_clickable_nav: true,
-    allow_keys: false,
+  type: jsPsychInstructions,
+  pages: () => {
+    const lastTrial = jsPsych.data.get().last(1).values()[0];
+    const round = lastTrial.round;
+    return [
+      `<div class='parent'>
+        <p>You provided the wrong answer.<br>
+        To make sure you understand the game, please continue to re-read the instructions.</p>
+      </div>`
+    ];
+  },
+  show_clickable_nav: true,
+  allow_keys: false,
+  on_finish: (data) => {
+    // You can still store metadata here if you want
+    const lastTrial = jsPsych.data.get().last(1).values()[0];
+    data.round = lastTrial.round;
+    data.trialName = "errorMessage";
+  }
 };
 
 function getQuestionsForCondition(assignment) {
@@ -460,7 +486,7 @@ function getQuestionsForCondition(assignment) {
 }
 
 
-function getCorrectAnswers() {
+function getCorrectAnswers(round, order) {
 
     let baseAnswer;
 
@@ -575,13 +601,13 @@ const attnChk = {
         const order = lastTaskTrial.order;
 
         // Pass round + order into function
-        const correctAnswers = getCorrectAnswers();
+        const correctAnswers = getCorrectAnswers(round, order);
 
         const totalErrors = getTotalErrors(data, correctAnswers);
 
         data.totalErrors = totalErrors;
         data.condition = conditionMap[randomAssignment];
-        data.round = round; // store correct round
+        data.round = round; 
     }
 };
 
@@ -844,6 +870,7 @@ function fillIn(questions, questionIds) {
                 const inputValue = parseInt(data.response[`percentage_${qId}`]) || 0;
                 data[`${qId}_percentage`] = inputValue;
                 data[`${qId}_input_value`] = inputValue;
+                data.trialName = "fillIn";
             });
         }
     };
@@ -1042,7 +1069,7 @@ const choose_Cardinality = {
         }
 
         return `
-            <div style="text-align:center; margin-bottom: 40px;">
+                <div class="cardinality-trial" style="text-align:center; margin-bottom:40px;">
                 ${selected}
                 <br>I would choose the following incentive structure:
             </div>
@@ -1096,7 +1123,7 @@ const choose_Cardinality = {
 
         data.selected_slider_index = data.response + 1;
         data.selected_slider_option = mapping[data.response];
-
+        data.trialName = "choose_Cardinality";
         console.log(data);
     }
 };
@@ -1145,14 +1172,32 @@ p.consent = {
 
 p.demographics = (function() {
 
-        const gender = {
-            type: jsPsychHtmlButtonResponse,
-            stimulus: '<p>What is your gender?</p>',
-            choices: ['Male', 'Female', 'Other'],
-            on_finish: (data) => {
-                data.gender = data.response;
-            }
-        };
+            const gender = {
+                type: jsPsychHtmlButtonResponse,
+                stimulus: '<p>What is your gender?</p>',
+                choices: ['Male', 'Female', 'Other'],
+
+                on_load: () => {
+                    // Find the button group for THIS trial
+                    const container = document.querySelector('#jspsych-html-button-response-btngroup');
+
+                    // Force buttons to be in a row, centered, with spacing
+                    container.style.display = 'flex';
+                    container.style.flexDirection = 'row';
+                    container.style.justifyContent = 'center';
+                    container.style.gap = '20px';
+
+                    // Also ensure buttons don't take full width
+                    const buttons = container.querySelectorAll('button');
+                    buttons.forEach(btn => {
+                        btn.style.width = 'auto';
+                    });
+                },
+
+                on_finish: (data) => {
+                    data.gender = data.response;
+                }
+            };
 
         const age = {
             type: jsPsychSurveyText,
