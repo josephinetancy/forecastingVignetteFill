@@ -355,7 +355,9 @@ return {
     on_finish: (data) => {
         data.round = round;
         jsPsych.data.addProperties({ round });
-        jsPsych.data.addProperties({order});
+        jsPsych.data.addProperties({ order });
+        jsPsych.data.addProperties({ company });
+        jsPsych.data.addProperties({ randomAssignment });
         data.trialName = "intro";
     }
     };
@@ -756,7 +758,14 @@ function fillIn(questions, questionIds) {
                 
                 <div class="paragraph-container">
                     <div class="fill-paragraph">
-                        ${questions.map(q => `<span class="sentence">${q.fillText}</span>`).join(' ')}
+                    ${questions.map((q, i) => `
+                  <span class="sentence">
+                    ${q.fillText.replace(
+                      '<input',
+                      `<input name="percentage_${questionIds[i]}"`
+                    )}
+                  </span>
+                `).join(' ')}
                     </div>
                 </div>
             </div>
@@ -765,113 +774,118 @@ function fillIn(questions, questionIds) {
         data: {
             questions: questionIds
         },
-         on_load: function() {
+                 on_load: function() {
 
-    // ---------------------------
-    // Dynamic prompt text
-    // ---------------------------
-    const lastTrial = jsPsych.data.get().last(2).values()[0];
-    const round = lastTrial.round;
-    const order = lastTrial.order;
+          // ---------------------------
+          // Dynamic prompt text
+          // ---------------------------
+          const lastTrial = jsPsych.data.get().last(2).values()[0];
+          const round = lastTrial.round;
+          const order = lastTrial.order;
 
-            let promptEl = document.querySelector('.prompt-text');
-            if (promptEl) {
+          let promptEl = document.querySelector('.prompt-text');
+          if (promptEl) {
 
-                // Mapping of which orders → which prompt, by round
-                const promptMap = {
-                    0: {
-                        maxEngage: [1, 2],
-                        maxEffort: [3, 4],
-                        minEngage: [5, 6]
-                    },
-                    1: {
-                        maxEngage: [3, 5],
-                        maxEffort: [2, 6],
-                        minEngage: [1, 4]
-                    },
-                    2: {
-                        maxEngage: [4, 6],
-                        maxEffort: [1, 5],
-                        minEngage: [2, 3]
-                    }
-                };
+            let promptType = "";
 
-                // Text for each prompt type
-                const promptText = {
-                    maxEngage: "<strong>Please fill in the blank to create the policy that you think would <br> maximize immersion and engagement.</strong>",
-                    maxEffort: `<strong>Please fill in the blank to create the policy that you think would <br> get ${textNew.employee}s to exert maximum effort.</strong>`,
-                    minEngage: "<strong>Please fill in the blank to create the policy that you think would <br> minimize immersion and engagement.</strong>"
-                };
+            const promptMap = {
+              0: {
+                maxEngage: [1, 2],
+                maxEffort: [3, 4],
+                minEngage: [5, 6]
+              },
+              1: {
+                maxEngage: [3, 5],
+                maxEffort: [2, 6],
+                minEngage: [1, 4]
+              },
+              2: {
+                maxEngage: [4, 6],
+                maxEffort: [1, 5],
+                minEngage: [2, 3]
+              }
+            };
 
-                const map = promptMap[round];
-                let selectedPrompt = "";
+            const promptText = {
+              maxEngage: "<strong>Please fill in the blank to create the policy that you think would <br> maximize immersion and engagement.</strong>",
+              maxEffort: `<strong>Please fill in the blank to create the policy that you think would <br> get ${textNew.employee}s to exert maximum effort.</strong>`,
+              minEngage: "<strong>Please fill in the blank to create the policy that you think would <br> minimize immersion and engagement.</strong>"
+            };
 
-                if (map.maxEngage.includes(order)) {
-                    selectedPrompt = promptText.maxEngage;
-                } else if (map.maxEffort.includes(order)) {
-                    selectedPrompt = promptText.maxEffort;
-                } else if (map.minEngage.includes(order)) {
-                    selectedPrompt = promptText.minEngage;
+            const map = promptMap[round];
+            let selectedPrompt = "";
+
+            if (map.maxEngage.includes(order)) {
+              selectedPrompt = promptText.maxEngage;
+              promptType = "maxEngage";
+            } else if (map.maxEffort.includes(order)) {
+              selectedPrompt = promptText.maxEffort;
+              promptType = "maxEffort";
+            } else if (map.minEngage.includes(order)) {
+              selectedPrompt = promptText.minEngage;
+              promptType = "minEngage";
+            }
+
+            promptEl.innerHTML = selectedPrompt;
+            document.body.dataset.promptType = promptType;
+
+          } // ← THIS was missing
+
+          // ---------------------------
+          // Input validation
+          // ---------------------------
+          document.querySelectorAll('.number-input').forEach(input => {
+            input.addEventListener('input', function() {
+              let value = parseInt(this.value);
+              if (isNaN(value) || value < 0) {
+                this.value = '';
+              } else if (value > 100) {
+                this.value = '100';
+              }
+
+              this.classList.remove('required-empty');
+              document.getElementById('error-message').style.display = 'none';
+            });
+          });
+
+          // ---------------------------
+          // Form submission validation
+          // ---------------------------
+          const form = document.querySelector('#jspsych-survey-html-form-form');
+          if (form) {
+            form.addEventListener('submit', function(e) {
+              const inputs = document.querySelectorAll('.number-input');
+              let allFilled = true;
+
+              inputs.forEach(input => {
+                if (!input.value || input.value.trim() === '') {
+                  input.classList.add('required-empty');
+                  allFilled = false;
+                } else {
+                  input.classList.remove('required-empty');
                 }
+              });
 
-                promptEl.innerHTML = selectedPrompt;
-            }
-
-            // ---------------------------
-            // Input validation
-            // ---------------------------
-            document.querySelectorAll('.number-input').forEach(input => {
-                input.addEventListener('input', function() {
-                    let value = parseInt(this.value);
-                    if (isNaN(value) || value < 0) {
-                        this.value = '';
-                    } else if (value > 100) {
-                        this.value = '100';
-                    }
-
-                    // Remove error styling when user starts typing
-                    this.classList.remove('required-empty');
-                    document.getElementById('error-message').style.display = 'none';
-                });
+              if (!allFilled) {
+                e.preventDefault();
+                document.getElementById('error-message').style.display = 'block';
+                const firstEmpty = document.querySelector('.number-input.required-empty');
+                if (firstEmpty) {
+                  firstEmpty.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }
             });
-
-            // ---------------------------
-            // Form submission validation
-            // ---------------------------
-            const form = document.querySelector('#jspsych-survey-html-form-form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    const inputs = document.querySelectorAll('.number-input');
-                    let allFilled = true;
-
-                    inputs.forEach(input => {
-                        if (!input.value || input.value.trim() === '') {
-                            input.classList.add('required-empty');
-                            allFilled = false;
-                        } else {
-                            input.classList.remove('required-empty');
-                        }
-                    });
-
-                    if (!allFilled) {
-                        e.preventDefault();
-                        document.getElementById('error-message').style.display = 'block';
-                        // Scroll to first empty field
-                        const firstEmpty = document.querySelector('.number-input.required-empty');
-                        if (firstEmpty) {
-                            firstEmpty.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        }
-                    }
-                });
-            }
+          }
         },
+
         on_finish: function(data) {
-            questionIds.forEach((qId, index) => {
-                const inputValue = parseInt(data.response[`percentage_${qId}`]) || 0;
-                data[`${qId}_percentage`] = inputValue;
-                data[`${qId}_input_value`] = inputValue;
-                data.trialName = "fillIn";
-            });
+          questionIds.forEach(qId => {
+            const value = parseInt(data.response[`percentage_${qId}`], 10);
+            data[qId] = value;
+          });
+
+          data.promptType = document.body.dataset.promptType;
+          data.trialName = "fillIn";
         }
     };
 }
@@ -879,20 +893,20 @@ function fillIn(questions, questionIds) {
 var fillIn_Uniformity = fillIn([
     {
         promptText: "",
-        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" name="flow_prior" min="0" max="100" required>% would receive a ${bigNumber} bonus. All remaining ${textNew.employee}s would receive a ${smallNumber} bonus.`
+        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" min="0" max="100" required>% would receive a ${bigNumber} bonus. All remaining ${textNew.employee}s would receive a ${smallNumber} bonus.`
     }
-], ['flow_uniformity']);
+], ['uniformity']);
 
 var fillIn_Diagnosticity = fillIn([
     {
         promptText: "<strong>What would you do to maximize immersion and engagement?</strong>",
-        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a ${bigNumber} bonus.`
+        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" min="0" max="100" required>% chance of receiving a ${bigNumber} bonus.`
     },
     {
         promptText: "", 
-        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" name="performance_posterior" min="0" max="100" required>% chance of receiving a ${bigNumber} bonus. Everyone who doesn't receive a ${bigNumber} bonus would receive a ${smallNumber} bonus.`
+        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" min="0" max="100" required>% chance of receiving a ${bigNumber} bonus. Everyone who doesn't receive a ${bigNumber} bonus would receive a ${smallNumber} bonus.`
     }
-], ['flow_diagnosticity1', 'flow_diagnosticity2']);
+], ['diagnosticity1', 'diagnosticity2']);
 
 
 
@@ -1196,6 +1210,7 @@ p.demographics = (function() {
 
                 on_finish: (data) => {
                     data.gender = data.response;
+                    data.trialName = "gender";
                 }
             };
 
@@ -1204,6 +1219,7 @@ p.demographics = (function() {
             questions: [{prompt: "Age:", name: "age"}],
             on_finish: (data) => {
                 saveSurveyData(data); 
+                data.trialName = "age";
             },
         }; 
 
@@ -1213,6 +1229,7 @@ p.demographics = (function() {
             choices: ['White / Caucasian', 'Black / African American','Asian / Pacific Islander', 'Hispanic', 'Native American', 'Other'],
             on_finish: (data) => {
                 data.ethnicity = data.response;
+                data.trialName = "ethnicity";
             }
         };
 
@@ -1222,6 +1239,7 @@ p.demographics = (function() {
             choices: ['Yes', 'No'],
             on_finish: (data) => {
                 data.english = data.response;
+                data.trialName = "english";
             }
         };  
 
@@ -1230,6 +1248,7 @@ p.demographics = (function() {
             questions: [{prompt: "Questions? Comments? Complains? Provide your feedback here!", rows: 10, columns: 100, name: "finalWord"}],
             on_finish: (data) => {
                 saveSurveyData(data); 
+                data.trialName = "finalWord";
             },
         }; 
 let demos;
