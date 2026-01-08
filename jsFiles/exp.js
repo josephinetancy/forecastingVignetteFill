@@ -1044,51 +1044,49 @@ var staticSliderChoice = createStaticSliderChoice();
 const choose_Cardinality = {
     type: jsPsychHtmlButtonResponse,
 
-    stimulus: () => {
+        stimulus: () => {
 
-        // --- Mapping which orders map to which prompt for each round ---
-        const promptMap = {
-            0: {
-                maxEngage: [1, 2],
-                maxEffort: [3, 4],
-                minEngage: [5, 6]
-            },
-            1: {
-                maxEngage: [3, 5],
-                maxEffort: [2, 6],
-                minEngage: [1, 4]
-            },
-            2: {
-                maxEngage: [4, 6],
-                maxEffort: [1, 5],
-                minEngage: [2, 3]
+            const lastTrial = jsPsych.data.get().last(1).values()[0];
+            const round = lastTrial.round;
+            const order = lastTrial.order;
+
+            const promptMap = {
+                0: { maxEngage: [1, 2], maxEffort: [3, 4], minEngage: [5, 6] },
+                1: { maxEngage: [3, 5], maxEffort: [2, 6], minEngage: [1, 4] },
+                2: { maxEngage: [4, 6], maxEffort: [1, 5], minEngage: [2, 3] }
+            };
+
+            const preambleText = {
+                maxEngage: `<strong>To maximize immersion and engagement,</strong>`,
+                maxEffort: `<strong>To encourage ${textNew.employee}s to exert maximum effort,</strong>`,
+                minEngage: `<strong>To minimize immersion and engagement,</strong>`
+            };
+
+            const mapping = promptMap[round];
+            let selectedText = "";
+            let promptType = "";
+
+            if (mapping.maxEngage.includes(order)) {
+                selectedText = preambleText.maxEngage;
+                promptType = "maxEngage";
+            } else if (mapping.maxEffort.includes(order)) {
+                selectedText = preambleText.maxEffort;
+                promptType = "maxEffort";
+            } else {
+                selectedText = preambleText.minEngage;
+                promptType = "minEngage";
             }
-        };
 
-        const preambleText = {
-            maxEngage: `<strong>To maximize immersion and engagement,</strong>`,
-            maxEffort: `<strong>To encourage ${textNew.employee}s to exert maximum effort,</strong>`,
-            minEngage: `<strong>To minimize immersion and engagement,</strong>`
-        };
+            // store for on_finish
+            document.body.dataset.promptType = promptType;
 
-        const mapping = promptMap[round];
-
-        let selected = "";
-        if (mapping.maxEngage.includes(order)) {
-            selected = preambleText.maxEngage;
-        } else if (mapping.maxEffort.includes(order)) {
-            selected = preambleText.maxEffort;
-        } else {
-            selected = preambleText.minEngage;
-        }
-
-        return `
+            return `
                 <div class="cardinality-trial" style="text-align:center; margin-bottom:40px;">
-                ${selected}
-                <br>I would choose the following incentive structure:
-            </div>
-        `;
-    },
+                    ${selectedText}
+                    <br>I would choose the following incentive structure:
+                </div>
+            `;
+        },
 
     choices: [
         '<img src="./img/slider1.png">',
@@ -1131,15 +1129,16 @@ const choose_Cardinality = {
                 `;
                 document.head.appendChild(style);
             },
-    on_finish: (data) => {
-        // data.response is the BUTTON INDEX (0, 1, 2)
-        const mapping = ['structure_1', 'structure_2', 'structure_3'];
+        on_finish: (data) => {
 
-        data.selected_slider_index = data.response + 1;
-        data.selected_slider_option = mapping[data.response];
-        data.trialName = "choose_Cardinality";
-        console.log(data);
-    }
+            const mapping = ['structure_1', 'structure_2', 'structure_3'];
+
+            data.cardinality = mapping[data.response];   // ← MAIN COLUMN
+            data.cardinality_index = data.response + 1;  // optional but useful
+            data.promptType = document.body.dataset.promptType;
+
+            data.trialName = "choose_Cardinality";
+        }
 };
 
 
