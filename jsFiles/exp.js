@@ -1044,49 +1044,49 @@ var staticSliderChoice = createStaticSliderChoice();
 const choose_Cardinality = {
     type: jsPsychHtmlButtonResponse,
 
-        stimulus: () => {
+    stimulus: () => {
 
-            const lastTrial = jsPsych.data.get().last(1).values()[0];
-            const round = lastTrial.round;
-            const order = lastTrial.order;
+        const lastTrial = jsPsych.data.get().last(1).values()[0];
+        const round = lastTrial.round;
+        const order = lastTrial.order;
 
-            const promptMap = {
-                0: { maxEngage: [1, 2], maxEffort: [3, 4], minEngage: [5, 6] },
-                1: { maxEngage: [3, 5], maxEffort: [2, 6], minEngage: [1, 4] },
-                2: { maxEngage: [4, 6], maxEffort: [1, 5], minEngage: [2, 3] }
-            };
+        const promptMap = {
+            0: { maxEngage: [1, 2], maxEffort: [3, 4], minEngage: [5, 6] },
+            1: { maxEngage: [3, 5], maxEffort: [2, 6], minEngage: [1, 4] },
+            2: { maxEngage: [4, 6], maxEffort: [1, 5], minEngage: [2, 3] }
+        };
 
-            const preambleText = {
-                maxEngage: `<strong>To maximize immersion and engagement,</strong>`,
-                maxEffort: `<strong>To encourage ${textNew.employee}s to exert maximum effort,</strong>`,
-                minEngage: `<strong>To minimize immersion and engagement,</strong>`
-            };
+        const preambleText = {
+            maxEngage: `maximize immersion and engagement`,
+            maxEffort: `encourage ${textNew.employee}s to exert maximum effort`,
+            minEngage: `minimize immersion and engagement`
+        };
 
-            const mapping = promptMap[round];
-            let selectedText = "";
-            let promptType = "";
+        const mapping = promptMap[round];
+        let selectedText = "";
+        let promptType = "";
 
-            if (mapping.maxEngage.includes(order)) {
-                selectedText = preambleText.maxEngage;
-                promptType = "maxEngage";
-            } else if (mapping.maxEffort.includes(order)) {
-                selectedText = preambleText.maxEffort;
-                promptType = "maxEffort";
-            } else {
-                selectedText = preambleText.minEngage;
-                promptType = "minEngage";
-            }
+        if (mapping.maxEngage.includes(order)) {
+            selectedText = preambleText.maxEngage;
+            promptType = "maxEngage";
+        } else if (mapping.maxEffort.includes(order)) {
+            selectedText = preambleText.maxEffort;
+            promptType = "maxEffort";
+        } else {
+            selectedText = preambleText.minEngage;
+            promptType = "minEngage";
+        }
 
-            // store for on_finish
-            document.body.dataset.promptType = promptType;
+        document.body.dataset.promptType = promptType;
 
-            return `
-                <div class="cardinality-trial" style="text-align:center; margin-bottom:40px;">
-                    ${selectedText}
-                    <br>I would choose the following incentive structure:
-                </div>
-            `;
-        },
+        return `
+            <div class="cardinality-trial" style="text-align:center; margin-bottom:40px;">
+                <strong>
+                    Choose the following policy to ${selectedText}.
+                </strong>
+            </div>
+        `;
+    },   // ✅ THIS WAS MISSING
 
     choices: [
         '<img src="./img/slider1.png">',
@@ -1097,47 +1097,43 @@ const choose_Cardinality = {
     button_html: `
         <button class="jspsych-btn image-btn">%choice%</button>
     `,
-            on_load: () => {
-                const style = document.createElement('style');
-                style.innerHTML = `
-                    /* Center the entire button group as a vertical column */
-                    #jspsych-html-button-response-btngroup {
-                        display: flex !important;
-                        flex-direction: column !important;   /* stack vertically */
-                        align-items: center !important;      /* center each image horizontally */
-                        gap: 25px;
-                        margin-top: 30px;
-                    }
 
-                    /* Each button is transparent, clickable, and centers its image */
-                    .image-btn {
-                        background: none !important;
-                        border: none !important;
-                        padding: 0;
-                        cursor: pointer;
-                        display: flex !important;
-                        justify-content: center !important;  /* centers the img inside button */
-                        width: 100%;                          /* optional: makes button take full width */
-                    }
+    on_load: () => {
+        const style = document.createElement('style');
+        style.innerHTML = `
+            #jspsych-html-button-response-btngroup {
+                display: flex !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 25px;
+                margin-top: 30px;
+            }
 
-                    /* Images themselves */
-                    .image-btn img {
-                        width: 50%;      /* adjust size as desired */
-                        height: auto;
-                        display: block;
-                    }
-                `;
-                document.head.appendChild(style);
-            },
-        on_finish: (data) => {
+            .image-btn {
+                background: none !important;
+                border: none !important;
+                padding: 0;
+                cursor: pointer;
+                display: flex !important;
+                justify-content: center !important;
+                width: 100%;
+            }
 
-            const mapping = ['0', '1', '2'];
+            .image-btn img {
+                width: 50%;
+                height: auto;
+                display: block;
+            }
+        `;
+        document.head.appendChild(style);
+    },
 
-            data.cardinality = mapping[data.response];   
-            data.promptType = document.body.dataset.promptType;
-
-            data.trialName = "choose_Cardinality";
-        }
+    on_finish: (data) => {
+        const mapping = ['0', '1', '2'];
+        data.cardinality = mapping[data.response];
+        data.promptType = document.body.dataset.promptType;
+        data.trialName = "choose_Cardinality";
+    }
 };
 
 
