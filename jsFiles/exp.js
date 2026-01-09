@@ -1131,7 +1131,7 @@ const choose_Cardinality = {
             },
         on_finish: (data) => {
 
-            const mapping = ['1', '2', '3'];
+            const mapping = ['0', '1', '2'];
 
             data.cardinality = mapping[data.response];   
             data.promptType = document.body.dataset.promptType;
