@@ -1131,10 +1131,9 @@ const choose_Cardinality = {
             },
         on_finish: (data) => {
 
-            const mapping = ['structure_1', 'structure_2', 'structure_3'];
+            const mapping = ['1', '2', '3'];
 
-            data.cardinality = mapping[data.response];   // ← MAIN COLUMN
-            data.cardinality_index = data.response + 1;  // optional but useful
+            data.cardinality = mapping[data.response];   
             data.promptType = document.body.dataset.promptType;
 
             data.trialName = "choose_Cardinality";
