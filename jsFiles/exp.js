@@ -1042,7 +1042,7 @@ var staticSliderChoice = createStaticSliderChoice();
 
 
 const choose_Cardinality = {
-    type: jsPsychHtmlButtonResponse,
+    type: jsPsychHtmlButtonResponseCardinality,
 
     stimulus: () => {
 
@@ -1101,7 +1101,7 @@ const choose_Cardinality = {
     on_load: () => {
         const style = document.createElement('style');
         style.innerHTML = `
-            #jspsych-html-button-response-btngroup {
+            #jspsych-html-button-response-btngroup-cardinality {
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
