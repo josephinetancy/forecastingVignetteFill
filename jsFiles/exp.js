@@ -25,14 +25,6 @@ console.log("Order is " + order)
 
 const exp = (function() {
 
-
-jsPsych.data.addProperties({
-    uniformity: null,
-    cardinality: null,
-    diagnosticity1: null,
-    diagnosticity2: null
-});
-
 var p = {};
 
 
@@ -394,6 +386,12 @@ return {
         jsPsych.data.addProperties({ order });
         jsPsych.data.addProperties({ company });
         jsPsych.data.addProperties({ randomAssignment });
+        jsPsych.data.addProperties({
+            uniformity: null,
+            cardinality: null,
+            diagnosticity1: null,
+            diagnosticity2: null
+        });
     }
     };
 }
@@ -643,7 +641,6 @@ const attnChk = {
         const totalErrors = getTotalErrors(data, correctAnswers);
 
         data.totalErrors = totalErrors;
-        data.condition = conditionMap[randomAssignment];
         data.round = round; 
     }
 };
