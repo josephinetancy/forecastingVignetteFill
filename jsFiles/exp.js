@@ -1123,6 +1123,19 @@ const choose_Cardinality = {
                 width: 50%;
                 height: auto;
                 display: block;
+                transition: 
+                    transform 0.2s ease,
+                    box-shadow 0.2s ease,
+                    filter 0.2s ease;
+                border-radius: 12px; /* optional but looks nicer with glow */
+            }
+
+            /* Glow on hover */
+            .image-btn:hover img {
+                transform: scale(1.03);
+                box-shadow: 
+                    0 0 12px rgba(255, 215, 0, 0.6),
+                    0 0 24px rgba(255, 215, 0, 0.35);
             }
         `;
         document.head.appendChild(style);
