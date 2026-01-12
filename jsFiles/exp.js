@@ -26,6 +26,13 @@ console.log("Order is " + order)
 const exp = (function() {
 
 
+jsPsych.data.addProperties({
+    uniformity: null,
+    cardinality: null,
+    diagnosticity1: null,
+    diagnosticity2: null
+});
+
 var p = {};
 
 
@@ -137,19 +144,6 @@ var stillConditionGoal =
     `to choose the (1) probability of a ${bigNumber} bonus for ${textNew.employee}s in the top 50% and the (2) probability of a ${bigNumber} bonus for ${textNew.employee}s in the bottom 50%`;
 
 const introPage = [
-        `<div class='parent' style="text-align:left">
-            <p><strong>Welcome to the Manager Challenge!</strong></p>
-            <p>We are interested in your intutions about human motivation.</p>
-            <p>To help us explore this topic, you will play the role of manager in an organization. You will tell us what you'd do as manager to achieve specific changes in employee motivation. We are interested both in how you'd improve  motivation as well as how you'd undermine it.</p>
-            <p>Specifically, you will be asked to design an incentive program that you think would:
-            <ul>
-                <li>Maximize how immersed and engaged employees feel in their work</li>
-                <li>Minimize how immersed and engaged employees feel in their work</li>
-                <li>Maximize how much effort employees exert</li>
-            </ul>
-            <p>Continue to begin the Manager Challenge!</p>
-        </div>`,
-
         `<div class='tight'>
             <img src="./img/${textNew.imageCompany}.png" style="width:40%; height:40%">
             <p>You're the manager of ${textNew.company}.</p>
@@ -345,6 +339,48 @@ const consent = `
     <p>If you agree to participate, press the "Next" button to indicate that you consent to participate in the study.</p>`
 
 
+const attnChk_intro = {
+    type: jsPsychSurveyMultiChoice,
+
+    preamble: `
+        <div class='parent' style="text-align:left">
+            <p><strong>Welcome to the Manager Challenge!</strong></p>
+            <p>We are interested in your intuitions about human motivation.</p>
+            <p>
+                You will play the role of a manager in an organization and design
+                an incentive program to shape employee motivation.
+            </p>
+            <p>Specifically, you will be asked to design an incentive program that you think would: <ul> <li>Maximize how immersed and engaged employees feel in their work</li> <li>Minimize how immersed and engaged employees feel in their work</li> <li>Maximize how much effort employees exert</li> </ul>
+            <p><strong>Please answer the following question to continue.</strong></p>
+        </div>
+    `,
+
+    questions: [
+        {
+            prompt: "I will design an incentive program that will...",
+            name: "attn_intro",
+            options: [
+                "Maximize how immersed and engaged employees feel in their work",
+                "Minimize how immersed and engaged employees feel in their work",
+                "Maximize how much effort employees exert",
+                "All of the above"
+            ],
+            required: true
+        }
+    ],
+
+    randomize_question_order: false,
+
+        on_finish: (data) => {
+            const correctAnswer = "All of the above";
+            const response = data.response.attn_intro;
+
+            data.totalErrors = response === correctAnswer ? 0 : 1;
+            data.trialName = "attnChk_intro";
+        }
+};
+
+
 function makeIntro() {
 return {
     type: jsPsychInstructions,
@@ -358,7 +394,6 @@ return {
         jsPsych.data.addProperties({ order });
         jsPsych.data.addProperties({ company });
         jsPsych.data.addProperties({ randomAssignment });
-        data.trialName = "intro";
     }
     };
 }
@@ -610,6 +645,23 @@ const attnChk = {
         data.totalErrors = totalErrors;
         data.condition = conditionMap[randomAssignment];
         data.round = round; 
+    }
+};
+
+const introAttnCheckLoop = {
+    timeline: [attnChk_intro, conditionalNode],
+
+    loop_function: () => {
+        const attnChkTrials = jsPsych.data
+            .get()
+            .filter({ trialName: "attnChk_intro" });
+
+        if (attnChkTrials.count() > 0) {
+            const lastAttnChk = attnChkTrials.last(1).values()[0];
+            return lastAttnChk.totalErrors > 0; // 🔑 THIS
+        } else {
+            return false;
+        }
     }
 };
 
@@ -1151,7 +1203,7 @@ const choose_Cardinality = {
 
 
 p.instLoopUniformity = {
-    timeline: [makeIntro, uniformity, makeRememberPage, attnCheckLoop,fillIn_Uniformity, makeIntroAgain, attnCheckLoop, fillIn_Uniformity, makeIntroAgainAgain, attnCheckLoop, fillIn_Uniformity],
+    timeline: [introAttnCheckLoop, makeIntro, uniformity, makeRememberPage, attnCheckLoop,fillIn_Uniformity, makeIntroAgain, attnCheckLoop, fillIn_Uniformity, makeIntroAgainAgain, attnCheckLoop, fillIn_Uniformity],
     loop_function: () => {
         // Look for the most recent attnChk trial specifically
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
@@ -1161,7 +1213,7 @@ p.instLoopUniformity = {
 };
 
 p.instLoopCardinality = {
-    timeline: [makeIntro, cardinality, makeRememberPage, attnCheckLoop, choose_Cardinality, makeIntroAgain, attnCheckLoop, choose_Cardinality, makeIntroAgainAgain, attnCheckLoop, choose_Cardinality],
+    timeline: [introAttnCheckLoop, makeIntro, cardinality, makeRememberPage, attnCheckLoop, choose_Cardinality, makeIntroAgain, attnCheckLoop, choose_Cardinality, makeIntroAgainAgain, attnCheckLoop, choose_Cardinality],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
@@ -1170,7 +1222,7 @@ p.instLoopCardinality = {
 };
 
 p.instLoopDiagnosticity = {
-    timeline: [makeIntro, diagnosticity, makeRememberPage, attnCheckLoop,fillIn_Diagnosticity, makeIntroAgain, attnCheckLoop, fillIn_Diagnosticity, makeIntroAgainAgain, attnCheckLoop, fillIn_Diagnosticity],
+    timeline: [introAttnCheckLoop, makeIntro, diagnosticity, makeRememberPage, attnCheckLoop,fillIn_Diagnosticity, makeIntroAgain, attnCheckLoop, fillIn_Diagnosticity, makeIntroAgainAgain, attnCheckLoop, fillIn_Diagnosticity],
     loop_function: () => {
         const attnChkData = jsPsych.data.get().filter({trial_type: 'survey-multi-choice'}).last(1);
         const fail = attnChkData.select('totalErrors').sum() > 0;
