@@ -942,18 +942,18 @@ function fillIn(questions, questionIds) {
 var fillIn_Uniformity = fillIn([
     {
         promptText: "",
-        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" min="0" max="100" required>% would receive a ${bigNumber} bonus. All remaining ${textNew.employee}s would receive a ${smallNumber} bonus.`
+        fillText: `Each day, all ${textNew.employee}s ranked in the top <input type="number" class="number-input" min="0" max="100">% would receive a ${bigNumber} bonus. All remaining ${textNew.employee}s would receive a ${smallNumber} bonus.`
     }
 ], ['uniformity']);
 
 var fillIn_Diagnosticity = fillIn([
     {
         promptText: "<strong>What would you do to maximize immersion and engagement?</strong>",
-        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" min="0" max="100" required>% chance of receiving a ${bigNumber} bonus.`
+        fillText: `Each day, all ${textNew.employee}s ranked in the top 50% would have a <input type="number" class="number-input" min="0" max="100">% chance of receiving a ${bigNumber} bonus.`
     },
     {
         promptText: "", 
-        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" min="0" max="100" required>% chance of receiving a ${bigNumber} bonus. Everyone who doesn't receive a ${bigNumber} bonus would receive a ${smallNumber} bonus.`
+        fillText: `All ${textNew.employee}s ranked in the bottom 50% would have a <input type="number" class="number-input" min="0" max="100">% chance of receiving a ${bigNumber} bonus. Everyone who doesn't receive a ${bigNumber} bonus would receive a ${smallNumber} bonus.`
     }
 ], ['diagnosticity1', 'diagnosticity2']);
 
