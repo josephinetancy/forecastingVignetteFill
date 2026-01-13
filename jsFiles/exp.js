@@ -820,9 +820,6 @@ function fillIn(questions, questionIds) {
             </div>
         `,
         button_label: 'Continue',
-        data: {
-            questions: questionIds
-        },
                  on_load: function() {
 
           // ---------------------------
