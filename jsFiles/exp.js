@@ -282,7 +282,7 @@ const cardinalityPage = [
             <p><strong>Incentive Structure 3</strong></p>
             <p>Each day, all ${textNew.employee}s ranked in the top 25% earn a ${bigNumber} bonus,</p>
             <p>all ${textNew.employee}s ranked in the middle 50% - 75% earn a $12 bonus,</p>
-            <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn a $8 bonus,</p>
+            <p>all ${textNew.employee}s ranked in the middle 25% - 50% earn an $8 bonus,</p>
             <p>and all ${textNew.employee}s ranked in the bottom 25% earn a ${smallNumber}.</p>
             <img src="./img/slider3.png" style="width:80%; height:80%">
         </div>`
@@ -310,16 +310,16 @@ const consent = `
     <p><b>Consent Form<br>
 
     <p><b>Description</b><br>
-    You are invited to participate in a research study on how humans enjoy different tasks. You'll be asked to participate in a short game that involves spinning the wheel. Then you'll be asked to answer various questions about your experience.</p>
+    You are invited to participate in a research study where you'll play the role of a manager. You'll be asked to participate in a short game that involves designing a program to shape employee motivation.</p>
 
     <p><b>Time Involvement</b><br>
-    Your participation will take approximately 15 minutes. 
+    Your participation will take approximately 3 minutes. 
 
     <p><b>Risks and Benefits</b><br>
     The risks associated with this study are not anticipated to be beyond those involved in normal, daily computer use. There are no foreseeable psychological risks and benefits beyond those involved in normal, daily life. The benefits which may reasonably be expected to result from this study are none. We cannot and do not guarantee or promise that you will receive any benefits from this study.
     
     <p><b>Payment</b><br>
-    You will receive $2.75 payment for your participation. 
+    You will receive $.60 payment for your participation. 
 
      <p><b>Payment</b><br>
     If you have read this form and have decided to participate in this project, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. The alternative is not to participate. You have the right to refuse to answer particular questions. The results of this research study may be presented at scientific or professional meetings or published in scientific journals. Your individual privacy will be maintained in all published and written data resulting from the study.
@@ -340,16 +340,16 @@ const attnChk_intro = {
             <p>We are interested in your intuitions about human motivation.</p>
             <p>
                 You will play the role of a manager in an organization and design
-                an incentive program to shape employee motivation.
+                incentive programs to shape employee motivation.
             </p>
-            <p>Specifically, you will be asked to design an incentive program that you think would: <ul> <li>Maximize how immersed and engaged employees feel in their work</li> <li>Minimize how immersed and engaged employees feel in their work</li> <li>Maximize how much effort employees exert</li> </ul>
+            <p>Specifically, you will be asked to design incentive programs that you think would: <ul> <li>Maximize how immersed and engaged employees feel in their work</li> <li>Minimize how immersed and engaged employees feel in their work</li> <li>Maximize how much effort employees exert</li> </ul>
             <p><strong>Please answer the following question to continue.</strong></p>
         </div>
     `,
 
     questions: [
         {
-            prompt: "I will design an incentive program that will...",
+            prompt: "I will design incentive programs that will...",
             name: "attn_intro",
             options: [
                 "Maximize how immersed and engaged employees feel in their work",
@@ -1353,11 +1353,11 @@ let timeline;
 
 
 if (randomAssignment === 1) {
-    timeline = [exp.instLoopCardinality, exp.demographics, exp.save_data, exp.end];
+    timeline = [exp.consent, exp.instLoopCardinality, exp.demographics, exp.save_data, exp.end];
 } else if (randomAssignment === 2) {
-    timeline = [exp.instLoopUniformity, exp.demographics, exp.save_data, exp.end];
+    timeline = [exp.consent, exp.instLoopUniformity, exp.demographics, exp.save_data, exp.end];
 } else if (randomAssignment === 3) {
-    timeline = [exp.instLoopDiagnosticity, exp.demographics, exp.save_data, exp.end];
+    timeline = [exp.consent, exp.instLoopDiagnosticity, exp.demographics, exp.save_data, exp.end];
 }
 
 jsPsych.run(timeline);
