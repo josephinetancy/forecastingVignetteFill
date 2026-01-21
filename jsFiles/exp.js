@@ -313,13 +313,13 @@ const consent = `
     You are invited to participate in a research study where you'll play the role of a manager. You'll be asked to participate in a short game that involves designing a program to shape employee motivation.</p>
 
     <p><b>Time Involvement</b><br>
-    Your participation will take approximately 3 minutes. 
+    Your participation will take approximately 4 minutes. 
 
     <p><b>Risks and Benefits</b><br>
     The risks associated with this study are not anticipated to be beyond those involved in normal, daily computer use. There are no foreseeable psychological risks and benefits beyond those involved in normal, daily life. The benefits which may reasonably be expected to result from this study are none. We cannot and do not guarantee or promise that you will receive any benefits from this study.
     
     <p><b>Payment</b><br>
-    You will receive $.50 payment for your participation. 
+    You will receive $.70 payment for your participation. 
 
      <p><b>Payment</b><br>
     If you have read this form and have decided to participate in this project, please understand your participation is voluntary and you have the right to withdraw your consent or discontinue participation at any time without penalty or loss of benefits to which you are otherwise entitled. The alternative is not to participate. You have the right to refuse to answer particular questions. The results of this research study may be presented at scientific or professional meetings or published in scientific journals. Your individual privacy will be maintained in all published and written data resulting from the study.
